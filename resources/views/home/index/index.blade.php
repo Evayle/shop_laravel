@@ -249,6 +249,7 @@
 					</div>
 					<!-- 已登录 -->
 
+
 				<div class="name c6">Hi~ <span class="cr">{{ $data->uname or ''}} </span></div>
 					<div class="point c6">积分:{{ $date->integral_num or '0'}}</div>
 
@@ -257,6 +258,7 @@
 					<div class="point c6"><a href="">点此登录</a>，发现更多精彩</div> -->
 					<div class="report-box">
 						<span class="badge">+30</span>
+
 						<!-- 判断是否登录 -->
 						@if(isset($date->integral_num))
 						<a class="btn btn-info btn-block " href="#" role="button">签到获取积分 额</a>
@@ -268,6 +270,7 @@
 				</div>
 
 				<div class="verify-qq">
+
 
 					<form class="input-group">
 						<input class="form-control" placeholder="输入客服QQ号码" type="text">

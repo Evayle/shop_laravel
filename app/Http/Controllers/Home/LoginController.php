@@ -4,20 +4,19 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
 use DB;
 use Hash;
 
+
 class LoginController extends Controller
 {
-
-/**登录
- *
- */
 
     public function login(){
 
         return view('home.login.index');
     }
+
 
 
     public function updata(){
@@ -69,6 +68,10 @@ class LoginController extends Controller
         //跳转页面
         return redirect()->route('home');
 
+    }
+
+    public function test(){
+        echo "验证";
     }
 
 

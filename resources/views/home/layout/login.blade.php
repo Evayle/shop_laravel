@@ -14,9 +14,8 @@
     <script src="/homes/js/jquery.form.js" charset="UTF-8"></script>
     <script src="/homes/js/global.js" charset="UTF-8"></script>
     <script src="/homes/js/login.js" charset="UTF-8"></script>
-
-
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>富潮里商城 - 登录 / 注册</title>
 </head>
 <body>
@@ -42,6 +41,7 @@
         </p>
     </div>
 </body>
+
 </html>
 <script type="text/javascript">
 
@@ -72,3 +72,4 @@ $("#send").click(function(){
  }
 });
 </script>
+

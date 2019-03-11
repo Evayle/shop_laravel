@@ -16,6 +16,7 @@ class IndexController extends Controller
      */
     public function index()
     {
+
         //利用session查询用户的登录账号
         $user = session()->get('user_login.1');
         $flight = home_users::where('uphon',$user)->first();
@@ -23,10 +24,9 @@ class IndexController extends Controller
         $uid  = $flight['id'];
         $home_integrals = home_integrals::where('uid',$uid)->first();
 
-
-
         //把查询的用户信息,传递到首页界面
         return view('home.index.index',['data'=>$flight],['date'=>$home_integrals]);
+
     }
 
     /**

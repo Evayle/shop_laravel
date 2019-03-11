@@ -8,6 +8,7 @@
                 </div>
                 <div class="tabs_container">
 
+
                     <!-- 登录页面 -->
                     <form action="/home/enpty" method="post" >
                     {{csrf_field()}}
@@ -37,6 +38,7 @@
                         <!-- 错误信息 -->
                         <div class="form-group">
                             <div class="error_msg" id="login_error">
+
                             </div>
                         </div>
 
@@ -73,34 +75,40 @@
 
 
 
+
                     <form class="tabs_form" action="/home/test" method="post" >
                    {{ csrf_field() }}
+
                         <div class="form-group">
                             <div class="input-group">
                                 <div class="input-group-addon">
                                     <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
                                 </div>
+
                                 <input class="form-control phone" name="phone" id="register_phone" required placeholder="手机号" maxlength="11" autocomplete="off" type="text" value="{{ old('phone') }}">
 
                             </div>
                             <span style="color:red;" id="tel"></span>
+
                         </div>
                         <div class="form-group">
                             <div class="input-group">
                                 <input class="form-control" name="smscode" id="register_sms" placeholder="输入验证码" type="text">
                                 <span class="input-group-btn">
+
                                     <button class="btn btn-primary getsms" type="button" id="send">发送短信验证码</button>
 
                                 </span>
 
                             </div>
                             <span id="test" style="color:red"></span>
-                        </div>
+                         </div>
                         <div class="form-group">
                             <div class="input-group">
                                 <div class="input-group-addon">
                                     <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
                                 </div>
+
                                 <input class="form-control password" name="password" id="register_pwd" placeholder="请输入密码" autocomplete="off" type="password" value="{{ old('password') }}">
                                 <div class="input-group-addon pwd-toggle" title="显示密码"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></div>
                             </div>
@@ -114,6 +122,7 @@
                         <div class="form-group">
                             <div class="error_msg" id="register_error"></div>
                         </div>
+
                         <!-- 注册 -->
                         <button class="btn btn-large btn-primary btn-lg btn-block " id="zhc" type="submit">注册</button>
                         <!-- <input type="submit"  value="注册" > -->
@@ -267,6 +276,7 @@
                         var success = form.siblings('.tabs_div');
                         var options = {
                             beforeSubmit: function () {
+
                                 console.log('我这个可爱的小猫咪呀');
                             },
                             success: function (data) {
@@ -283,7 +293,6 @@
                         switch(pwd.validatepwd()) {
                             case 1: error.html(msgtemp('<strong>密码不能为空</strong> 请输入密码',    'alert-warning')); return; break;
                             case 2: error.html(msgtemp('<strong>密码过短</strong> 请输入6位以上的密码','alert-warning')); return; break;
-
                         }
                         form.ajaxForm(options);
                         // 请求成功执行类似这样的事件
@@ -293,6 +302,7 @@
                     })
                 });
             </script>
+
             <script type="text/javascript">
                 $(function () {
             //利用返回来的url地址进行判断
@@ -311,12 +321,5 @@
              }
           });
          </script>
-
-
-
         </div>
     </div>
-
-
-
-@endsection

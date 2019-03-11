@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Admin\tp_goods_categorys;
+
+use App\Model\Admin\tp_goods_values;
+use App\Model\Admin\tp_goods_attrs;
 use App\Http\Requests\CategoryStoreBlogPost;
 use DB;
 
@@ -42,7 +45,9 @@ class CategoryController extends Controller
         // 接收关键词参数
         $search = $request->input('search','');
 
-        $cats = tp_goods_categorys::where('categorys_name', 'like', '%'.$search.'%')->select('*',DB::raw("concat(categorys_path,',',id) as paths"))->orderBy('paths','asc')->paginate(2);
+
+
+        $cats = tp_goods_categorys::where('categorys_name', 'like', '%'.$search.'%')->select('*',DB::raw("concat(categorys_path,',',id) as paths"))->orderBy('paths','asc')->paginate(10);
 
         // 拼接上分类排版
         foreach ($cats as $key => $value) {
@@ -104,6 +109,7 @@ class CategoryController extends Controller
     }
 
     /**
+<<<<<<< HEAD
      * Display the specified resource.
      *
      * @param  int  $id
@@ -145,7 +151,38 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+    /**
+    /显示属性名列表
+     *
+     * @return \Illuminate\Http\Response
+     */
+    }
+    public function attr(Request $request)
+    {
+        // 接收关键词参数
+        $search = $request->input('search','');
+
+        $arrts = tp_goods_attrs::where('attrs_name', 'like', '%'.$search.'%')->orderBy('goods_categorys_id','asc')->paginate(10);
+
+        // 加载添加分类视图
+        return view('admin.category.attr', ['arrts' => $arrts, 'request' => $request->all()]);
+    }
+
+    /**
+     * 显示属性值列表
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function value(Request $request)
+    {
+        // 接收关键词参数
+        $search = $request->input('search','');
+
+        $values = tp_goods_values::where('values_name', 'like', '%'.$search.'%')->orderBy('goods_attrs_id','asc')->paginate(10);
+
+        // 加载添加分类视图
+        return view('admin.category.value', ['values' => $values, 'request' => $request->all()]);
     }
 
     /**

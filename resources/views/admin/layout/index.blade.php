@@ -233,8 +233,14 @@
                       </a>
                       <ul class="sub">
                           <li><a  href="/admin/category">分类列表</a></li>
+
                           <li><a  href="/admin/category/create">分类添加</a></li>
                           <li><a  href="/admin/category/delete">回收站</a></li>
+
+                          <li><a  href="/admin/category/attr">属性名列表</a></li>
+                          <li><a  href="/admin/category/value">属性值列表</a></li>
+                          <li><a  href="/admin/category/create">分类添加</a></li>
+
                       </ul>
                   </li>
                   <!-- 商品分类结束 -->
@@ -260,6 +266,8 @@
                           <li><a  href="/admin/goods">优惠券列表</a></li>
                           <li><a  href="/admin/goods/create">优惠券添加</a></li>
                           <li><a  href="/admin/goods/delete">回收站</a></li>
+
+
                       </ul>
                   </li>
               </ul>

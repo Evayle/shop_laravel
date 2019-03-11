@@ -15,9 +15,6 @@
 
 Route::get('/',function(){
 
-
-
-
 return view('home.index.index');
 });
 
@@ -40,12 +37,33 @@ Route::group(['middleware'=>'login'],function(){
 
     // 后台分类管理
     Route::get('admin/category/create/{id}','Admin\CategoryController@create');
+
     Route::resource('admin/category','Admin\CategoryController');
 
     // 后台商品管理
     Route::resource('admin/goods','Admin\GoodsController');
 
+    Route::get('admin/category/attr','Admin\CategoryController@attr');
+    Route::get('admin/category/value','Admin\CategoryController@value');
+    Route::resource('admin/category','Admin\CategoryController');
+
+    // 后台商品管理(huang)
+    Route::get('admin/goods/attr/{id}','Admin\GoodsController@attr');
+    Route::post('admin/goods/attrStore','Admin\GoodsController@attrStore');
+    Route::get('admin/goods/value/{id}','Admin\GoodsController@value');
+    Route::post('admin/goods/valueStore','Admin\GoodsController@valueStore');
+    Route::get('admin/goods/info/{id}','Admin\GoodsController@info');
+    Route::resource('admin/goods','Admin\GoodsController');
+
+
+
+
 });
+
+
+
+
+
 
 
 //ajax验证后台登录路由
@@ -55,6 +73,7 @@ Route::any('admin/denglu','Admin\LoginController@login');
 Route::post('admin/deng','Admin\LoginController@deng');
 
 // 前台首页
+
 Route::get('home','Home\IndexController@index')->name('home');
 
 Route::resource('home/shopcart','Home\ShopcartController');
@@ -79,11 +98,6 @@ Route::post('home/enpty','Home\LoginController@entry');
 
 
 
-
-
-
-
-
 //短信验证码接口
 Route::get('home/send','Home\TestController@updata');
 
@@ -92,6 +106,12 @@ Route::get('home/send','Home\TestController@updata');
 Route::any('123',function(){
     dump(session()->all());
 });
+
+Route::get('home','Home\IndexController@index');
+Route::resource('home/shopcart','Home\ShopcartController');
+
+Route::any('home/login','Home\LoginController@login');
+
 
 
 
