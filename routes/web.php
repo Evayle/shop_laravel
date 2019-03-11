@@ -71,27 +71,17 @@ Route::any('admin/denglu','Admin\LoginController@login');
 //ajax验证后台登录路由(测试)
 Route::post('admin/deng','Admin\LoginController@deng');
 
-// 前台首页
-Route::get('home','Home\IndexController@index');
 // 购物车
 Route::resource('home/shopcart','Home\ShopcartController');
 
-Route::any('home/login','Home\LoginController@login');
-
-
-//ajax验证后台登录路由
-Route::any('admin/denglu','Admin\LoginController@login');
-
-//ajax验证后台登录路由(测试)
-Route::post('admin/deng','Admin\LoginController@deng');
 
 // 前台首页
 
 Route::get('home','Home\IndexController@index')->name('home');
 
-Route::resource('home/shopcart','Home\ShopcartController');
 //前台 登录页面
-Route::any('home/login','Home\LoginController@login')->name('test');;
+Route::any('home/login','Home\LoginController@login')->name('test');
+
 //前台注册验证页面
 Route::any('home/test','Home\TestController@test');
 
@@ -119,13 +109,6 @@ Route::get('home/send','Home\TestController@updata');
 Route::any('123',function(){
     dump(session()->all());
 });
-
-Route::get('home','Home\IndexController@index');
-Route::resource('home/shopcart','Home\ShopcartController');
-
-Route::any('home/login','Home\LoginController@login');
-
-
 
 
 // 徐俊伟的代码

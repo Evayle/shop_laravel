@@ -14,8 +14,6 @@
 	<script src="/homes/js/swiper.min.js" charset="UTF-8"></script>
 	<script src="/homes/js/global.js" charset="UTF-8"></script>
 	<script src="/homes/js/jquery.DJMask.2.1.1.js" charset="UTF-8"></script>
-
-
 	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.slim.js"></script>
 	<title>富潮里</title>
 
@@ -24,6 +22,7 @@
 <body>
 	<!-- 顶部tab -->
 	<div class="tab-header">
+
 		<div class="inner">
 			<div class="pull-left">
 
@@ -55,6 +54,8 @@
 	<!-- 搜索栏 -->
 	<div class="top-search">
 		<div class="inner">
+		<a class="logo" href="index.html"><img src="/homes/images/icons/logo.jpg" alt="U袋网" class="cover"></a>
+
 			<div class="search-box">
 				<form class="input-group">
 					<input placeholder="Ta们都在搜富潮里" type="text" id="in">

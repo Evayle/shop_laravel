@@ -17,10 +17,8 @@ class TestController extends Controller
         //dump(session()->all());
 
         if(empty($_POST)){
-
             return redirect()->route('test');
         }
-
         $phon = $_POST['phone'];
         $pass = Hash::make($_POST['password']);
         $num = 10;
