@@ -4,21 +4,37 @@ namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreBlogPost;
-use App\Models\tp_friendship;
+
+use App\Http\Requests\FsStoreBlogPost;
+use App\Model\Admin\tp_friendship;
 use DB;
 use Illuminate\Support\Facades\Storage;
+
+/**
+ * 这是友情链接的控制器
+ */
 
 class friendshipController extends Controller
 {
     /**
      * Display a listing of the resource.
+<<<<<<< HEAD
      *
+=======
+     * 友情链接列表
+>>>>>>> origin/xujw
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        //
+
+        /*if(file_exists('../storage/app/public/1552233414775.jpeg')){
+            unlink('../storage/app/public/1552233414775.jpeg');
+        }else{
+            dd('no');
+        }
+        exit;*/
+
         // $list = $request->all();
         $tp_fs = new tp_friendship;
         $count = $request->input('count',5);
@@ -30,7 +46,11 @@ class friendshipController extends Controller
 
     /**
      * Show the form for creating a new resource.
+<<<<<<< HEAD
      *
+=======
+     * 友情链接添加页面
+>>>>>>> origin/xujw
      * @return \Illuminate\Http\Response
      */
     public function create()
@@ -41,11 +61,16 @@ class friendshipController extends Controller
 
     /**
      * Store a newly created resource in storage.
+
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreBlogPost $request)
+     /* 友情链接添加操作
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(FsStoreBlogPost $request)
     {
         //
         $data = $request->except('_token');
@@ -98,7 +123,11 @@ class friendshipController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+<<<<<<< HEAD
      *
+=======
+     * 友情链接修改页面
+>>>>>>> origin/xujw
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -114,24 +143,23 @@ class friendshipController extends Controller
 
     /**
      * Update the specified resource in storage.
+<<<<<<< HEAD
      *
+=======
+     * 友情链接修改操作
+>>>>>>> origin/xujw
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
-        
 
+        /*// 这是验证是否选择图片的  不需要了
+        $this->validate($request, ['fs_logo'=>'required'], ['fs_logo.required'=>'请选择图片']);*/
         $data = new tp_friendship;
         $upd = $data->find($id);
-
-        /*$bool = Storage::delete($upd['fs_logo']);
-        // $bool = Storage::delete('/storage/'.$upd['fs_logo']);
-        echo '/storage/'.$upd['fs_logo'];
-        dd($bool);*/
-
+        $old_pic = $upd->fs_logo;
         $file = $request->file('fs_logo');
         if ($file == true) {
             // 获取文件后缀
@@ -142,15 +170,16 @@ class friendshipController extends Controller
             $res = $file->storeAs('public',$logo_name);
             if ($res == false) {
                 return back()->with('error','图片添加失败');
+            }else{
+                if (file_exists('../storage/app/public/'.$old_pic)) {
+                    unlink('../storage/app/public/'.$old_pic);
+                }
             }
-            // dd('暂停');
-        }else{
-            return back()->with('error','图片添加');
+            $upd->fs_logo = $logo_name;
         }
         $upd->fs_name = $request->input('fs_name','');
         $upd->fs_link = $request->input('fs_link','');
         $upd->fs_note = $request->input('fs_note','');
-        $upd->fs_logo = $logo_name;
         $bool = $upd->save();
         if ($bool == true) {
             return redirect('admin/friendship')->with('success','修改成功');
@@ -162,7 +191,11 @@ class friendshipController extends Controller
 
     /**
      * Remove the specified resource from storage.
+<<<<<<< HEAD
      *
+=======
+     * 友情链接删除操作
+>>>>>>> origin/xujw
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -171,9 +204,14 @@ class friendshipController extends Controller
         //
         // dd($id);
         $tp_fs = new tp_friendship;
+        $old_data = $tp_fs->find($id);
+        // 获取要删除的文件名
+        $old_pic = $old_data->fs_logo;
         $res = $tp_fs::destroy($id);
         // dd($res);
         if ($res) {
+            unlink('../storage/app/public/'.$old_pic);
+
             return redirect($_SERVER['HTTP_REFERER'])->with('success','删除成功');
         }else{
             return redirect($_SERVER['HTTP_REFERER'])->with('error','删除失败');

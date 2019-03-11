@@ -22,22 +22,15 @@
     <link href="/bg/assets/css/style.css" rel="stylesheet">
     <link href="/bg/assets/css/style-responsive.css" rel="stylesheet">
 
+
     <script src="/bg/assets/js/chart-master/Chart.js"></script>
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="/bg/https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="/bg/https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
   </head>
 
   <body>
 
   <section id="container" >
-      <!-- **********************************************************************************************************************************************************
-      TOP BAR CONTENT & NOTIFICATIONS
-      *********************************************************************************************************************************************************** -->
-      <!--header start-->
+
       <header class="header black-bg">
               <div class="sidebar-toggle-box">
                   <div class="fa fa-bars tooltips" data-placement="right" data-original-title="点击收起还原"></div>
@@ -234,9 +227,9 @@
                       <ul class="sub">
                           <li><a  href="/admin/category">分类列表</a></li>
 
+
                           <li><a  href="/admin/category/create">分类添加</a></li>
                           <li><a  href="/admin/category/delete">回收站</a></li>
-
                           <li><a  href="/admin/category/attr">属性名列表</a></li>
                           <li><a  href="/admin/category/value">属性值列表</a></li>
                           <li><a  href="/admin/category/create">分类添加</a></li>
@@ -270,6 +263,32 @@
 
                       </ul>
                   </li>
+
+                  <!-- 友情链接 -->
+                  <li class="sub-menu">
+                      <a href="#" >
+                          <i class="glyphicon glyphicon-shopping-cart"></i>
+                          <span>友情链接</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="/admin/friendship">链接列表</a></li>
+                          <li><a  href="/admin/friendship/create">添加链接</a></li>
+                      </ul>
+                  </li>
+                  <!-- 友情链接结束 -->
+                  <!-- 前台轮播图 -->
+                  <li class="sub-menu">
+                      <a href="#" >
+                          <i class="glyphicon glyphicon-shopping-cart"></i>
+                          <span>轮播图管理</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="/admin/slide">图片列表</a></li>
+                          <li><a  href="/admin/slide/create">添加图片</a></li>
+                          <li><a  href="/admin/slide/delete">回收站</a></li>
+                      </ul>
+                  </li>
+
               </ul>
               <!-- sidebar menu end-->
           </div>
@@ -341,5 +360,86 @@
         return false;
         });
   </script>
-  </body>
+
+  <script>
+  // xu:不要删这个js脚本 这是实现友情链接的图片预览功能的
+    $(function(){
+            $("#pic").change(function(){
+                if($.browser.msie){
+                    $("#img0").attr("src",$(this).val())
+                    $("#info").text("当前选择的文件:"+$(this).val())
+                }else{
+                    $("#info").text("当前选择的文件:"+$(this).val())
+                    var objUrl=getObjectURL(this.files[0]);
+                    // console.log("objUrl="+objUrl);
+                    if(objUrl){
+                        $("#img0").attr("src",objUrl);
+                    }
+                }
+            })
+            //建立一個可存取到該file的url
+            function getObjectURL(file) {
+                var url = null ;
+                if (window.createObjectURL!=undefined) {
+                    url = window.createObjectURL(file);
+                } else if (window.URL!=undefined) {
+                    url = window.URL.createObjectURL(file);
+                } else if (window.webkitURL!=undefined) {
+                    url = window.webkitURL.createObjectURL(file);
+                }
+                return url ;
+            }
+        })
+  </script>
+  <style>
+  /*请勿删除这个样式 这是后台轮播图点击查看大图的样式*/
+    .eqr{
+      display: none;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 990;
+    }
+    .eqr:hover{
+      cursor: pointer;
+    }
+    .eq{
+      height: auto;
+      margin: auto;
+      margin-top: 20px;
+      text-align: center;
+      z-index: 991;
+    }
+    .img2{
+      border: 2px black solid;
+    }
+    .click:hover{
+      cursor: pointer;
+    }
+    .icon {
+      width: 1em;
+      height: 1em;
+      vertical-align: -0.15em;
+      fill: currentColor;
+      overflow: hidden;
+    }
+  </style>
+  <script>
+  // 这是后台轮播图的单击显示效果
+  $('.click').live('click',function(){
+    var id = $(this).attr('id');
+    var obj = document.getElementById(id);
+    var src = obj.src;
+    $('.eqr').css('display','block');
+    $('.img2').attr('src',src);
+  });
+  $('.eqr').click(function(){
+    $(this).css('display','none');
+  });
+</script>
+</body>
+
 </html>

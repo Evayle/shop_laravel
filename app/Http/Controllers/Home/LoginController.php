@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+
 use DB;
 use Hash;
 
@@ -16,6 +17,7 @@ class LoginController extends Controller
 
         return view('home.login.index');
     }
+
 
 
 
@@ -73,6 +75,7 @@ class LoginController extends Controller
     public function test(){
         echo "验证";
     }
+
 
 
 

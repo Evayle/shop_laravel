@@ -1,10 +1,16 @@
 @extends('home.layout.index')
-@section('content')
+
+
+@section('index')
+
 <!-- 顶部标题 -->
 	<div class="bgf5 clearfix">
 		<div class="top-user">
 			<div class="inner">
-				<a class="logo" href="index.html"><img src="/homes/images/icons/logo.jpg" alt="U袋网" class="cover"></a>
+
+
+				<a class="logo" href="/home"><img src="/homes/images/icons/logo.jpg" alt="U袋网" class="cover"></a>
+
 				<div class="title">购物车</div>
 			</div>
 		</div>
@@ -24,7 +30,7 @@
 								<th width="300">商品信息</th>
 								<th width="150">单价</th>
 								<th width="200">数量</th>
-								<th width="200">现价</th>
+								<th width="200">金额</th>
 								<th width="80">操作</th>
 							</tr>
 						</thead>

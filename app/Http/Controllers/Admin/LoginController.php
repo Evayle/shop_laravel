@@ -22,10 +22,12 @@ class LoginController extends Controller
     public function login(){
 
 
+
         // //防止浏览器直接输入路由,用这个方法验证
         // if(empty($_POST)){
         //     return redirect()->route('login');
         // }
+
 
 
         //接收所有的传值
@@ -55,7 +57,6 @@ class LoginController extends Controller
             $pass = $flight['admin_password'];
         //哈希验证密码
         if (Hash::check($upass, $pass)) {
-
                 //echo "密码验证成功";
 
             }else{

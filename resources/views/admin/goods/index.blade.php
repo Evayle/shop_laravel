@@ -7,12 +7,14 @@
       </div>
     @endif
 
+
     <h3><i class="fa fa-angle-right"></i> 商品管理</h3>
 
     <div class="row mt">
         <div class="col-md-12">
             <div class="content-panel">
                 <table class="table table-striped table-advance table-hover">
+
 
           	  	  <h4><i class="fa fa-angle-right"></i> 商品列表
                     <form action="/admin/goods" method="get">
@@ -25,6 +27,7 @@
           	  	  <hr>
                     <thead>
                     <tr>
+
 
                         <th><i class="fa fa-bullhorn"></i> 商品名称</th>
                         <th><i class="fa fa-bullhorn"></i> 封面图</th>
@@ -48,6 +51,7 @@
                     <tbody>
                     @foreach ($goods as $k => $v)
                     <tr>
+
                         <td><a href="basic_table.html#">{{ $v->goods_name }}</a></td>
                         <td class="hidden-phone"><img src="{{ asset($v->goods_plot) }}" width="50"></td>
                         <td>{{ $v->goods_keywords }} </td>
@@ -74,7 +78,6 @@
                             <a href="/admin/goods/attr/{{ $v->id }}"><button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button></a>
                             <a href="/admin/goods/{{ $v->id }}/edit"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
                             <a href="/admin/goods/create/{{ $v->id }}"><button class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></button></a>
-
                         </td>
                     </tr>
                     @endforeach

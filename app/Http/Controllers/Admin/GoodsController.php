@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GoodsStoreBlogPost;
-
 use App\Http\Requests\GoodsEditStoreBlogPost;
 use App\Model\Admin\tp_goods_categorys;
 use App\Model\Admin\tp_goods;
@@ -52,6 +51,7 @@ class GoodsController extends Controller
 
 
 
+
     public function index(Request $request)
     {
         $search = $request->input('search');
@@ -84,7 +84,6 @@ class GoodsController extends Controller
         // 检查是否有文件上传
         if ($request->hasFile('goods_plot')) {
             $file = $request->file('goods_plot');// 创建文件上传对象
-
             // 执行文件上传
             $res = $file->store('public');
 
@@ -109,9 +108,7 @@ class GoodsController extends Controller
 
         // 执行添加
         if ($goods->save()) {
-
             // 同时添加详情图跟缩略图
-
             // 同时添加缩略图
             $data = $request->only(['pics_url']);
             $data['goods_id'] = $goods->id;
@@ -128,7 +125,9 @@ class GoodsController extends Controller
 
 
 
+
             // 同时添加详情图
+
 
             $data = $request->only(['imgs_url']);
             $data['goods_id'] = $goods->id;
@@ -169,14 +168,12 @@ class GoodsController extends Controller
     public function edit($id)
     {
 
-
         $goods = tp_goods::find($id);
         $goodspic = tp_goods_pics::where('goods_id',$id)->get();
         $goodsimg = tp_goods_imgs::where('goods_id',$id)->get();
 
         // 加载修改视图
         return view('admin.goods.edit', ['cats' => self::getCats(), 'goods' => $goods, 'goodspic' => $goodspic, 'goodsimg' => $goodsimg]);
-
     }
 
     /**
@@ -186,6 +183,7 @@ class GoodsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
 
     public function update(GoodsEditStoreBlogPost $request, $id)
     {
@@ -296,6 +294,7 @@ class GoodsController extends Controller
         } else {
             return back()->with('error', '修改失败');
         }
+
     }
 
     /**
@@ -315,6 +314,7 @@ class GoodsController extends Controller
      */
     public function delete()
     {
+
 
 
     /* * 属性名添加页面
@@ -486,5 +486,6 @@ class GoodsController extends Controller
     public function info($id)
     {
         return view('admin.goods.info', ['goods_id' => $id]);
+
     }
 }

@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+/**
+ * 这是购物车的控制器
+ */
+
 class shopcartController extends Controller
 {
     /**

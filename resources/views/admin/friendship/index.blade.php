@@ -41,19 +41,19 @@
                               <tbody>
                               @foreach($data as $k => $v)
                                 <tr style="text-align: center;">
-                                    <td>{{ $i++ }}</td>
-                                    <td>{{ $v->fs_name }}</td>
-                                    <td class="numeric">{{ $v->fs_link }}</td>
-                                    <td class="numeric"><img src="/storage/{{ $v->fs_logo }}" alt=""height="26px"></td>
-                                    <td class="numeric">{{ $v->fs_note }}</td>
+                                    <td class="col-md-1">{{ $i++ }}</td>
+                                    <td class="col-md-1">{{ $v->fs_name }}</td>
+                                    <td class="col-md-2">{{ $v->fs_link }}</td>
+                                    <td class="col-md-1"><img src="/storage/{{ $v->fs_logo }}" alt=""height="26px"></td>
+                                    <td class="col-md-2">{{ $v->fs_note }}</td>
                                     @if( $v->fs_status == 'true' )
-                                      <td class="numeric"><a href=""><img src="/bg/img/对.jpg" alt="" width="26"></a></td>
+                                      <td class="col-md-1"><a href=""><img src="/bg/img/对.jpg" alt="" width="26"></a></td>
                                     @else()
-                                      <td class="numeric"><a href=""><img src="/bg/img/错.jpg" alt="" width="26"></a></td>
+                                      <td class="col-md-1"><a href=""><img src="/bg/img/错.jpg" alt="" width="26"></a></td>
                                     @endif
-                                    <td class="numeric">{{ $v->created_at }}</td>
-                                    <td class="numeric">{{ $v->updated_at }}</td>
-                                    <td>
+                                    <td class="col-md-1">{{ $v->created_at }}</td>
+                                    <td class="col-md-1">{{ $v->updated_at }}</td>
+                                    <td class="col-md-2">
                                       <a href="/admin/friendship/{{ $v->id }}/edit" class="btn btn-warning">修改</a>
                                       <form action="/admin/friendship/{{ $v->id }}" method="post" style="display: inline-block;">
                                         {{ csrf_field() }}
@@ -70,12 +70,12 @@
                           </div>
                           </section>
                   </div><!-- /content-panel -->
-               </div><!-- /col-lg-4 -->     
+               </div><!-- /col-lg-4 -->
         </div><!-- /row -->
           </section>
       </section>
       <script>
-        
+
       </script>
 
 

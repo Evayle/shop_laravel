@@ -1,5 +1,6 @@
 @extends('home.layout.index')
-@section('content')
+
+@section('index')
 <!-- 顶部标题 -->
 	<div class="bgf5 clearfix">
 		<div class="top-user">
