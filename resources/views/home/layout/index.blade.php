@@ -45,7 +45,7 @@
 				<a href="/home/login?p=register">注册</a>
 				@endif
 
-				<a href="udai_welcome.html">我的U袋</a>
+				<a href="home/page">个人中心</a>
 				<a href="udai_order.html">我的订单</a>
 				<a href="udai_integral.html">积分平台</a>
 			</div>
@@ -78,7 +78,7 @@
 			</div>
 			<div class="cart-box">
 
-				<a href="udai_shopcart.html" class="cart-but">
+				<a href="/home/shopping" class="cart-but">
 					<i class="iconfont icon-shopcart cr fz16"></i> 购物车 0 件
 				</a>
 			</div>

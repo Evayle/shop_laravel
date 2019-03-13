@@ -62,6 +62,8 @@ Route::group(['middleware'=>'login'],function(){
     Route::resource('admin/goods','Admin\GoodsController');
     // 轮播图管理
     Route::resource('admin/slide','Admin\SlideController');
+    //后台优惠券管理
+    Route::resource('admin/coupon','Admin\CouponController');
 
 });
 
@@ -115,4 +117,58 @@ Route::any('123',function(){
 // 前台用户收藏的路由
 Route::get('home/collect','Home\CollectController@index');
 Route::get('home/collect/create','Home\CollectController@create');
+
+//前台用户跳转模块
+//前台点击购物车跳转模块(徐也做了,到时候用他的)
+Route::resource('home/shopping','Home\ShoppingController');
+
+
+
+
+
+//前台的个人中心
+//个人中心首页
+Route::get('home/page','Home\HomepageController@index');
+
+//个人资料
+Route::resource('home/presonal','Home\PresonalController');
+
+//个人积分
+Route::resource('home/inteqral','Home\InteqralController');
+
+//用户个人地址
+Route::resource('home/address','Home\AddresController');
+
+//用户优惠券
+Route::resource('home/coupon','Home\CouponController');
+
+//用户paypwd
+//用户修改密码
+Route::resource('home/pay','Home\PaypwdController');
+
+
+//用户修改登录
+Route::resource('home/login_pass','Home\UpassController');
+
+
+//用户订单
+Route::resource('home/orders','Home\UorderController');
+
+
+//用户收藏
+Route::resource('home/collection','Home\CollectionController');
+
+//退换货
+Route::resource('home/refund','Home\refundController');
+
+
+//立即付款
+Route::resource('home/Receipt','Home\ReceiptController');
+
+
+//确认收货
+
+
+
+
 

@@ -6,9 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-
     <title>富潮里后台管理系统</title>
-
     <!-- Bootstrap core CSS -->
     <link href="/bg/assets/css/bootstrap.css" rel="stylesheet">
     <!--external css-->
@@ -17,13 +15,29 @@
     <link rel="stylesheet" type="text/css" href="/bg/assets/js/gritter/css/jquery.gritter.css" />
     <link rel="stylesheet" type="text/css" href="/bg/assets/lineicons/style.css">
     <link rel="stylesheet" type="text/css" href="/bg/css/user_add.css">
-
     <!-- Custom styles for this template -->
     <link href="/bg/assets/css/style.css" rel="stylesheet">
     <link href="/bg/assets/css/style-responsive.css" rel="stylesheet">
-
-
     <script src="/bg/assets/js/chart-master/Chart.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.0/jquery.min.js"></script>
+
+    <!-- 优惠券表格 -->
+
+
+
+
+    <!-- 优惠券表格 结束-->
+
+
+    <!-- 时间插件 -->
+     <style>
+    body{padding: 20px;}
+    .demo-input{padding-left: 10px; height: 38px; min-width: 262px; line-height: 38px; border: 1px solid #e6e6e6;  background-color: #fff;  border-radius: 2px;}
+    .demo-footer{padding: 50px 0; color: #999; font-size: 14px;}
+    .demo-footer a{padding: 0 5px; color: #01AAED;}
+  </style>
+  <script src="/laydate/laydate.js"></script>
+  <!-- 时间插件结束 -->
 
   </head>
 
@@ -277,11 +291,10 @@
                           <span>优惠券管理</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="/admin/goods">优惠券列表</a></li>
-                          <li><a  href="/admin/goods/create">优惠券添加</a></li>
-                          <li><a  href="/admin/goods/delete">回收站</a></li>
-
-
+                          <li><a  href="/admin/coupon">优惠券列表</a></li>
+                          <li><a  href="/admin/coupon/create">优惠券添加</a></li>
+                          <li><a  href="/admin/coupon/jilu">发放记录</a></li>
+                          <li><a  href="/admin/coupon/jilu">回收站</a></li>
                       </ul>
                   </li>
 
