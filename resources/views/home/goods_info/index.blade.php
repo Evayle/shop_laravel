@@ -1,6 +1,7 @@
 @extends('home.layout.index')
 @section('index')
 	<!-- 内页导航栏 -->
+	<!-- 这是商品详情页 -->
 	<div class="top-nav bg3">
 		<div class="nav-box inner">
 			<div class="all-cat">
@@ -155,35 +156,158 @@
 										<a class="amount-but sub"></a>
 									</div>
 								</div>
+								<!-- 引入阿里矢量库文件 之前的没用 -->
+								<script src="/homes/font_u9bb8x660y/iconfont.js"></script>
+								<style>
+								.icon {
+								  width: 1em;
+								  height: 1em;
+								  vertical-align: -0.15em;
+								  fill: currentColor;
+								  overflow: hidden;
+								}
+								.icon:hover{
+									cursor: pointer;
+								}
+								</style>
 								<div class="item-stock"><span style="margin-left: 10px;">库存 <b id="Stock">1000</b> 件</span>
-								<button type="button" class="btn btn-default" style="float: right;margin-right: 70px; background: pink;" id="clt"> 收藏</button>
+								<!-- 点赞按钮 勿删-->
+								<a class="zan" style="float: right; margin-right: 70px; font-size: 30px; color:#ccc;" title="点赞此商品">
+									<svg class="icon" aria-hidden="true">
+									  <use xlink:href="#icon-unie60b"></use>
+									</svg>
+								</a>
+								<script>
+								// 这是点赞之后刷新要显示的已点赞效果 勿删
+								$(document).ready(function(){
+									$.ajaxSetup({
+									    headers: {
+									        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+									    }
+									});
+									$.ajax({
+						                url:"/home/laud/create", //处理页面的路径
+						                data:{'goods_id':8}, //要提交的数据是一个JSON
+						                type:"GET", //提交方式
+						                dataType:"json", //返回数据的类型
+						                //TEXT字符串 JSON返回JSON XML返回XML
+						                success:function(data){ //回调函数 ,成功时返回的数据存在形参data里
+						                	if (data == 4) {
+						                		$('.zan').css('color','red').attr('title','已点赞');
+						                	}
+					                    }
+									});
+								});
+								// 这是点赞的jq代码
+								$('.zan').click(function(){
+									$('.zan').css('color','red').attr('title','已点赞');
+									$.ajaxSetup({
+									    headers: {
+									        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+									    }
+									});
+									// ajax传值
+									$.ajax({
+							                url:"/home/laud", //处理页面的路径
+							                data:{'goods_id':9}, //要提交的数据是一个JSON
+							                type:"POST", //提交方式
+							                dataType:"json", //返回数据的类型
+							                //TEXT字符串 JSON返回JSON XML返回XML
+							                success:function(data){ //回调函数 ,成功时返回的数据存在形参data里
+						                        if (data == 0) {
+						                        	alert('对8起!点赞失败了呀!请重新点赞!');
+						                        }
+							                	if (data == 1) {
+							                		alert('点赞成功!谢谢您的赞!');
+							                	}
+						                        if (data == 2)  //trim()方法会去掉页面中的冗余空格
+						                        {
+						                            alert('您已经点过赞啦!不用再点了!');
+						                        }
+						                 		if (data == 3) {
+						                 			alert('点赞成功!这是该商品的第一个赞哦!');
+						                 		}
+						                    }
+										});
+								});
+								</script>
+								<button type="button" class="btn btn-default coll" style="float: right;margin-right: 70px; background: pink;" id="clt">收藏</button>
 								</div>
 								<script>
-								$('#clt').click(function(){
-
-									$.ajax({
-                                    headers: {
-                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                    },
-                                    type: 'GET',
-                                    url: '/home/collect/create',
-                                    data: {'users_id':12,'goods_id':234},
-                                    dataType: 'json',
-                                    async : 'false',    //同步
-                                    success: function(data){
-                                    	if(data == "1"){
-                                    		console.log(data);
-                                    	}else{
-                                    		console.log(0);
-                                    	}
-                                      	
-                                      }
-                                    });
-
-								});
-									
-                            
-                        
+								// 这个script脚本是实现收藏相关功能的 勿删
+									$(document).ready(function(){
+										$.ajaxSetup({
+										    headers: {
+										        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+										    }
+										});
+										$.ajax({
+							                url:"/home/collect/new_data", //处理页面的路径
+							                data:{'goods_id':9}, //要提交的数据是一个JSON
+							                type:"GET", //提交方式
+							                dataType:"json", //返回数据的类型
+							                //TEXT字符串 JSON返回JSON XML返回XML
+							                success:function(data){ //回调函数 ,成功时返回的数据存在形参data里
+						                        if(data == 1)  //trim()方法会去掉页面中的冗余空格
+						                        {
+						                            $('#clt').text('收藏');
+						                            // console.log(data);
+						                        }else{
+						                        	$('#clt').text('已收藏');
+						                        	// console.log(data);
+						                        }
+						                 
+						                    }
+										});
+									});
+									$('#clt').click(function(){
+										var a = $('#clt').text();
+										if( a=="收藏" ){
+											$.ajaxSetup({
+											    headers: {
+											        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+											    }
+											});
+											$.ajax({
+								                url:"/home/collect/create", //处理页面的路径
+								                data:{'goods_id':9}, //要提交的数据是一个JSON
+								                type:"GET", //提交方式
+								                dataType:"json", //返回数据的类型
+								                //TEXT字符串 JSON返回JSON XML返回XML
+								                success:function(data){ //回调函数 ,成功时返回的数据存在形参data里
+							                        if(data == 1)  //trim()方法会去掉页面中的冗余空格
+							                        {
+							                            $('#clt').text('已收藏');
+							                        }else{
+							                        	alert('收藏失败');
+							                        }
+							                 
+							                    }
+											});
+										}else{
+											$.ajaxSetup({
+											    headers: {
+											        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+											    }
+											});
+											$.ajax({
+								                url:"/home/collect/destroy", //处理页面的路径
+								                data:{'goods_id':9}, //要提交的数据是一个JSON
+								                type:"GET", //提交方式
+								                dataType:"json", //返回数据的类型
+								                //TEXT字符串 JSON返回JSON XML返回XML
+								                success:function(data){ //回调函数 ,成功时返回的数据存在形参data里
+								                	// console.log(data);
+							                        if(data == 1)  //trim()方法会去掉页面中的冗余空格
+							                        {
+							                            $('#clt').text('收藏');
+							                        }else{
+							                        	alert('取消收藏失败');
+							                        }
+							                    }
+											});
+										}
+									});
 								</script>
 								<script>
 									$(function () {

@@ -18,11 +18,8 @@ class friendshipController extends Controller
 {
     /**
      * Display a listing of the resource.
-<<<<<<< HEAD
      *
-=======
      * 友情链接列表
->>>>>>> origin/xujw
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -46,11 +43,8 @@ class friendshipController extends Controller
 
     /**
      * Show the form for creating a new resource.
-<<<<<<< HEAD
      *
-=======
      * 友情链接添加页面
->>>>>>> origin/xujw
      * @return \Illuminate\Http\Response
      */
     public function create()
@@ -61,7 +55,6 @@ class friendshipController extends Controller
 
     /**
      * Store a newly created resource in storage.
-
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -123,11 +116,8 @@ class friendshipController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-<<<<<<< HEAD
      *
-=======
      * 友情链接修改页面
->>>>>>> origin/xujw
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -143,11 +133,8 @@ class friendshipController extends Controller
 
     /**
      * Update the specified resource in storage.
-<<<<<<< HEAD
      *
-=======
      * 友情链接修改操作
->>>>>>> origin/xujw
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -191,11 +178,8 @@ class friendshipController extends Controller
 
     /**
      * Remove the specified resource from storage.
-<<<<<<< HEAD
      *
-=======
      * 友情链接删除操作
->>>>>>> origin/xujw
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */

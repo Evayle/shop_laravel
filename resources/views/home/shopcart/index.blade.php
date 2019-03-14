@@ -1,20 +1,9 @@
-@extends('home.layout.index')
+@extends('home.layout.shopping')
 
 
-@section('index')
+@section('shopping')
 
 <!-- 顶部标题 -->
-	<div class="bgf5 clearfix">
-		<div class="top-user">
-			<div class="inner">
-
-
-				<a class="logo" href="/home"><img src="/homes/images/icons/logo.jpg" alt="U袋网" class="cover"></a>
-
-				<div class="title">购物车</div>
-			</div>
-		</div>
-	</div>
 	<div class="content clearfix bgf5">
 		<section class="user-center inner clearfix">
 			<div class="user-content__box clearfix bgf">
