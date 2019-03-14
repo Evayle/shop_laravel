@@ -1,6 +1,5 @@
 @extends('admin.layout.index')
 @section('content')
-      <section id="main-content">
           <section class="wrapper">
             <div class="row mt">
             <div class="col-lg-12">
@@ -44,7 +43,7 @@
                                     <td class="col-md-1">{{ $i++ }}</td>
                                     <td class="col-md-1">{{ $v->fs_name }}</td>
                                     <td class="col-md-2">{{ $v->fs_link }}</td>
-                                    <td class="col-md-1"><img src="/storage/{{ $v->fs_logo }}" alt=""height="26px"></td>
+                                    <td class="col-md-1"><img src="/storage/admin/link/{{  $v->fs_logo }}" alt=""height="26px"></td>
                                     <td class="col-md-2">{{ $v->fs_note }}</td>
                                     @if( $v->fs_status == 'true' )
                                       <td class="col-md-1"><a href=""><img src="/bg/img/对.jpg" alt="" width="26"></a></td>

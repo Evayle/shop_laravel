@@ -14,7 +14,7 @@
 	<script src="/homes/js/swiper.min.js" charset="UTF-8"></script>
 	<script src="/homes/js/global.js" charset="UTF-8"></script>
 	<script src="/homes/js/jquery.DJMask.2.1.1.js" charset="UTF-8"></script>
-	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.slim.js"></script>
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<title>富潮里</title>
 
 
@@ -79,6 +79,7 @@
 			<div class="cart-box">
 
 				<a href="/home/shopping" class="cart-but">
+
 					<i class="iconfont icon-shopcart cr fz16"></i> 购物车 0 件
 				</a>
 			</div>
@@ -98,8 +99,8 @@
 				</a>
 			</li>
 			<li class="r-toolbar-item">
-
-				<a href="udai_shopcart.html" class="r-item-hd">
+				<!-- 这里同上 已有则可删除 -->
+				<a href="/home/shopcart" class="r-item-hd">
 
 					<i class="iconfont icon-cart" data-badge="10"></i>
 					<div class="r-tip__box"><span class="r-tip-text">购物车</span></div>

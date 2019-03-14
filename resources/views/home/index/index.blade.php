@@ -332,7 +332,7 @@
 						<img src="/homes/images/floor_1.jpg" alt="" class="cover">
 					</a>
 					<div class="right-box hot-box">
-						<a href="item_show.html" class="floor-item">
+						<a href="/home/collect" class="floor-item">
 							<div class="item-img hot-img">
 								<img src="/homes/images/temp/S-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
 							</div>

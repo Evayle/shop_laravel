@@ -3,7 +3,7 @@
 <html lang="zh-cmn-Hans">
 <head>
     <meta charset="UTF-8">
-    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="shortcut icon" href="/homes/favicon.ico">
     <link rel="stylesheet" href="/homes/css/iconfont.css">
     <link rel="stylesheet" href="/homes/css/global.css">
     <link rel="stylesheet" href="/homes/css/bootstrap.min.css">
@@ -51,7 +51,8 @@
     <div class="bgf5 clearfix">
         <div class="top-user">
             <div class="inner">
-                <a class="logo" href="index.html"><img src="/homes/images/icons/logo.jpg" alt="富潮里" class="cover"></a>
+
+                <a class="logo" href="/home"><img src="/homes/images/icons/logo.jpg" alt="富潮里" class="cover"></a>
                 <div class="title">跳转的页面标题</div>
             </div>
         </div>
