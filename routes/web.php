@@ -31,39 +31,29 @@ Route::group(['middleware'=>'login'],function(){
 
     //退出登录
     Route::any('admin/loutgin','Admin\LoginController@session');
+
+
     // 友情链接
-
     Route::get('admin/friendship/setdata','Admin\FriendshipController@setdata');
-
-
     Route::resource('admin/friendship','Admin\FriendshipController');
 
-    // 后台分类管理
-    Route::get('admin/category/create/{id}','Admin\CategoryController@create');
 
 
-
-    Route::resource('admin/category','Admin\CategoryController');
-
-    // 后台商品管理
-    Route::resource('admin/goods','Admin\GoodsController');
-
-
-    Route::get('admin/category/attr','Admin\CategoryController@attr');
-    Route::get('admin/category/value','Admin\CategoryController@value');
-    Route::resource('admin/category','Admin\CategoryController');
-
-    // 后台商品管理(huang)
-    Route::get('admin/goods/attr/{id}','Admin\GoodsController@attr');
-    Route::post('admin/goods/attrStore','Admin\GoodsController@attrStore');
-    Route::get('admin/goods/value/{id}','Admin\GoodsController@value');
-    Route::post('admin/goods/valueStore','Admin\GoodsController@valueStore');
-    Route::get('admin/goods/info/{id}','Admin\GoodsController@info');
-    Route::resource('admin/goods','Admin\GoodsController');
     // 轮播图管理
     Route::resource('admin/slide','Admin\SlideController');
     //后台优惠券管理
     Route::resource('admin/coupon','Admin\CouponController');
+
+    // 后台分类管理(huang)
+    Route::get('admin/category/create/{id}','Admin\CategoryController@create');
+    Route::resource('admin/category','Admin\CategoryController');
+
+    // 后台商品管理(huang)
+    Route::resource('admin/goods','Admin\GoodsController');
+
+    // 轮播图管理
+    Route::resource('admin/slide','Admin\SlideController');
+
 
 });
 
@@ -154,7 +144,6 @@ Route::resource('home/login_pass','Home\UpassController');
 //用户订单
 Route::resource('home/orders','Home\UorderController');
 
-
 //用户收藏
 Route::resource('home/collection','Home\CollectionController');
 
@@ -164,11 +153,3 @@ Route::resource('home/refund','Home\refundController');
 
 //立即付款
 Route::resource('home/Receipt','Home\ReceiptController');
-
-
-//确认收货
-
-
-
-
-

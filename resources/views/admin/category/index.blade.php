@@ -36,8 +36,8 @@
                         <td><a href="basic_table.html#">{{ $v->categorys_name }}</a></td>
                         <td class="hidden-phone">{{ $v->categorys_pid }}</td>
                         <td>{{ $v->categorys_path }} </td>
-                        <td><span class="label label-info label-mini">{{ $v->categorys_hot == 0 ? '非热门' : '热门' }}</span></td>
-                        <td><span class="label label-info label-mini">{{ $v->categorys_display == 0 ? '显示' : '隐藏' }}</span></td>
+                        <td><span class="label label-info label-mini"><a href="/admin/category/{{ $v->id }}">{{ $v->categorys_hot == 0 ? '非热门' : '热门' }}</a></span></td>
+                        <td><span class="label label-info label-mini"><a href="/admin/category/{{ $v->id }}/edit">{{ $v->categorys_display == 0 ? '显示' : '隐藏' }}</a></span></td>
                         <td>
                             <a href="/admin/category/create/{{ $v->id }}"><button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button></a>
                         </td>

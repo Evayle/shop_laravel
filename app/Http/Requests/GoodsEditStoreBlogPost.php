@@ -26,7 +26,8 @@ class GoodsEditStoreBlogPost extends FormRequest
         return [
         'goods_name' => 'required',
         'goods_describe' => 'required',
-        'goods_keywords' => 'required',
+        'goods_store' => 'required|regex:/^\d{1,10}$/',
+        'goods_price' => 'required|regex:/^\d{1,8}(\.\d{1,2})?$/',
         ];
     }
 
@@ -35,7 +36,10 @@ class GoodsEditStoreBlogPost extends FormRequest
         return [
             'goods_name.required' => '商品名称必填',
             'goods_describe.required' => '商品描述必填',
-            'goods_keywords.required' => '商品关键词必填',
+            'goods_store.required' => '商品库存必填',
+            'goods_store.regex' => '商品库存格式不正确',
+            'goods_price.required' => '商品价格必填',
+            'goods_price.regex' => '商品价格格式不正确',
         ];
     }
 }

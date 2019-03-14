@@ -1,11 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBlogPost;
-
 use App\Model\Admin\tp_admin_users;
 use App\Model\Admin\tp_admin_user_infos;
 use Hash;
@@ -25,15 +23,12 @@ class UserController extends Controller
 
         //dump($request->all());
         $count = $request->input('count',5);
-
-
         $i = 1;
         $uname = $request->input('user','');
         $tp_data = tp_admin_users::where('admin_name','like','%'.$uname.'%')
         ->orderBy('id','desc')
         ->paginate($count);
-
-        return view('admin.users.index',['data'=>$tp_data,'i'=>$i,'request'=>$request->all() or ""]);
+        return view('admin.users.index',['data'=>$tp_data,'i'=>$i,'request'=>$request->all() or " "]);
             }
 
     /**
@@ -70,7 +65,7 @@ class UserController extends Controller
             if (!$file == null) {
 
                 //移动文件路径
-                $res = $file->storeAs('home_avatar',time().rand(2,100000000000).'.jpg');
+                $res = $file->storeAs('home_avatar',time().rand(555,1000000).'.jpg');
                     $data['admin_avatar'] = $res;
             } else {
                 $res = 'user_avatar.jpg';//如果用户没有头像，就直接用系统的统一头像；

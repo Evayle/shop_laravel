@@ -10,13 +10,7 @@ use App\Model\Admin\tp_goods_categorys;
 use App\Model\Admin\tp_goods;
 use App\Model\Admin\tp_goods_imgs;
 use App\Model\Admin\tp_goods_pics;
-
 use DB;
-
-use App\Model\Admin\tp_goods_attrs;
-use App\Model\Admin\tp_goods_values;
-use App\Model\Admin\tp_goods_skus;
-
 use Illuminate\Support\Facades\Storage;
 
 class GoodsController extends Controller
@@ -48,16 +42,15 @@ class GoodsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-
-
-
     public function index(Request $request)
     {
         $search = $request->input('search');
         $goods = tp_goods::where('goods_name', 'like', '%'.$search.'%')->paginate(10);
+
+        $ctegs = new tp_goods_categorys;
         // 加载前台视图
-        return view('admin.goods.index',['goods' => $goods, 'request' => $request->all()]);
+        return view('admin.goods.index',['goods' => $goods, 'request' => $request->all(), 'ctegs' => $ctegs]);
+
     }
 
     /**
@@ -85,7 +78,7 @@ class GoodsController extends Controller
         if ($request->hasFile('goods_plot')) {
             $file = $request->file('goods_plot');// 创建文件上传对象
             // 执行文件上传
-            $res = $file->store('public');
+            $res = $file->store('public/admin/fm');
 
             // 将'public'替换成'storage'
             $res1 = substr($res, 6);
@@ -94,52 +87,34 @@ class GoodsController extends Controller
             return back();
         }
 
-        $goods = new tp_goods;
-        $goods->goods_name = $data['goods_name'];
-        $goods->goods_plot = $data['goods_plot'];
-        $goods->goods_fsp = $data['goods_fsp'];
-        $goods->goods_keywords = $data['goods_keywords'];
-        $goods->goods_categorys_id = $data['goods_categorys_id'];
-        $goods->goods_describe = $data['goods_describe'];
-        $goods->goods_vip = $data['goods_vip'];
-        $goods->goods_recommend = $data['goods_recommend'];
-        $goods->goods_preferential = $data['goods_preferential'];
-        $goods->goods_discount = $data['goods_discount'];
 
-        // 执行添加
-        if ($goods->save()) {
-            // 同时添加详情图跟缩略图
+        $id = DB::table('tp_goods')->insertGetId($data);
+
+        // 执行添加后跳转
+        if ($id) {
             // 同时添加缩略图
             $data = $request->only(['pics_url']);
-            $data['goods_id'] = $goods->id;
+            $data['goods_id'] = $id;
+
             $files = $request->file('pics_url');
             foreach ($files as $key => $value) {
-                $res = $value->store('public');
+                $res = $value->store('public/admin/pic');
                 $res1 = substr($res, 6);
                 $data['pics_url'] = 'storage'.$res1;
-                $goods_pics = new tp_goods_pics;
-                $goods_pics->pics_url = $data['pics_url'];
-                $goods_pics->goods_id = $data['goods_id'];
-                $goods_pics->save();
+
+                DB::table('tp_goods_pics')->insert($data);
             };
 
-
-
-
             // 同时添加详情图
-
-
             $data = $request->only(['imgs_url']);
-            $data['goods_id'] = $goods->id;
+            $data['goods_id'] = $id;
+
             $files = $request->file('imgs_url');
             foreach ($files as $key => $value) {
-                $res = $value->store('public');
+                $res = $value->store('public/admin/img');
                 $res1 = substr($res, 6);
                 $data['imgs_url'] = 'storage'.$res1;
-                $goods_imgs = new tp_goods_imgs;
-                $goods_imgs->imgs_url = $data['imgs_url'];
-                $goods_imgs->goods_id = $data['goods_id'];
-                $goods_imgs->save();
+                DB::table('tp_goods_imgs')->insert($data);
             };
 
             return redirect('admin/goods')->with('success', '添加成功');
@@ -156,7 +131,22 @@ class GoodsController extends Controller
      */
     public function show($id)
     {
-        //
+
+        // 修改上下架
+        $goods = tp_goods::find($id);
+        $bool = $goods->goods_status;
+
+        // 判断值后更改内容
+        if ($bool) {
+            $goods->goods_status = 0;
+            $goods->save();
+            return back()->with('success', '修改上下架成功');
+        } else {
+            $goods->goods_status = 1;
+            $goods->save();
+            return back()->with('success', '修改上下架成功');
+        }
+
     }
 
     /**
@@ -187,21 +177,14 @@ class GoodsController extends Controller
 
     public function update(GoodsEditStoreBlogPost $request, $id)
     {
+        // dd($id);
         $goods = tp_goods::find($id);
-        $data = $request->except('_method','_token');
+        $data = $request->except(['_token', '_method', 'pics_url', 'imgs_url', 'goods_plot']);
 
         // 判断封面图是否修改
         if (!$request->hasFile('goods_plot')) {
-            $goods->goods_name = $request->input('goods_name', '');
-            $goods->goods_keywords = $request->input('goods_keywords', '');
-            $goods->goods_describe = $request->input('goods_describe', '');
-            $goods->goods_categorys_id = $request->input('goods_categorys_idgoods_vip', '');
-            $goods->goods_vip = $request->input('goods_vip', '');
-            $goods->goods_discount = $request->input('goods_discount', '');
-            $goods->goods_preferential = $request->input('goods_preferential', '');
-            $goods->goods_fsp = $request->input('goods_fsp', '');
-            $goods->goods_recommend = $request->input('goods_recommend', '');
-            $goods->goods_categorys_id = $request->input('goods_categorys_id', '');
+            // 没有修改封面图
+            $bool = DB::table('tp_goods')->where('id', $id)->update($data);
         } else {
             // 将 '/storage/xxxx.jpg' 更换成 'xxxx.jpg'
             $path = substr($goods->goods_plot, 8);
@@ -211,27 +194,18 @@ class GoodsController extends Controller
 
             // 重新更换新的图片
             $file = $request->file('goods_plot');// 创建文件上传对象
-            $res = $file->store('public');
+            $res = $file->store('public/admin/fm');
 
             // 将'public' 字符串替换成'storage'字符串
             $res1 = substr($res, 6);
-            $goods->goods_plot = 'storage'.$res1;
-            $goods->goods_name = $request->input('goods_name', '');
-            $goods->goods_keywords = $request->input('goods_keywords', '');
-            $goods->goods_describe = $request->input('goods_describe', '');
-            $goods->goods_categorys_id = $request->input('goods_categorys_idgoods_vip', '');
-            $goods->goods_vip = $request->input('goods_vip', '');
-            $goods->goods_discount = $request->input('goods_discount', '');
-            $goods->goods_preferential = $request->input('goods_preferential', '');
-            $goods->goods_fsp = $request->input('goods_fsp', '');
-            $goods->goods_recommend = $request->input('goods_recommend', '');
-            $goods->goods_categorys_id = $request->input('goods_categorys_id', '');
+            $data['goods_plot'] = 'storage'.$res1;
+
+            $bool = DB::table('tp_goods')->where('id', $id)->update($data);
         }
 
         // 判断缩略图是否修改
         if ($request->hasFile('pics_url')) {
             $goodspic = tp_goods_pics::where('goods_id', $id)->get();
-            // dd($goodspic);
             foreach ($goodspic as $value) {
                 // 将 '/storage/xxxx.jpg' 更换成 'xxxx.jpg'
                 $path = substr($value->pics_url, 8);
@@ -248,20 +222,16 @@ class GoodsController extends Controller
             $data['goods_id'] = $id;
             $files = $request->file('pics_url');
             foreach ($files as $key => $value) {
-                $res = $value->store('public');
+                $res = $value->store('public/admin/pic');
                 $res1 = substr($res, 6);
                 $data['pics_url'] = 'storage'.$res1;
-                $goods_pics = new tp_goods_pics;
-                $goods_pics->pics_url = $data['pics_url'];
-                $goods_pics->goods_id = $data['goods_id'];
-                $goods_pics->save();
+                $bool = DB::table('tp_goods_pics')->insert($data);
             };
         }
 
         // 判断详情图是否修改
         if ($request->hasFile('imgs_url')) {
             $goodsimg = tp_goods_imgs::where('goods_id', $id)->get();
-            // dd($goodspic);
             foreach ($goodsimg as $value) {
                 // 将 '/storage/xxxx.jpg' 更换成 'xxxx.jpg'
                 $path = substr($value->imgs_url, 8);
@@ -278,18 +248,14 @@ class GoodsController extends Controller
             $data['goods_id'] = $id;
             $files = $request->file('imgs_url');
             foreach ($files as $key => $value) {
-                $res = $value->store('public');
+                $res = $value->store('public/admin/img');
                 $res1 = substr($res, 6);
                 $data['imgs_url'] = 'storage'.$res1;
-                $goods_imgs = new tp_goods_imgs;
-                $goods_imgs->imgs_url = $data['imgs_url'];
-                $goods_imgs->goods_id = $data['goods_id'];
-                $goods_imgs->save();
+                $bool = DB::table('tp_goods_imgs')->insert($data);
             };
         }
-
         // 执行修改
-        if ($goods->save()) {
+        if ($bool) {
             return redirect('admin/goods')->with('success', '修改成功');
         } else {
             return back()->with('error', '修改失败');
@@ -305,187 +271,50 @@ class GoodsController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
 
-    /**
-     * 回收站
-     * @return [type] [description]
-     */
-    public function delete()
-    {
-
-
-
-    /* * 属性名添加页面
-     * @return [type] [description]
-     */
-    }
-    public function attr($id)
-    {
-        // 判断是否有库存
-        $data = tp_goods::where('goods_hot', '>', 0)->where('id', $id)->first();
-        if ($data) {
-            // 跳转到单品库存列表
-            return redirect("admin/goods/info/{$id}")->with('success', '已设置规格, 可任意更改该商品的库存');
+        // 执行删除操作
+        DB::beginTransaction();
+        $goods = tp_goods::find($id);
+        $res1 = tp_goods::destroy($id);
+        if ($res1) {
+            // 同时删除封面图
+            $path = substr($goods->goods_plot, 8);// 将 '/storage/xxxx.jpg' 更换成 'xxxx.jpg'
+            Storage::delete("public/$path");
         }
 
-        // 判断是否填写了属性名
-        $data = tp_goods_attrs::where('goods_id', $id)->first();
-        if (!empty($data)) {
-            return redirect("admin/goods/value/{$id}")->with('success', '已设置属性名, 且暂无库存, 可任意更改属性值');
-        }
+        // 删除详情套图及数据
+        $goodsimg = tp_goods_imgs::where('goods_id', $id)->get();
+        $res2 = tp_goods_imgs::where('goods_id', $id)->delete();
+        if ($res2) {
+            foreach ($goodsimg as $value) {
+                // 将 '/storage/xxxx.jpg' 更换成 'xxxx.jpg'
+                $path = substr($value->imgs_url, 8);
 
-        return view('admin.goods.attr', ['goods_id' => $id]);
-    }
-
-    /**
-     * 属性名执行添加
-     * @return [type] [description]
-     */
-    public function attrStore(Request $request)
-    {
-        $data = $request->except('_token');
-
-        // 获取分类id
-        $goods_categorys_id = tp_goods::where('id', $data['goods_id'])->first()->goods_categorys_id;
-
-        // 获取商品id
-        $goods_id = $data['goods_id'];
-
-        // 去除$data中的goods_id值
-        unset($data['goods_id']);
-
-        // 遍历写入属性名表
-        foreach ($data as $k => $v) {
-            foreach ($v as $kk => $vv) {
-                if (!empty($vv)) {
-                    $attr = new tp_goods_attrs;
-                    $attr->goods_categorys_id = $goods_categorys_id;
-                    $attr->goods_id = $goods_id;
-                    $attr->attrs_name = $vv;
-                    // dump($attr);
-                    $bool = $attr->save();
-                }
-            }
-        }
-        if ($bool) {
-            return redirect("admin/goods/value/{$goods_id}")->with('success', '属性名添加成功');
-        } else {
-            return back()->with('error', '属性名添加失败');
-        }
-    }
-
-    /**
-     * 属性值添加页面
-     * @return [type] [description]
-     */
-    public function value($id)
-    {
-        return view('admin.goods.value', ['goods_id' => $id]);
-    }
-
-    /**
-     * 属性值执行添加
-     * @return [type] [description]
-     */
-    public function valueStore(Request $request)
-    {
-        // 判断是否重写属性值
-        $data = tp_goods_values::where('goods_id', $request->input('goods_id'))->first();
-        if ($data) {
-            tp_goods_values::where('goods_id', $request->input('goods_id'))->delete();
-        }
-
-        $data = $request->except('_token');
-
-        // 获取商品id
-        $goods_id = $data['goods_id'];
-
-        // 根据商品id获取对应的两个属性名id
-        $ysid = tp_goods_attrs::where('goods_id', $goods_id)->where('attrs_name', '颜色')->first()->id;
-        $ccid = tp_goods_attrs::where('goods_id', $goods_id)->where('attrs_name', '尺寸')->first()->id;
-
-        // 获取颜色属性值
-        $ys = $data['ys'];
-
-        // 获取尺寸属性值
-        $cc = $data['cc'];
-
-        // 遍历将颜色属性写入属性值表
-        foreach ($ys as $k => $v) {
-            if (!empty($v)) {
-                $value = new tp_goods_values;
-                $value->goods_attrs_id = $ysid;
-                $value->goods_id = $goods_id;
-                $value->values_name = $v;
-                // dump($value);
-                $bool = $value->save();
+                // 删除旧图片
+                Storage::delete("public/$path");
             }
         }
 
-        // 遍历将尺寸属性写入属性值表
-        foreach ($cc as $k => $v) {
-            if (!empty($v)) {
-                $value = new tp_goods_values;
-                $value->goods_attrs_id = $ccid;
-                $value->goods_id = $goods_id;
-                $value->values_name = $v;
-                // dump($value);
-                $bool = $value->save();
+        // 删除缩略套图及数据
+        $goodspic = tp_goods_pics::where('goods_id', $id)->get();
+        $res3 = tp_goods_pics::where('goods_id', $id)->delete();
+        if ($res3) {
+            foreach ($goodspic as $value) {
+                // 将 '/storage/xxxx.jpg' 更换成 'xxxx.jpg'
+                $path = substr($value->pics_url, 8);
+
+                // 删除旧图片
+                Storage::delete("public/$path");
             }
         }
 
-        if ($bool) {
-            // 判断是否重写规格表
-            $data = tp_goods_skus::where('goods_id', $goods_id)->first();
-            if ($data) {
-                tp_goods_skus::where('goods_id', $goods_id)->delete();
-            }
-
-            // 再将属性名跟属性值填入规格表
-            $goods_categorys_id = tp_goods::where('id', $goods_id)->first()->goods_categorys_id;// 获取分类id
-
-            // 获取颜色属性值, 并且拼接成id,id 字符串
-            $ysv = tp_goods_values::where('goods_attrs_id', $ysid)->get();
-            foreach ($ysv as $k => $v) {
-                $ysarr[] = $v->id;
-            }
-            $ysstr = join($ysarr, ',');
-
-            $sku = new tp_goods_skus;
-            $sku->goods_id = $goods_id;
-            $sku->goods_categorys_id = $goods_categorys_id;
-            $sku->goods_attrs_id = $ysid;
-            $sku->goods_values_id = $ysstr;
-            $sku->save();
-
-            // 获取尺寸属性值, 并且拼接成id,id 字符串
-            $ccv = tp_goods_values::where('goods_attrs_id', $ccid)->get();
-            foreach ($ccv as $k => $v) {
-                $ccarr[] = $v->id;
-            }
-            $ccstr = join($ccarr, ',');
-
-            $sku = new tp_goods_skus;
-            $sku->goods_id = $goods_id;
-            $sku->goods_categorys_id = $goods_categorys_id;
-            $sku->goods_attrs_id = $ccid;
-            $sku->goods_values_id = $ccstr;
-            $sku->save();
-            return redirect("admin/goods/info/{$goods_id}")->with('success', '属性名添加成功');
-        } else {
-            return back()->with('error', '属性名添加失败');
+        if($res1 && $res2 && $res3){
+            DB::commit();
+            return redirect($_SERVER['HTTP_REFERER'])->with('success','删除成功');
+        }else{
+            DB::rollBack();
+            return redirect($_SERVER['HTTP_REFERER'])->with('error','删除失败');
         }
-    }
-
-    /**
-     * 单品库存页面
-     * @return [type] [description]
-     */
-    public function info($id)
-    {
-        return view('admin.goods.info', ['goods_id' => $id]);
-
     }
 }
+

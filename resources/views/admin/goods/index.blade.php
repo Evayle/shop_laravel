@@ -28,21 +28,22 @@
                     <thead>
                     <tr>
 
-
                         <th><i class="fa fa-bullhorn"></i> 商品名称</th>
                         <th><i class="fa fa-bullhorn"></i> 封面图</th>
-                        <th class="hidden-phone"><i class="fa fa-question-circle"></i>商品关键词</th>
-                        <th class="hidden-phone"><i class="fa fa-question-circle"></i>分类ID</th>
+                        <th class="hidden-phone"><i class="fa fa-question-circle"></i>分类名称</th>
+
                         <th class="hidden-phone"><i class="fa fa-question-circle"></i>描述</th>
                         <th class="hidden-phone"><i class="fa fa-question-circle"></i>是否包邮</th>
                         <th class="hidden-phone"><i class="fa fa-question-circle"></i>是否会员打折</th>
                         <th class="hidden-phone"><i class="fa fa-question-circle"></i>是否推荐</th>
                         <th class="hidden-phone"><i class="fa fa-question-circle"></i>是否打折</th>
                         <th class="hidden-phone"><i class="fa fa-question-circle"></i>是否参与优惠</th>
+                        <th class="hidden-phone"><i class="fa fa-question-circle"></i>是否可积分兑换</th>
                         <th class="hidden-phone"><i class="fa fa-question-circle"></i>点击数</th>
                         <th class="hidden-phone"><i class="fa fa-question-circle"></i>销量</th>
                         <th class="hidden-phone"><i class="fa fa-question-circle"></i>评论数</th>
-                        <th><i class="fa fa-bookmark"></i>库存总量</th>
+                        <th><i class="fa fa-bookmark"></i>库存</th>
+                        <th><i class="fa fa-bookmark"></i>价格</th>
                         <th><i class=" fa fa-edit"></i>上下架</th>
 
                         <th>操作</th>
@@ -51,33 +52,37 @@
                     <tbody>
                     @foreach ($goods as $k => $v)
                     <tr>
-
-                        <td><a href="basic_table.html#">{{ $v->goods_name }}</a></td>
+                        <td>{{ $v->goods_name }}</td>
                         <td class="hidden-phone"><img src="{{ asset($v->goods_plot) }}" width="50"></td>
-                        <td>{{ $v->goods_keywords }} </td>
-                        <td>{{ $v->goods_categorys_id }} </td>
+                        <td>{{ $ctegs->where("id", $v->goods_categorys_id)->first()->categorys_name }}</td>
                         <td>
                             <abbr title="{{ $v->goods_describe }}">
-                                <p style="width: 200px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">
+                                <p style="width: 120px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">
+
                                     {{ $v->goods_describe }}
                                 </p>
                             </abbr>
                         </td>
-
                         <td><span class="label label-info label-mini">{{ $v->goods_fsp == 0 ? '包邮' : '不包邮' }}</span></td>
                         <td><span class="label label-info label-mini">{{ $v->goods_vip == 0 ? '打折' : '不打折' }}</span></td>
                         <td><span class="label label-info label-mini">{{ $v->goods_recommend == 0 ? '推荐' : '不推荐' }}</span></td>
                         <td><span class="label label-info label-mini">{{ $v->goods_discount == 0 ? '打折' : '不打折' }}</span></td>
                         <td><span class="label label-info label-mini">{{ $v->goods_preferential == 0 ? '优惠' : '不优惠' }}</span></td>
+                        <td><span class="label label-info label-mini">{{ $v->goods_hot == 0 ? '兑换' : '不兑换' }}</span></td>
                         <td>{{ $v->goods_click }} </td>
                         <td>{{ $v->goods_sales }} </td>
                         <td>{{ $v->goods_comments }} </td>
-                        <td><span class="label label-info label-mini">{{ $v->goods_hot == 0 ? '无库存' : "$v->goods_hot" }}</span></td>
-                        <td><span class="label label-info label-mini">{{ $v->goods_status == 0 ? '未上架' : '上架' }}</span></td>
+                        <td>{{ $v->goods_store }} </td>
+                        <td>{{ $v->goods_price }} </td>
+                        <td><span class="label label-info label-mini"><a href="/admin/goods/{{ $v->id }}">{{ $v->goods_status == 0 ? '未上架' : '上架' }}</a></span></td>
                         <td>
-                            <a href="/admin/goods/attr/{{ $v->id }}"><button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button></a>
                             <a href="/admin/goods/{{ $v->id }}/edit"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
-                            <a href="/admin/goods/create/{{ $v->id }}"><button class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></button></a>
+                            <form action="/admin/goods/{{ $v->id }}" method="post" style="display: inline-block;">
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
+                                <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></button>
+                            </form>
+
                         </td>
                     </tr>
                     @endforeach

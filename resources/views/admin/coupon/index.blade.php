@@ -77,7 +77,18 @@
                                     <td>{{$val->coupon_sku}}</td>
 
                                   <td>
-                                      <a href="/admin/user/$value->id/edit" class="btn btn-primary" role="button"><i class="fa fa-pencil">{{$val->coupon_out}}</i></a>
+                                      <a href="/admin/user/$value->id/edit" class="btn btn-primary" role="button"><i class="fa fa-pencil">
+                                      @if($val->coupon_out == 0)
+                                      未发放
+                                      @elseif($val->coupon_out == 1)
+                                      发放中
+                                      @eiseif($val->coupon_out == 2)
+                                      发放完毕
+                                      @else
+                                      出错,紧急冻结
+                                      @endif
+
+                                      </i></a>
                                       <form action="/admin/coupon/$val->id" method="post" style="display: inline-block;">
                                     <input type="submit"  value="删除"  class="btn btn-danger">
                                       </form>

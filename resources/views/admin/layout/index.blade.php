@@ -6,6 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>富潮里后台管理系统</title>
     <!-- Bootstrap core CSS -->
     <link href="/bg/assets/css/bootstrap.css" rel="stylesheet">
@@ -241,8 +242,8 @@
                       </a>
                       <ul class="sub">
                           <li><a  href="/admin/category">分类列表</a></li>
-                          <li><a  href="/admin/category/attr">属性名列表</a></li>
-                          <li><a  href="/admin/category/value">属性值列表</a></li>
+
+
                           <li><a  href="/admin/category/create">分类添加</a></li>
                       </ul>
                   </li>
@@ -256,7 +257,6 @@
                       </a>
                       <ul class="sub">
                           <li><a  href="/admin/goods">商品列表</a></li>
-                          <li><a  href="/admin/goods/delete">规格列表</a></li>
                           <li><a  href="/admin/goods/create">商品添加</a></li>
                       </ul>
                   </li>
@@ -309,12 +309,7 @@
 <section id="main-content">
       @section('content')
 
-
-
-
       @show
-
-
 
       <!-- 内容的结束 -->
       <!--footer start-->
@@ -454,3 +449,4 @@
 </body>
 
 </html>
+

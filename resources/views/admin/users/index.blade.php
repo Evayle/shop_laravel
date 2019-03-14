@@ -2,7 +2,6 @@
 @section('content')
     <section class="wrapper">
             <h2 class="text-center">用户展示</h2>
-
                 <div class="row mt">
                   <div class="col-md-12">
                       <div class="content-panel">
@@ -64,7 +63,6 @@
                                   <td>{{$value->admin_email}}</td>
                                   <td>{{$value->created_at}}</td>
                                   <td>
-
                                       <a href="/admin/user/{{$value->id}}/edit" class="btn btn-primary" role="button"><i class="fa fa-pencil"></i></a>
 
                                       <form action="/admin/user/{{$value->id}}" method="post" style="display: inline-block;">

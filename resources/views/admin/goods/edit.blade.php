@@ -31,9 +31,16 @@
             </div>
 
             <div class="form-group">
-                <label class="col-sm-2 "><span class="user_add">商品关键词</span></label>
+                <label class="col-sm-2 "><span class="user_add">商品库存</span></label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="goods_keywords" value="{{ $goods->goods_keywords }}">
+                    <input type="text" class="form-control" name="goods_store" value="{{ $goods->goods_store }}">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 "><span class="user_add">商品价格</span></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="goods_price" value="{{ $goods->goods_price }}">
                 </div>
             </div>
 
@@ -106,6 +113,16 @@
             </div>
 
             <div class="form-group">
+                <label class="col-sm-2 col-sm-2 control-label"><span class="user_add">是否可积分兑换</span></label>
+                <div class="col-sm-10">
+                    <select class="form-control input-sm" name="goods_hot">
+                       <option value="0" @if($goods->goods_hot == 0) selected @endif>是</option>
+                       <option value="1" @if($goods->goods_hot == 1) selected @endif>否</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
                 <label class="col-sm-2 col-sm-2 control-label"><span class="user_add">商品封面图</span></label>
                 <div class="col-sm-10">
                   <input type="file" id="file" name="goods_plot">
@@ -140,7 +157,7 @@
             </div>
           </form>
       </div>
-		</div><!-- col-lg-12-->      	
+		</div><!-- col-lg-12-->
 	</div><!-- /row -->
 	</center>
 @endsection

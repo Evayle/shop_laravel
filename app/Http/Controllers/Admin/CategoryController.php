@@ -5,9 +5,6 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Admin\tp_goods_categorys;
-use App\Model\Admin\tp_goods_values;
-use App\Model\Admin\tp_goods_attrs;
-
 use App\Http\Requests\CategoryStoreBlogPost;
 use DB;
 
@@ -109,8 +106,11 @@ class CategoryController extends Controller
     /**
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> origin/xujw
+=======
+>>>>>>> origin/huang1
      * Display the specified resource.
      *
      * @param  int  $id
@@ -118,7 +118,22 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+
+        // 修改热门分类
+        $goods = tp_goods_categorys::find($id);
+        $bool = $goods->categorys_hot;
+
+        // 判断值后更改内容
+        if ($bool) {
+            $goods->categorys_hot = 0;
+            $goods->save();
+            return back()->with('success', '修改热门分类成功');
+        } else {
+            $goods->categorys_hot = 1;
+            $goods->save();
+            return back()->with('success', '修改热门分类成功');
+        }
+
     }
 
     /**
@@ -129,70 +144,19 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
-    }
+        // 修改显示
+        $goods = tp_goods_categorys::find($id);
+        $bool = $goods->categorys_display;
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-
-
-    /**
-    /显示属性名列表
-     *
-     * @return \Illuminate\Http\Response
-     */
-    }
-    public function attr(Request $request)
-    {
-        // 接收关键词参数
-        $search = $request->input('search','');
-
-        $arrts = tp_goods_attrs::where('attrs_name', 'like', '%'.$search.'%')->orderBy('goods_categorys_id','asc')->paginate(10);
-
-        // 加载添加分类视图
-        return view('admin.category.attr', ['arrts' => $arrts, 'request' => $request->all()]);
-    }
-
-    /**
-     * 显示属性值列表
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function value(Request $request)
-    {
-        // 接收关键词参数
-        $search = $request->input('search','');
-
-        $values = tp_goods_values::where('values_name', 'like', '%'.$search.'%')->orderBy('goods_attrs_id','asc')->paginate(10);
-
-        // 加载添加分类视图
-        return view('admin.category.value', ['values' => $values, 'request' => $request->all()]);
-    }
-
-    /**
-     * 回收站
-     * @return [type] [description]
-     */
-    public function delete()
-    {
-
+        // 判断值后更改内容
+        if ($bool) {
+            $goods->categorys_display = 0;
+            $goods->save();
+            return back()->with('success', '修改显示成功');
+        } else {
+            $goods->categorys_display = 1;
+            $goods->save();
+            return back()->with('success', '修改显示成功');
+        }
     }
 }
