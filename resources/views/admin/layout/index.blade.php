@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="/bg/assets/js/gritter/css/jquery.gritter.css" />
     <link rel="stylesheet" type="text/css" href="/bg/assets/lineicons/style.css">
     <link rel="stylesheet" type="text/css" href="/bg/css/user_add.css">
+    <link rel="stylesheet" type="text/css" href="/css/coupon.css">
     <!-- Custom styles for this template -->
     <link href="/bg/assets/css/style.css" rel="stylesheet">
     <link href="/bg/assets/css/style-responsive.css" rel="stylesheet">

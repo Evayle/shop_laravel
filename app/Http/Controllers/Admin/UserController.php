@@ -179,7 +179,7 @@ class UserController extends Controller
 
             return redirect('admin/user')->with('success','修改成功');
         }else{
-            echo "提交失败";
+
             DB::rollBack();
             return back()->with('error','修改失败');
         }

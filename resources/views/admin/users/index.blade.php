@@ -9,7 +9,6 @@
                           <table class="table table-striped table-advance table-hover">
                               <h4>
                             <form action="/admin/user" method="get">
-
                               <div class="dropdown">
                                 每页显示
                                   <select name="count">

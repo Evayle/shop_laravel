@@ -12,7 +12,7 @@
                       <form class="form-horizontal style-form" action="/admin/coupon" method="post" id="forms">
                             {{ csrf_field() }}
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label"><strong><strong>*</strong></strong>优惠券名称</label>
+                              <label class="col-sm-2 col-sm-2 control-label"><strong><strong style="color:red">*</strong></strong>优惠券名称</label>
                               <div class="col-sm-10">
                                   <input type="text" class="form-control" placeholder="请填写优惠券的名称" id="youhuiquan" name="coupon" >
                                   <span id="ss" style="color:red"></span>
@@ -31,7 +31,7 @@
 
                           </script>
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label"><strong><strong>*</strong></strong>优惠券发放时间</label>
+                              <label class="col-sm-2 col-sm-2 control-label"><strong><strong style="color:red">*</strong></strong>优惠券发放时间</label>
                               <div class="col-sm-10">
                                   <input type="text" class="demo-input" placeholder="请选择日期" id="time" name="coupon_start_time">
                                    至
@@ -60,7 +60,7 @@
                             <br>
                             <br>
                             <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label"><strong><strong>*</strong></strong>活动时间</label>
+                              <label class="col-sm-2 col-sm-2 control-label"><strong><strong style="color:red">*</strong></strong>活动时间</label>
                               <div class="col-sm-10">
                                   <input type="text" class="demo-input" placeholder="请选择日期" id="time2" name="coupon_start_period">
                                    至
@@ -113,7 +113,7 @@
                             </script>
                         <hr>
 
-                        <label class="col-sm-2 col-sm-2 control-label"><strong>*</strong>优惠券发放类型</label>
+                        <label class="col-sm-2 col-sm-2 control-label"><strong style="color:red">*</strong>优惠券发放类型</label>
                         <label class="checkbox-inline" id="inlineCheckbox1">
                           <input type="radio"  name="coupon_send_type" value="1" ">商品添加
                         </label>
@@ -128,7 +128,7 @@
 
                             <!--  需要和商品表链接起来 -->
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label"><strong>*</strong>绑定商品</label>
+                              <label class="col-sm-2 col-sm-2 control-label"><strong style="color:red">*</strong>绑定商品</label>
                               <div class="col-sm-10">
                                  <select class="form-control input-sm" name="coupon_shop" id="sel">
                                     <option value="0">顶级分类</option>
@@ -176,19 +176,19 @@
                                 });
                         </script>
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label"><strong>*</strong>优惠券面额</label>
+                              <label class="col-sm-2 col-sm-2 control-label"><strong style="color:red">*</strong>优惠券面额</label>
                               <div class="col-sm-10">
                                   <input type="text"  class="form-control" placeholder="输入金额" style='width:300px;' name="coupon_many" id="many">
                               </div>
                           </div>
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label"><strong>*</strong>发行张数</label>
+                              <label class="col-sm-2 col-sm-2 control-label"><strong style="color:red">*</strong>发行张数</label>
                               <div class="col-sm-10">
                                  <input type="text"  class="form-control" placeholder="填写数量" style='width: 100px;' name="coupon_nums">
                               </div>
                           </div>
                           <div class="form-group" ">
-                              <label class="col-sm-2 col-sm-2 control-label"><strong>*</strong>结算类型</label>
+                              <label class="col-sm-2 col-sm-2 control-label"><strong style="color:red">*</strong>结算类型</label>
                                   <input type="radio" name="coupon_setting_type" value="1" id="le"><strong id="man">满减</strong>
                                   <input type="radio" name="coupon_setting_type"  value="2" id="lei"><strong id="zhe">折扣</strong>
                           </div>
@@ -221,13 +221,13 @@
                             });
                           </script>
                            <div class="form-group" hidden="hidden" id="zhekou" >
-                              <label class="col-sm-2 col-sm-2 control-label"><strong>*</strong>优惠券折扣规则</label>
+                              <label class="col-sm-2 col-sm-2 control-label"><strong style="color:red">*</strong>优惠券折扣规则</label>
                               <div class="col-sm-10">
                                <strong>满:</strong> <input style="width:80px;type="text" display:block;  id="manyzhe"><strong>折:</strong><input style="width:80px;type="text" display:block; name="coupon_rule" id="diss"><strong>%(请输入小数例:0.75 即是7.5折)</strong>
                               </div>
                           </div>
                           <div class="form-group" hidden="hidden" id="manjian" >
-                              <label class="col-sm-2 col-sm-2 control-label"><strong>*</strong>优惠券折扣规则</label>
+                              <label class="col-sm-2 col-sm-2 control-label"><strong style="color:red">*</strong>优惠券折扣规则</label>
                               <div class="col-sm-10">
                                <strong>满:</strong> <input style="width:80px;type="text" display:block; id="manyman"><strong>减:</strong><input style="width:80px;type="text" display:block; name="coupon_rule" id="dis" ><strong>元</strong>
                               </div>

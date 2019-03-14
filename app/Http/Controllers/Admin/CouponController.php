@@ -12,9 +12,17 @@ class CouponController extends Controller
      *
      *
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.coupon.index');
+        //接收表单传值过来的数量,默认是5
+        $count = $request->input('count',5);
+        //接收搜索的内容
+        $name = $request->input('coupon_search','');
+       $date = coupon_shop::where('coupon','like','%'.$name.'%')
+        ->orderBy('id','desc')
+        ->paginate($count);
+        $i = 1;
+        return view('admin.coupon.index',['date'=>$date,'i'=>$i,'request'=>$request->all() or ""]);
     }
 
     /**
@@ -36,10 +44,15 @@ class CouponController extends Controller
     public function store(Request $request)
     {
         $mun = mt_rand(99999,10000000).time();
+        $out = 0;
+
         $data = $_POST;
         //优惠券状态
+        $sku = $data['coupon_nums'];
         $data['coupon_status'] = 0;
         $data['coupon_self'] = 0;
+        $data['coupon_out'] =$out;
+        $data['coupon_sku'] =$sku;
         $data['coupon_num'] =$mun;
         $date = new coupon_shop;
         $date->coupon = $data['coupon'];
@@ -58,8 +71,16 @@ class CouponController extends Controller
         $date->coupon_setting_type  = $data['coupon_setting_type'];
         $date->coupon_rule  = $data['coupon_rule'];
         $date->coupon_shop  = $data['coupon_shop'];
+        $date->coupon_out  = $data['coupon_out'];
+        $date->coupon_sku  = $data['coupon_sku'];
         $dadd = $date->save();
-        dump($dadd);
+
+        //提交成功以后
+        if($dadd == true){
+            return redirect('admin/coupon/{success}')->with('success','添加成功');
+        }else{
+            return back()->with('error','修改失败');
+        }
 
     }
 
@@ -71,7 +92,7 @@ class CouponController extends Controller
      */
     public function show($id)
     {
-        echo "show";
+        return view('admin.coupon.jump');
     }
 
     /**
