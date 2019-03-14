@@ -24,9 +24,10 @@ class IndexController extends Controller
         $flight = home_users::where('uphon',$user)->first();
         //查询用户详情表的数据
         $uid  = $flight['id'];
+        $mhn = "马海宁宁";
         $home_integrals = home_integrals::where('uid',$uid)->first();
         //把查询的用户信息,传递到首页界面
-        return view('home.index.index',['data'=>$flight],['date'=>$home_integrals]);
+        return view('home.index.index',['data'=>$flight],['date'=>$home_integrals,"mhn"=>$mhn]);
     }
 
     /**

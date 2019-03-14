@@ -15,7 +15,8 @@
 
 Route::get('/',function(){
 
-return view('home.index.index');
+
+return redirect('/home');
 });
 
 
@@ -43,6 +44,7 @@ Route::group(['middleware'=>'login'],function(){
     Route::resource('admin/slide','Admin\SlideController');
     //后台优惠券管理
     Route::resource('admin/coupon','Admin\CouponController');
+    Route::any('admin/coupon_recording','Admin\CouponController@recording');
 
     // 后台分类管理(huang)
     Route::get('admin/category/create/{id}','Admin\CategoryController@create');

@@ -128,4 +128,7 @@ class CouponController extends Controller
     {
         echo "destroy";
     }
+    public function recording(){
+        return view('admin.coupon.recording');
+    }
 }

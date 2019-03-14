@@ -18,6 +18,7 @@
                                     <option value="50" @if(isset($request['count']) && $request['count'] == 50) selected @endif>50</option>
                                     <option value="100" @if(isset($request['count']) && $request['count'] == 100) selected @endif>100</option>
                                   </select>
+                            </div>
                               <div class="form-group" style=" position: absolute;
                               left: 80%;
                               top: -5px;">
@@ -43,7 +44,7 @@
                                   <th>活动时间</th>
                                   <th>总数量</th>
                                   <th>库存</th>
-                                  <th>操作</th>
+                                  <th>状态</th>
                               </tr>
                               </thead>
                               <tbody id = "coupon_tr">
@@ -71,26 +72,25 @@
 
                                     </td>
                                     <td>{{$val->coupon_many}}</td>
-                                    <td>{{$val->coupon_start_time }}||{{$val->coupon_end_time}}  </td>
-                                        <td>{{$val->coupon_start_period }} ||{{$val->coupon_end_period}} </td>
+                                    <td>{{$val->coupon_start_time }}<br>{{$val->coupon_end_time}}  </td>
+                                        <td>{{$val->coupon_start_period }} <br>{{$val->coupon_end_period}} </td>
                                     <td>{{$val->coupon_nums}}</td>
                                     <td>{{$val->coupon_sku}}</td>
 
                                   <td>
-                                      <a href="/admin/user/$value->id/edit" class="btn btn-primary" role="button"><i class="fa fa-pencil">
+                                      <a href="/admin/user/$value->id/edit" class="btn btn-primary" role="button">
                                       @if($val->coupon_out == 0)
                                       未发放
                                       @elseif($val->coupon_out == 1)
-                                      发放中
+                                      已发放
                                       @eiseif($val->coupon_out == 2)
                                       发放完毕
                                       @else
                                       出错,紧急冻结
                                       @endif
-
-                                      </i></a>
+                                      </a>
                                       <form action="/admin/coupon/$val->id" method="post" style="display: inline-block;">
-                                    <input type="submit"  value="删除"  class="btn btn-danger">
+                                    <input type="submit"  value="紧急冻结"  class="btn btn-danger">
                                       </form>
                                   </td>
 

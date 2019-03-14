@@ -22,15 +22,20 @@
     <link href="/bg/assets/css/style-responsive.css" rel="stylesheet">
     <script src="/bg/assets/js/chart-master/Chart.js"></script>
     <script src="https://cdn.bootcss.com/jquery/3.3.0/jquery.min.js"></script>
-    <!-- 时间插件 -->
-     <style>
-    body{padding: 20px;}
-    .demo-input{padding-left: 10px; height: 38px; min-width: 262px; line-height: 38px; border: 1px solid #e6e6e6;  background-color: #fff;  border-radius: 2px;}
-    .demo-footer{padding: 50px 0; color: #999; font-size: 14px;}
-    .demo-footer a{padding: 0 5px; color: #01AAED;}
-  </style>
-  <script src="/laydate/laydate.js"></script>
-  <!-- 时间插件结束 -->
+
+    <link rel="stylesheet" type="text/css" href="/table/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/table/css/bootstrap.min.css" />
+    <script src="/table/js/jquery-1.10.2.js"></script>
+    <script src="/table/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/table/js/bootbox.min.js"></script>
+
+
+
+
+
+
+
+
 
   </head>
 
@@ -298,7 +303,7 @@
       <!--sidebar end-->
       <!-- 内容的开始 -->
 <section id="main-content">
-      @section('content')
+      @section('content_coupon')
 
       @show
 

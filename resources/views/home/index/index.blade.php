@@ -8,7 +8,7 @@
 				<div class="cat-list__box">
 					<div class="cat-box">
 						<div class="title">
-							<i class="iconfont icon-skirt ce"></i> 女装
+							<i class="iconfont icon-skirt ce"></i>
 						</div>
 						<ul class="cat-list clearfix">
 							<li>下装</li>
