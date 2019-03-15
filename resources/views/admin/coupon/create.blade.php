@@ -26,51 +26,29 @@
                             }else{
                               $("#ss").text('');
                             }
-
                           });
-
                           </script>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label"><strong><strong style="color:red">*</strong></strong>优惠券发放时间</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="demo-input" placeholder="请选择日期" id="time" name="coupon_start_time">
-                                   至
-                                   <input type="text" class="demo-input" placeholder="请选择日期" id="time1" name="coupon_end_time">
-                                   <span id="time_span"  style="color:red"></span><br />
-                                  <strong>请选择优惠券的发放时间</strong>
-                              </div>
-                          </div>
-                            <script>
-                            lay('#version').html('-v'+ laydate.v);
-
-                            //执行一个laydate实例
-                            laydate.render({
-                              elem: '#time' //指定元素
-                            });
-                            </script>
-                            <script>
-                            lay('#version').html('-v'+ laydate.v);
-
-                            //执行一个laydate实例
-                            laydate.render({
-                              elem: '#time1' //指定元素
-                            });
-                            </script>
-
                             <br>
                             <br>
                             <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label"><strong><strong style="color:red">*</strong></strong>活动时间</label>
+                              <label class="col-sm-2 col-sm-2 control-label"><strong><strong style="color:red">*</strong></strong>优惠券使用时间区间</label>
                               <div class="col-sm-10">
-                                  <input type="text" class="demo-input" placeholder="请选择日期" id="time2" name="coupon_start_period">
-                                   至
-                                   <input type="text" class="demo-input" placeholder="请选择日期" id="time3" name="coupon_end_period">
+                                  <input type="text" class="demo-input" placeholder="请选择日期" id="time" name="coupon_start_period">
+                                   &nbsp; &nbsp;
+                                   <input type="time" class="demo-input" name="start_period" id="time_stra">
+                                   <span id="time_span"  style="color:red"> </span>
+                                    <br>
+                                   <strong>优惠券活动开始时间</strong>
+                                   <br>
+                                   <br>
+                                   <input type="text" class="demo-input" placeholder="请选择日期" id="time2" name="coupon_end_period">
+                                   &nbsp; &nbsp;
+                                   <input type="time" class="demo-input" name="end_period" id="time_end">
                                    <span id="time_span1"  style="color:red"> </span><br />
-                                  <strong>请选择优惠券活动开始的时间</strong>
+                                  <strong>优惠券活动开始结束时间</strong>
                               </div>
                           </div><script>
                             lay('#version').html('-v'+ laydate.v);
-
                             //执行一个laydate实例
                             laydate.render({
                               elem: '#time2' //指定元素
@@ -81,41 +59,14 @@
 
                             //执行一个laydate实例
                             laydate.render({
-                              elem: '#time3' //指定元素
+                              elem: '#time' //指定元素
                             });
-                            </script>
-                                 <script type="text/javascript">
-                               $('#time2').click(function(){
-                                var time = $('#time').val();
-                                var time1 = $('#time1').val();
-                                var now = new Date();
-                                //当前日期
-                                var time11 = now.getFullYear() + "-" +((now.getMonth()+1)<10?"0":"")+(now.getMonth()+1)+"-"+(now.getDate()<10?"0":"")+now.getDate();
-
-                                if(time>time1){
-
-                                    $('#time_span').text("发放时间不可以小于截止时间");
-                                    return false
-                                }
-                                if(time<time11){
-                                    $('#time_span').text("日期格式不对,请仔细检查");
-                                    return false;
-                                }
-                                if(time-time>100){
-                                     $('#time_span').text("发放时间过长");
-                                     return false;
-                                }
-                                if(time<time1){
-                                    $('#time_span').text(" ");
-                                    return false;
-                                }
-                                });
                             </script>
                         <hr>
 
                         <label class="col-sm-2 col-sm-2 control-label"><strong style="color:red">*</strong>优惠券发放类型</label>
                         <label class="checkbox-inline" id="inlineCheckbox1">
-                          <input type="radio"  name="coupon_send_type" value="1" ">商品添加
+                          <input type="radio"  name="coupon_send_type" value="1">商品添加
                         </label>
                         <label class="checkbox-inline" id="inlineCheckbox2">
                           <input type="radio"  name="coupon_send_type" value="2"> 分享链接添加
@@ -131,48 +82,51 @@
                               <label class="col-sm-2 col-sm-2 control-label"><strong style="color:red">*</strong>绑定商品</label>
                               <div class="col-sm-10">
                                  <select class="form-control input-sm" name="coupon_shop" id="sel">
-                                    <option value="0">顶级分类</option>
-                                    <option value="1">123</option>
-                                    <option value="2">|----123132</option>
-                                </select>
+                                    @foreach($date as $k=>$v)
+                                     <option value="{{$v->id}}">{{$v->goods_name}}</option>
+                                    @endforeach
+
+                                  </select>
                               </div>
                           </div>
                                     <script type="text/javascript">
-                        $('#sel').click(function(){
-                                //活动开始时间
-                                var time = $('#time2').val();
-                                //活动结束时间
-                                var time1 = $('#time3').val();
+                                $('#sel').click(function(){
                                 //发放开始时间
-                                var time3 = $('#time').val();
+                                var time = $('#time').val();
                                 //发放截止时间
-                                var time4 = $('#time1').val();
+                                var time2 = $('#time2').val();
+
+                                //具体分钟
+                                var star = $('#time_stra').val();
+                                var end = $('#time_end').val();
+
+                                console.log(star);
+                                console.log(end);
                                 var now = new Date();
                                 //当前日期
                                 var time11 = now.getFullYear() + "-" +((now.getMonth()+1)<10?"0":"")+(now.getMonth()+1)+"-"+(now.getDate()<10?"0":"")+now.getDate();
+                                 $('#time_span').text(" ");
+                                 $('#time_span1').text(" ")
 
-                                if (time3>time) {
-                                    $('#time_span1').text("活动时间不可以小于发放时间");
-                                    return false;
-                                };
-                                if(time4>=time1){
-                                     $('#time_span1').text("活动时间必须大于发放截止时间");
+
+                                if (time>time2) {
+                                    $('#time_span').text("开始时间不可以大于结束时间");
                                     return false;
                                 }
-                                if(time>time1){
-
-                                    $('#time_span1').text("活动截止时间不可以小于活动开始时间");
+                                if(time11>time){
+                                     $('#time_span').text("开始使用时间不可以少于当前时间");
                                     return false;
                                 }
 
-                                if(time-time>100){
-                                     $('#time_span1').text("发放时间过长");
-                                     return false;
-                                }
-                                if(time<time1){
-                                    $('#time_span1').text(" ");
+                                 if(star ==""){
+                                      $('#time_span').text("请填写完整的时间");
+                                      return false;
+                                 }
+                                 if(end ==""){
+                                     $('#time_span1').text("请填写完整的时间");
                                     return false;
-                                }
+                                 }
+
                                 });
                         </script>
                           <div class="form-group">

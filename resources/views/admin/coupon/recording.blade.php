@@ -48,28 +48,26 @@
                     <div class="modal-dialog modal-lg modal_position">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title">添加</h4>
+                                <h4 class="modal-title">优惠券</h4>
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                             <div class="modal-body">
                             <div>
-                                <table>
-                                   <td>
-                                       <th>
-                                           21323
+                                <table class="table table-hover">
+                                   <tr>
+                                        <th>
+                                           <strong>优惠券名称</strong>
                                        </th>
-                                   </td>
-
-                                        <th><strong>Twitter, Inc.</strong></th>
-                                        <th>1</th>
-                                        <th>1</th>
+                                        <th><strong>待核销数量</strong></th>
+                                        <th><strong>用户领取数量</strong></th>
+                                        <th><strong>用户使用数量</strong></th>
                                     </tr>
                                     <tr>
                                         <td>1</td>
+                                        <td>50</td>
                                         <td>1</td>
                                         <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
+
                                     </tr>
                                 </table>
 
@@ -84,47 +82,35 @@
                     </div>
                 </div>
             </div>
-
-
-
-
             <table id="tb" class="table">
                 <thead>
                     <tr>
+
+                        <th>序号</th>
                         <th>优惠券名称</th>
-                        <th>使用</th>
-                        <th>剩余数量</th>
-                        <th>优惠券领取时间</th>
-                        <th>优惠券发放时间</th>
-                        <th>用户类型</th>
+                        <th>优惠券类型</th>
+                        <th>优惠券金额/折扣</th>
+                        <th>优惠券使用期限</th>
+                        <th>剩余库存</th>
+                        <th>发放数量</th>
                         <th>状 态</th>
                     </tr>
                 </thead>
                 <tbody id="show_tbody">
                     <tr>
+                        <td>1</td>
                         <td>刘晓晓</td>
-                        <td>7652101</td>
-                        <td>18086667777</td>
-                        <td>------</td>
-                        <td>一级</td>
-                        <td>高级</td>
+                        <td>折扣</td>
+                        <td>满100元7折</td>
+                        <td>2019-2020</td>
+                        <td>50</td>
+                        <td>500</td>
                         <td>
-                            <a href="#" class="edit" id="new_add"  data-toggle="modal" data-target="#renyuan">查看详情</a>
-                            <a href="#" class="del">删除</a>
+                            <a href="#" class="edit" id="new_add"  data-toggle="modal" data-target="#renyuan">查看更多详情</a>
+
                         </td>
                     </tr>
-                    <tr>
-                        <td>李磊</td>
-                        <td>7652102</td>
-                        <td>18086668888</td>
-                        <td>------</td>
-                        <td>三级</td>
-                        <td>专家</td>
-                        <td>
-                            <a href="#" class="edit">编辑</a>
-                            <a href="#" class="del">删除</a>
-                        </td>
-                    </tr>
+
                 </tbody>
             </table>
         </div>

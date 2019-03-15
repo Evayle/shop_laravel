@@ -2,7 +2,6 @@
 @section('content')
      <section class="wrapper">
             <h2 class="text-center">优惠券列表</h2>
-
                 <div class="row mt">
                   <div class="col-md-12">
                       <div class="content-panel">
@@ -40,7 +39,7 @@
                                   <th>获得方式</th>
                                   <th>使用条件</th>
                                   <th>优惠券金额</th>
-                                  <th>发放时间</th>
+
                                   <th>活动时间</th>
                                   <th>总数量</th>
                                   <th>库存</th>
@@ -72,26 +71,23 @@
 
                                     </td>
                                     <td>{{$val->coupon_many}}</td>
-                                    <td>{{$val->coupon_start_time }}<br>{{$val->coupon_end_time}}  </td>
+
                                         <td>{{$val->coupon_start_period }} <br>{{$val->coupon_end_period}} </td>
                                     <td>{{$val->coupon_nums}}</td>
                                     <td>{{$val->coupon_sku}}</td>
 
                                   <td>
-                                      <a href="/admin/user/$value->id/edit" class="btn btn-primary" role="button">
-                                      @if($val->coupon_out == 0)
-                                      未发放
-                                      @elseif($val->coupon_out == 1)
-                                      已发放
-                                      @eiseif($val->coupon_out == 2)
-                                      发放完毕
+                                      <a href="/admin/coupon/cou/{{$val->id}}" class="btn btn-primary" >
+                                     @if ($val->coupon_out === 1)
+                                         发放中
+                                      @elseif ($val->coupon_out === 0)
+                                         未发放
+                                      @elseif ($val->coupon_out === 2)
+                                        发放完毕
                                       @else
-                                      出错,紧急冻结
+                                          出错!
                                       @endif
                                       </a>
-                                      <form action="/admin/coupon/$val->id" method="post" style="display: inline-block;">
-                                    <input type="submit"  value="紧急冻结"  class="btn btn-danger">
-                                      </form>
                                   </td>
 
                               </tr>@endforeach

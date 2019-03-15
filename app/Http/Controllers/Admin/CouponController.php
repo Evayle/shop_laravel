@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Admin\coupon_shop;
+use DB;
+use App\Model\Admin\tp_goods;
 class CouponController extends Controller
 {
     /**
@@ -32,7 +34,10 @@ class CouponController extends Controller
      */
     public function create()
     {
-        return view('admin.coupon.create');
+
+        $date = tp_goods::all();
+
+        return view('admin.coupon.create',['date'=>$date]);
     }
 
     /**
@@ -43,9 +48,10 @@ class CouponController extends Controller
      */
     public function store(Request $request)
     {
+        DB::beginTransaction();
         $mun = mt_rand(99999,10000000).time();
         $out = 0;
-
+        //$date = BD::table('tp_goods')->where('')
         $data = $_POST;
         //优惠券状态
         $sku = $data['coupon_nums'];
@@ -54,36 +60,38 @@ class CouponController extends Controller
         $data['coupon_out'] =$out;
         $data['coupon_sku'] =$sku;
         $data['coupon_num'] =$mun;
+        $gid = $data['coupon_shop'];
+        $data['coupon_end_period'] = $data['coupon_end_period'].'-'.$data['end_period'];
+        $data['coupon_start_period'] = $data['coupon_start_period'].'-'.$data['start_period'];
         $date = new coupon_shop;
         $date->coupon = $data['coupon'];
         $date->coupon_send_type = $data['coupon_send_type'];
         $date->coupon_many  = $data['coupon_many'];
-        $date->coupon_num  = $data['coupon_num'];
         $date->coupon_nums  = $data['coupon_nums'];
         $date->coupon_num  = $data['coupon_num'];
         $date->coupon_self  = $data['coupon_self'];
-        $date->coupon_start_time  = $data['coupon_start_time'];
-        $date->coupon_end_time  = $data['coupon_end_time'];
+        $date->coupon_out  = $data['coupon_out'];
+        $date->coupon_sku  = $data['coupon_sku'];
         $date->coupon_start_period  = $data['coupon_start_period'];
         $date->coupon_end_period  = $data['coupon_end_period'];
         $date->coupon_status  = $data['coupon_status'];
-        $date->coupon_setting_type  = $data['coupon_setting_type'];
-        $date->coupon_setting_type  = $data['coupon_setting_type'];
         $date->coupon_rule  = $data['coupon_rule'];
         $date->coupon_shop  = $data['coupon_shop'];
-        $date->coupon_out  = $data['coupon_out'];
-        $date->coupon_sku  = $data['coupon_sku'];
+        $date->coupon_setting_type  = $data['coupon_setting_type'];
         $dadd = $date->save();
 
+        //修改商品属性对应的值
+        $coupon_id =['coupon_id'=>$date->id];
+        $tp_goods = DB::table('tp_goods')->where('id',$gid)->update($coupon_id);
         //提交成功以后
-        if($dadd == true){
+        if($dadd && $tp_goods == true){
+            DB::commit();
             return redirect('admin/coupon/{success}')->with('success','添加成功');
         }else{
+            DB::rollBack();
             return back()->with('error','修改失败');
         }
-
     }
-
     /**
      * Display the specified resource.
      *
@@ -94,7 +102,6 @@ class CouponController extends Controller
     {
         return view('admin.coupon.jump');
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -105,7 +112,6 @@ class CouponController extends Controller
     {
         echo "edit";
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -117,7 +123,6 @@ class CouponController extends Controller
     {
         echo "update";
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -131,4 +136,16 @@ class CouponController extends Controller
     public function recording(){
         return view('admin.coupon.recording');
     }
+
+    public function cou($id)
+    {
+
+        $data = Db::table('coupon_shop')->where('id',$id)->pluck('coupon_out');
+        if($data[0]==0){
+            $coupon_out = ['coupon_out'=>1];
+            $date = Db::table('coupon_shop')->where('id',$id)->update($coupon_out);
+        }
+        return back();
+    }
+
 }

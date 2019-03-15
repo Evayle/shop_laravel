@@ -13,6 +13,7 @@
 
 
 
+
 Route::get('/',function(){
 
 
@@ -43,8 +44,11 @@ Route::group(['middleware'=>'login'],function(){
     // 轮播图管理
     Route::resource('admin/slide','Admin\SlideController');
     //后台优惠券管理
+    //
+    Route::get('admin/coupon/cou/{id}','Admin\CouponController@cou');
     Route::resource('admin/coupon','Admin\CouponController');
     Route::any('admin/coupon_recording','Admin\CouponController@recording');
+
 
     // 后台分类管理(huang)
     Route::get('admin/category/create/{id}','Admin\CategoryController@create');
@@ -116,59 +120,6 @@ Route::get('home/collect/destroy','Home\CollectController@destroy');
 //前台点击购物车跳转模块(徐也做了,到时候用他的)
 Route::resource('home/shopping','Home\ShoppingController');
 
-
-
-
-
-//前台的个人中心
-//个人中心首页
-Route::get('home/page','Home\HomepageController@index');
-
-//个人资料
-Route::resource('home/presonal','Home\PresonalController');
-
-//个人积分
-Route::resource('home/inteqral','Home\InteqralController');
-
-//用户个人地址
-Route::resource('home/address','Home\AddresController');
-
-//用户优惠券
-Route::resource('home/coupon','Home\CouponController');
-
-//用户paypwd
-//用户修改密码
-Route::resource('home/pay','Home\PaypwdController');
-
-
-//用户修改登录
-Route::resource('home/login_pass','Home\UpassController');
-
-
-//用户订单
-Route::resource('home/orders','Home\UorderController');
-
-
-// 这里有改动 这是点赞的路由 勿删
-//用户点赞路由
-Route::resource('home/laud','Home\LaudController');
-
-//退换货
-Route::resource('home/refund','Home\refundController');
-
-
-//立即付款
-Route::resource('home/Receipt','Home\ReceiptController');
-
-
-//确认收货
-
-
-
-
-//前台用户跳转模块
-//前台点击购物车跳转模块(徐也做了,到时候用他的)
-Route::resource('home/shopping','Home\ShoppingController');
 
 
 

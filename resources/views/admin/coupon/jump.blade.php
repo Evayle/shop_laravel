@@ -16,6 +16,7 @@
     <script src="/jq/js/jquery.sticky.min.js"></script>
     <script src="/jq/demo/libs/pretty.js"></script>
     <script type="text/javascript" src="/jq/js/jquery-confirm.js"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
 <script>
