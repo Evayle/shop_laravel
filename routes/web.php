@@ -43,7 +43,7 @@ Route::group(['middleware'=>'login'],function(){
     // 轮播图管理
     Route::resource('admin/slide','Admin\SlideController');
     //后台优惠券管理
-    //
+
     Route::get('admin/coupon/cou/{id}','Admin\CouponController@cou');
     Route::resource('admin/coupon','Admin\CouponController');
     Route::any('admin/coupon_recording','Admin\CouponController@recording');
@@ -120,8 +120,6 @@ Route::get('home/collect/destroy','Home\CollectController@destroy');
 Route::resource('home/shopping','Home\ShoppingController');
 
 
-
-
 //前台的个人中心
 //个人中心首页
 Route::get('home/page','Home\HomepageController@index');
@@ -150,8 +148,15 @@ Route::resource('home/login_pass','Home\UpassController');
 //用户订单
 Route::resource('home/orders','Home\UorderController');
 
+
 //用户收藏
 Route::resource('home/collection','Home\CollectionController');
+
+
+// 这里有改动 这是点赞的路由 勿删
+//用户点赞路由
+Route::resource('home/laud','Home\LaudController');
+
 
 //退换货
 Route::resource('home/refund','Home\refundController');

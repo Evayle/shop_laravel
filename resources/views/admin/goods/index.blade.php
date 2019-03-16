@@ -31,7 +31,6 @@
                         <th><i class="fa fa-bullhorn"></i> 商品名称</th>
                         <th><i class="fa fa-bullhorn"></i> 封面图</th>
                         <th class="hidden-phone"><i class="fa fa-question-circle"></i>分类名称</th>
-
                         <th class="hidden-phone"><i class="fa fa-question-circle"></i>描述</th>
                         <th class="hidden-phone"><i class="fa fa-question-circle"></i>是否包邮</th>
                         <th class="hidden-phone"><i class="fa fa-question-circle"></i>是否会员打折</th>
@@ -45,20 +44,24 @@
                         <th><i class="fa fa-bookmark"></i>库存</th>
                         <th><i class="fa fa-bookmark"></i>价格</th>
                         <th><i class=" fa fa-edit"></i>上下架</th>
-
                         <th>操作</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach ($goods as $k => $v)
                     <tr>
-                        <td>{{ $v->goods_name }}</td>
+                        <td>
+                            <abbr title="{{ $v->goods_name }}">
+                                <p style="width: 120px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">
+                                    {{ $v->goods_name }}
+                                </p>
+                            </abbr>
+                        </td>
                         <td class="hidden-phone"><img src="{{ asset($v->goods_plot) }}" width="50"></td>
-                        <td>{{ $ctegs->where("id", $v->goods_categorys_id)->first()->categorys_name }}</td>
+                        <td>{{ $ctegs->where("id", $v->goods_categorys_id)->first()->categorys_name or '' }}</td>
                         <td>
                             <abbr title="{{ $v->goods_describe }}">
                                 <p style="width: 120px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">
-
                                     {{ $v->goods_describe }}
                                 </p>
                             </abbr>
@@ -82,7 +85,6 @@
                                 {{ method_field('DELETE') }}
                                 <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></button>
                             </form>
-
                         </td>
                     </tr>
                     @endforeach

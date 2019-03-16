@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Model\Admin\coupon_shop;
 use DB;
 use App\Model\Admin\tp_goods;
+
 class CouponController extends Controller
 {
     /**
@@ -36,7 +37,6 @@ class CouponController extends Controller
     {
 
         $date = tp_goods::all();
-
         return view('admin.coupon.create',['date'=>$date]);
     }
 
@@ -48,6 +48,7 @@ class CouponController extends Controller
      */
     public function store(Request $request)
     {
+
         DB::beginTransaction();
         $mun = mt_rand(99999,10000000).time();
         $out = 0;
@@ -60,6 +61,7 @@ class CouponController extends Controller
         $data['coupon_out'] =$out;
         $data['coupon_sku'] =$sku;
         $data['coupon_num'] =$mun;
+
         $gid = $data['coupon_shop'];
         $data['coupon_end_period'] = $data['coupon_end_period'].'-'.$data['end_period'];
         $data['coupon_start_period'] = $data['coupon_start_period'].'-'.$data['start_period'];
@@ -102,6 +104,7 @@ class CouponController extends Controller
     {
         return view('admin.coupon.jump');
     }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -136,7 +139,6 @@ class CouponController extends Controller
     public function recording(){
         return view('admin.coupon.recording');
     }
-
     public function cou($id)
     {
 

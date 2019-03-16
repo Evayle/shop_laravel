@@ -39,7 +39,6 @@
                                   <th>获得方式</th>
                                   <th>使用条件</th>
                                   <th>优惠券金额</th>
-
                                   <th>活动时间</th>
                                   <th>总数量</th>
                                   <th>库存</th>
@@ -71,12 +70,12 @@
 
                                     </td>
                                     <td>{{$val->coupon_many}}</td>
-
                                         <td>{{$val->coupon_start_period }} <br>{{$val->coupon_end_period}} </td>
                                     <td>{{$val->coupon_nums}}</td>
                                     <td>{{$val->coupon_sku}}</td>
 
                                   <td>
+
                                       <a href="/admin/coupon/cou/{{$val->id}}" class="btn btn-primary" >
                                      @if ($val->coupon_out === 1)
                                          发放中

@@ -48,11 +48,14 @@
                     <div class="modal-dialog modal-lg modal_position">
                         <div class="modal-content">
                             <div class="modal-header">
+
                                 <h4 class="modal-title">优惠券</h4>
+
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                             <div class="modal-body">
                             <div>
+
                                 <table class="table table-hover">
                                    <tr>
                                         <th>
@@ -82,10 +85,10 @@
                     </div>
                 </div>
             </div>
+
             <table id="tb" class="table">
                 <thead>
                     <tr>
-
                         <th>序号</th>
                         <th>优惠券名称</th>
                         <th>优惠券类型</th>
@@ -110,7 +113,6 @@
 
                         </td>
                     </tr>
-
                 </tbody>
             </table>
         </div>

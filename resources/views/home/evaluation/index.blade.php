@@ -255,13 +255,12 @@ body{font:12px/180% Arial, Helvetica, sans-serif;}
             </div>
 
         </section>
+<br>
+<br>
+<br>
+<br>
+<br>
 
-
-<br>
-<br>
-<br>
-<br>
-<br>
         <section class="item-show__div item-show__body posr clearfix">
             <div class="item-nav-tabs">
                 <ul class="nav-tabs nav-pills clearfix" role="tablist" id="item-tabs">
@@ -275,48 +274,41 @@ body{font:12px/180% Arial, Helvetica, sans-serif;}
                         <div class="item-detail__info clearfix">
                             <div class="quiz">
 
-    <h3>我要评论</h3>
+                                     <h3>我要评论</h3>
 
-    <div class="quiz_content">
+                            <div class="quiz_content">
 
-        <form action="" id="" method="post">
-
-            <div class="goods-comm">
-
-                <div class="goods-comm-stars">
-
-                    <span class="star_l">满意度：</span>
-
-                    <span>123</span>
-
-                </div>
-
-            </div>
-
-
-
-            <div class="l_text">
-
-                <label class="m_flo">内  容：</label>
-
-                <textarea name="" id="" class="text"></textarea>
-
-                <span class="tr">字数限制为5-200个</span>
-
-            </div>
-
-            <button class="btm" type="submit"></button>
-
-        </form>
-
-    </div><!--quiz_content end-->
-
-</div><!--quiz end-->
-
-
+                                <form action="/home/evaluation" method="post" enctype="multipart/form-data">
+                                 {{ csrf_field()}}
+                                    <div class="goods-comm">
+                                        <div class="goods-comm-stars">
+                                            <span class="star_l">满意度：</span>
+                                          <input type="radio" name="user_like" value="1" placeholder="" checked>
+                                          <span>好评</span>
+                                          &nbsp;&nbsp;&nbsp;&nbsp;
+                                          <input type="radio" name="user_like" value="2" placeholder="">
+                                          <span>中评</span>
+                                           &nbsp;&nbsp;&nbsp;&nbsp;
+                                          <input type="radio" name="user_like" value="3" placeholder="">
+                                          <span>差评</span>
+                                        </div>
+                                    </div>
+                                    <div class="l_text">
+                                        <label class="m_flo">内  容：</label>
+                                        <textarea name="user_comment" id="" class="text"></textarea>
+                                        <span class="tr">字数限制为5-200个</span>
+                                    </div>
+                                        <input type="file" name="good_img[]" multiple>
+                            </div><!--quiz_content end-->
+                             <input type="submit" style="width:50px;margin-left">
+                              </form>
+                        </div><!--quiz end-->
+                        <br>
 
                         </div>
                     </div>
+
+
 
                         <div class="evaluate-tabs bgf5">
                             <ul class="nav-tabs nav-pills clearfix" role="tablist">
