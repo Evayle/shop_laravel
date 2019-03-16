@@ -13,7 +13,6 @@
 
 
 
-
 Route::get('/',function(){
 
 
@@ -123,8 +122,6 @@ Route::resource('home/shopping','Home\ShoppingController');
 
 
 
-
-
 //前台的个人中心
 //个人中心首页
 Route::get('home/page','Home\HomepageController@index');
@@ -162,3 +159,7 @@ Route::resource('home/refund','Home\refundController');
 
 //立即付款
 Route::resource('home/Receipt','Home\ReceiptController');
+
+
+//用户评价
+Route::resource('home/evaluation','Home\EvaluationController');
