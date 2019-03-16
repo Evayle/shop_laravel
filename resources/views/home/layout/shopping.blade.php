@@ -15,6 +15,7 @@
     <script src="/homes/js/swiper.min.js" charset="UTF-8"></script>
     <script src="/homes/js/global.js" charset="UTF-8"></script>
     <script src="/homes/js/jquery.DJMask.2.1.1.js" charset="UTF-8"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>富潮里</title>
 </head>
 <body>

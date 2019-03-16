@@ -8,7 +8,7 @@
 				<div class="title"><i class="iconfont icon-menu"></i> 全部分类</div>
 			</div>
 			<ul class="nva-list">
-				<a href="index.html"><li>首页</li></a>
+				<a href="/home"><li>首页</li></a>
 				<a href="temp_article/udai_article10.html"><li>企业简介</li></a>
 				<a href="temp_article/udai_article5.html"><li>新手上路</li></a>
 				<a href="class_room.html"><li>U袋学堂</li></a>
@@ -21,8 +21,8 @@
 	<div class="content inner">
 		<section class="item-show__div item-show__head clearfix">
 			<div class="pull-left">
-				<ol class="breadcrumb">
-					<li><a href="index.html">首页</a></li>
+				<ol class="breadcrumb">	
+					<li><a href="/home">首页</a></li>
 					<li><a href="item_sale_page.html">爆款推荐</a></li>
 					<li class="active">原创设计日常汉服女款绣花长褙子吊带改良宋裤春夏</li>
 				</ol>
@@ -111,7 +111,7 @@
 					</ul>
 					<div class="item-key">
 						<div class="item-sku">
-							<dl class="item-prop clearfix">
+							<!-- <dl class="item-prop clearfix">
 								<dt class="item-metatit">颜色：</dt>
 								<dd><ul data-property="颜色" class="clearfix">
 									<li><a class="on" href="javascript:;" role="button" data-value="白色" aria-disabled="true">
@@ -127,8 +127,8 @@
 										<span>黄色</span>
 									</a></li>
 								</ul></dd>
-							</dl>
-							<dl class="item-prop clearfix">
+							</dl> -->
+							<!-- <dl class="item-prop clearfix">
 								<dt class="item-metatit">尺码：</dt>
 								<dd><ul data-property="尺码" class="clearfix">
 									<li><a href="javascript:;" role="button" data-value="S" aria-disabled="true">
@@ -144,7 +144,7 @@
 										<span>XL</span>
 									</a></li>
 								</ul></dd>
-							</dl>
+							</dl> -->
 						</div>
 						<div class="item-amount clearfix bgf5">
 							<div class="item-metatit">数量：</div>
@@ -176,66 +176,76 @@
 									<svg class="icon" aria-hidden="true">
 									  <use xlink:href="#icon-unie60b"></use>
 									</svg>
+									<span class="sp" style="font-size: 16px;text-decoration: none;cursor: pointer;">1223</span>
 								</a>
 								<script>
-								// 这是点赞之后刷新要显示的已点赞效果 勿删
-								$(document).ready(function(){
-									$.ajaxSetup({
-									    headers: {
-									        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-									    }
-									});
-									$.ajax({
-						                url:"/home/laud/create", //处理页面的路径
-						                data:{'goods_id':9}, //要提交的数据是一个JSON
-						                type:"GET", //提交方式
-						                dataType:"json", //返回数据的类型
-						                //TEXT字符串 JSON返回JSON XML返回XML
-						                success:function(data){ //回调函数 ,成功时返回的数据存在形参data里
-						                	console.log(data);
-						                	if (data == 4) {
-						                		$('.zan').css('color','red').attr('title','已点赞');
-						                	}
-					                    }
-									});
-								});
-								// 这是点赞的jq代码
-								$('.zan').click(function(){
-									$('.zan').css('color','red').attr('title','已点赞');
-									$.ajaxSetup({
-									    headers: {
-									        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-									    }
-									});
-									// ajax传值
-									$.ajax({
-							                url:"/home/laud", //处理页面的路径
-							                data:{'goods_id':9}, //要提交的数据是一个JSON
-							                type:"POST", //提交方式
+									// 这是点赞之后刷新要显示的已点赞效果 勿删
+									$(document).ready(function(){
+										$.ajaxSetup({
+										    headers: {
+										        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+										    }
+										});
+										$.ajax({
+							                url:"/home/laud/create", //处理页面的路径
+							                data:{'goods_id':13}, //要提交的数据是一个JSON
+							                type:"GET", //提交方式
 							                dataType:"json", //返回数据的类型
 							                //TEXT字符串 JSON返回JSON XML返回XML
 							                success:function(data){ //回调函数 ,成功时返回的数据存在形参data里
-						                        if (data == 0) {
-						                        	alert('对8起!点赞失败了呀!请重新点赞!');
-						                        }
-							                	if (data == 1) {
-							                		alert('点赞成功!谢谢您的赞!');
+							                	// console.log(data);
+							                	if (data == 4) {
+							                		$('.zan').css('color','red').attr('title','已点赞');
 							                	}
-						                        if (data == 2)  //trim()方法会去掉页面中的冗余空格
-						                        {
-						                            alert('您已经点过赞啦!不用再点了!');
-						                        }
-						                 		if (data == 3) {
-						                 			alert('点赞成功!这是该商品的第一个赞哦!');
-						                 		}
 						                    }
 										});
-								});
+									});
+									// 这是点赞的jq代码
+									$('.zan').click(function(){
+										$('.zan').css('color','red').attr('title','已点赞');
+										$.ajaxSetup({
+										    headers: {
+										        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+										    }
+										});
+										// ajax传值
+										$.ajax({
+								                url:"/home/laud", //处理页面的路径
+								                data:{'goods_id':13}, //要提交的数据是一个JSON
+								                type:"POST", //提交方式
+								                dataType:"json", //返回数据的类型
+								                //TEXT字符串 JSON返回JSON XML返回XML
+								                success:function(data){ //回调函数 ,成功时返回的数据存在形参data里
+							                        if (data == 0) {
+							                        	alert('对8起!点赞失败了呀!请重新点赞!');
+							                        }
+								                	if (data == 1) {
+								                		alert('点赞成功!谢谢您的赞!');
+								                		$('.sp').text('1224');
+								                	}
+							                        if (data == 2)  //trim()方法会去掉页面中的冗余空格
+							                        {
+							                            alert('您已经点过赞啦!不用再点了!');
+							                        }
+							                 		if (data == 3) {
+							                 			alert('点赞成功!这是该商品的第一个赞哦!');
+							                 			$('.sp').text('1224'); 	
+							                 		}
+							                    }
+											});
+									});
 								</script>
-								<button type="button" class="btn btn-default coll" style="float: right;margin-right: 70px; background: pink;" id="clt">收藏</button>
+								<label style="float: right;" class="lab" title="点击收藏此商品">
+									<button type="button" class="btn btn-default coll" style="float: right;margin-right: 70px; background: pink;" id="clt">收藏</button>
+									<a href="javascript:;"  style="font-size: 30px; margin-top: 1px;cursor: pointer;">
+									<svg class="icon shou" aria-hidden="true">
+									  <use xlink:href="#icon-shoucang1"></use>
+									</svg>
+									</a>
+								</label>
 								</div>
 								<script>
-								// 这个script脚本是实现收藏相关功能的 勿删
+									// 这个script脚本是实现收藏相关功能的 勿删
 									$(document).ready(function(){
 										$.ajaxSetup({
 										    headers: {
@@ -254,15 +264,18 @@
 						                        {
 						                            $('#clt').text('收藏');
 						                            // console.log(data);
+						                            $('.shou').css('color','none');
 						                        }else{
 						                        	$('#clt').text('已收藏');
 						                        	// console.log(data);
+						                        	$('.shou').css('color','red');
+							                        $('.lab').attr('title','已收藏');
 						                        }
 
 						                    }
 										});
 									});
-									$('#clt').click(function(){
+									$('.lab').click(function(){
 										var a = $('#clt').text();
 										if( a=="收藏" ){
 											$.ajaxSetup({
@@ -280,6 +293,8 @@
 							                        if(data == 1)  //trim()方法会去掉页面中的冗余空格
 							                        {
 							                            $('#clt').text('已收藏');
+							                            $('.shou').css('color','red');
+							                            $('.lab').attr('title','已收藏');
 							                        }else{
 							                        	alert('收藏失败');
 							                        }
@@ -303,6 +318,8 @@
 							                        if(data == 1)  //trim()方法会去掉页面中的冗余空格
 							                        {
 							                            $('#clt').text('收藏');
+							                            $('.shou').css('color','none');
+							                            $('.lab').attr('title','点击收藏此商品');
 							                        }else{
 							                        	alert('取消收藏失败');
 							                        }
@@ -344,9 +361,9 @@
 							</div>
 						</div>
 						<div class="item-action clearfix bgf5">
-							<a href="javascript:;" rel="nofollow" data-addfastbuy="true" title="点击此按钮，到下一步确认购买信息。" role="button" class="item-action__buy">立即购买</a>
+							<a href="/home/shopcart/create?id=18" rel="nofollow" data-addfastbuy="true" title="点击此按钮，到下一步确认购买信息。" role="button" class="item-action__buy">立即购买</a>
 
-							<a href="javascript:;" rel="nofollow" data-addfastbuy="true" role="button" class="item-action__basket">
+							<a href="javascript:;" rel="nofollow" data-addfastbuy="true" role="button" class="item-action__basket" title="点击此按钮,把商品添加到购物车">
 								<i class="iconfont icon-shopcart"></i> 加入购物车
 							</a>
 						</div>

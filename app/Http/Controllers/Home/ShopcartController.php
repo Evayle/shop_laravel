@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\Home\tp_address;
+use DB;
 
 /**
  * 这是购物车的控制器
@@ -30,6 +32,30 @@ class shopcartController extends Controller
     public function create()
     {
         //
+        // dd($_GET);
+        $tp_address = new tp_address;
+        $phon = session()->get('user_login.1');
+        $uid = DB::table('home_users')->where('uphon',$phon)->pluck('id');
+        // dump($uid[0]); 获取用户id 通过用户id获取用户默认地址
+        $res['user_id'] = $uid[0];
+        $res['status'] = 1;
+        $address = DB::table('tp_address')->where($res)->get();
+        // dump($address);
+        foreach ($address as $v) {
+          $ads['id'] = $v->id;
+          $ads['user_id'] = $v->user_id;
+          $ads['name'] = $v->name;
+          $ads['address'] = $v->address;
+          $ads['address_info'] = $v->address_info;
+          $ads['phone'] = $v->phone;
+          $ads['code'] = $v->code;
+          $ads['status'] = $v->status;
+        }
+        // dump($ads);
+        $goods = DB::table('tp_goods')->where('id' , '=',$_GET['id'])->get();
+
+        dump($goods);
+        return view('home.shopcart.pay',['ads'=>$ads, 'goods'=>$goods]);
     }
 
     /**
@@ -41,7 +67,8 @@ class shopcartController extends Controller
     public function store(Request $request)
     {
         //
-        dump($request->all());
+        // dump($request->all());
+        return view('home.shopcart.pay');
     }
 
     /**
@@ -64,6 +91,7 @@ class shopcartController extends Controller
     public function edit($id)
     {
         //
+        echo "edit";
     }
 
     /**

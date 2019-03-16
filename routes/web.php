@@ -130,8 +130,10 @@ Route::resource('home/presonal','Home\PresonalController');
 //个人积分
 Route::resource('home/inteqral','Home\InteqralController');
 
-//用户个人地址
-Route::resource('home/address','Home\AddresController');
+//用户个人地址  注意:这里的控制器是"addres Controller"  没有s
+Route::get('home/address/address','Home\AddresController@address');// 新增的个人地址方法
+Route::get('home/address/upd/{id}','Home\AddresController@add');
+Route::resource('home/address/','Home\AddresController');
 
 //用户优惠券
 Route::resource('home/coupon','Home\CouponController');

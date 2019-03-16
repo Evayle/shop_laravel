@@ -1,15 +1,7 @@
-@extends('home.layout.index')
+@extends('home.layout.shopping')
 
-@section('index')
+@section('shopping')
 <!-- 顶部标题 -->
-	<div class="bgf5 clearfix">
-		<div class="top-user">
-			<div class="inner">
-				<a class="logo" href="index.html"><img src="images/icons/logo.jpg" alt="U袋网" class="cover"></a>
-				<div class="title">购物车</div>
-			</div>
-		</div>
-	</div>
 	<div class="content clearfix bgf5">
 		<section class="user-center inner clearfix">
 			<div class="user-content__box clearfix bgf">
@@ -18,47 +10,16 @@
 				<form action="" class="shopcart-form__box">
 					<div class="addr-radio">
 						<div class="radio-line radio-box active">
-							<label class="radio-label ep" title="福建省 福州市 鼓楼区 温泉街道 五四路159号世界金龙大厦20层B北 福州rpg.blue网络 （喵喵喵 收） 153****9999">
+							<label class="radio-label ep" title="{{$ads['address']}}  {{$ads['address_info']}}  {{$ads['phone']}}">
 								<input name="addr" checked="" value="0" autocomplete="off" type="radio"><i class="iconfont icon-radio"></i>
-								福建省 福州市 鼓楼区 温泉街道
-								五四路159号世界金龙大厦20层B北 福州rpg.blue网络
-								（喵喵喵 收） 153****9999
+								{{$ads['address']}}  {{$ads['address_info']}}  {{$ads['phone']}}
 							</label>
 							<a href="javascript:;" class="default">默认地址</a>
 							<a href="udai_address_edit.html" class="edit">修改</a>
 						</div>
-						<div class="radio-line radio-box">
-							<label class="radio-label ep" title="福建省 福州市 鼓楼区 温泉街道 五四路159号世界金龙大厦20层B北 福州rpg.blue网络 （taroxd 收） 153****9999">
-								<input name="addr" value="1" autocomplete="off" type="radio"><i class="iconfont icon-radio"></i>
-								福建省 福州市 鼓楼区 温泉街道
-								五四路159号世界金龙大厦20层B北 福州rpg.blue网络
-								（taroxd 收） 153****9999
-							</label>
-							<a href="" class="default">设为默认地址</a>
-							<a href="udai_address_edit.html" class="edit">修改</a>
-						</div>
-						<div class="radio-line radio-box">
-							<label class="radio-label ep" title="福建省 福州市 鼓楼区 温泉街道 五四路159号世界金龙大厦20层B北 福州rpg.blue网络 （喵污喵⑤ 收） 153****9999">
-								<input name="addr" value="2" autocomplete="off" type="radio"><i class="iconfont icon-radio"></i>
-								福建省 福州市 鼓楼区 温泉街道
-								五四路159号世界金龙大厦20层B北 福州rpg.blue网络
-								（喵污喵⑤ 收） 153****9999
-							</label>
-							<a href="" class="default">设为默认地址</a>
-							<a href="udai_address_edit.html" class="edit">修改</a>
-						</div>
-						<div class="radio-line radio-box">
-							<label class="radio-label ep" title="福建省 福州市 鼓楼区 温泉街道 五四路159号世界金龙大厦20层B北 福州rpg.blue网络 （浴巾打码女 收） 153****9999">
-								<input name="addr" value="2" autocomplete="off" type="radio"><i class="iconfont icon-radio"></i>
-								福建省 福州市 鼓楼区 温泉街道
-								五四路159号世界金龙大厦20层B北 福州rpg.blue网络
-								（浴巾打码女 收） 153****9999
-							</label>
-							<a href="" class="default">设为默认地址</a>
-							<a href="udai_address_edit.html" class="edit">修改</a>
-						</div>
+						
 					</div>
-					<div class="add_addr"><a href="udai_address.html">添加新地址</a></div>
+					<div class="add_addr"><a href="/home/address">添加新地址</a></div>
 					<div class="shop-title">确认订单</div>
 					<div class="shop-order__detail">
 						<table class="table">
@@ -73,39 +34,26 @@
 								</tr>
 							</thead>
 							<tbody>
+							@foreach($goods as $v)
 								<tr>
-									<th scope="row"><a href="item_show.html"><div class="img"><img src="images/temp/M-003.jpg" alt="" class="cover"></div></a></th>
+									<th scope="row"><a href="item_show.html"><div class="img"><img src="/homes/images/temp/M-003.jpg" alt="" class="cover"></div></a></th>
 									<td>
-										<div class="name ep3">锦瑟 原创传统日常汉服男绣花交领衣裳cp情侣装春夏款</div>
-										<div class="type c9">颜色分类：深棕色  尺码：均码</div>
+										<div class="name ep3">{{$v->goods_name}} </div>
+										<!-- <div class="type c9">颜色分类：深棕色  尺码：均码</div> -->
 									</td>
-									<td>¥20.0</td>
+									<td>￥{{$v->goods_price}}</td>
 									<td>1</td>
-									<td>¥0.0</td>
-									<td>¥20.0</td>
-								</tr>
-								<tr>
-									<th scope="row"><a href="item_show.html"><div class="img"><img src="images/temp/S-005.jpg" alt="" class="cover"></div></a></th>
 									<td>
-										<div class="name ep3">锦瑟 原创传统日常汉服男绣花交领衣裳cp情侣装春夏款</div>
-										<div class="type c9">颜色分类：深棕色  尺码：均码</div>
+										@if($v->goods_fsp == 0)
+										<span>包邮</span>
+										@else
+										<span>￥10.0</span>
+										@endif
 									</td>
-									<td>¥20.0</td>
-									<td>2</td>
-									<td>¥0.0</td>
-									<td>¥40.0</td>
+									<td>￥{{$v->goods_price}}</td>
 								</tr>
-								<tr>
-									<th scope="row"><a href="item_show.html"><div class="img"><img src="images/temp/M-007.jpg" alt="" class="cover"></div></a></th>
-									<td>
-										<div class="name ep3">锦瑟 原创传统日常汉服男绣花交领衣裳cp情侣装春夏款</div>
-										<div class="type c9">颜色分类：深棕色  尺码：均码</div>
-									</td>
-									<td>¥20.0</td>
-									<td>1</td>
-									<td>¥0.0</td>
-									<td>¥20.0</td>
-								</tr>
+							@endforeach
+								
 							</tbody>
 						</table>
 					</div>
@@ -151,14 +99,14 @@
 						<div class="radio-line radio-box">
 							<label class="radio-label ep">
 								<input name="pay-mode" value="2" autocomplete="off" type="radio"><i class="iconfont icon-radio"></i>
-								<img src="images/icons/alipay.png" alt="支付宝支付">
+								<img src="/homes/images/icons/alipay.png" alt="支付宝支付">
 							</label>
 							<div class="pay-value">支付<b class="fz16 cr">18.00</b>元</div>
 						</div>
 						<div class="radio-line radio-box">
 							<label class="radio-label ep">
 								<input name="pay-mode" value="3" autocomplete="off" type="radio"><i class="iconfont icon-radio"></i>
-								<img src="images/icons/paywechat.png" alt="微信支付">
+								<img src="/homes/images/icons/paywechat.png" alt="微信支付">
 							</label>
 							<div class="pay-value">支付<b class="fz16 cr">18.00</b>元</div>
 						</div>
