@@ -54,7 +54,7 @@
 	<!-- 搜索栏 -->
 	<div class="top-search">
 		<div class="inner">
-		<a class="logo" href="index.html"><img src="/homes/images/icons/logo.jpg" alt="U袋网" class="cover"></a>
+		<a class="logo" href="/home"><img src="/homes/images/icons/logo.jpg" alt="U袋网" class="cover"></a>
 
 			<div class="search-box">
 				<form class="input-group">
@@ -77,8 +77,8 @@
 				</p>
 			</div>
 			<div class="cart-box">
-
-				<a href="/home/shopping" class="cart-but">
+				<!-- 此处有改动 shopping不要了 改成shopcart -->
+				<a href="/home/shopcart" class="cart-but">
 
 					<i class="iconfont icon-shopcart cr fz16"></i> 购物车 0 件
 				</a>

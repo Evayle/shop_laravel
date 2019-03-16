@@ -15,7 +15,8 @@
     <script src="/homes/js/swiper.min.js" charset="UTF-8"></script>
     <script src="/homes/js/global.js" charset="UTF-8"></script>
     <script src="/homes/js/jquery.DJMask.2.1.1.js" charset="UTF-8"></script>
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="https://cdn.bootcss.com/jquery/1.7.2/jquery.min.js"></script>
     <title>U袋网</title>
 </head>
 <body>
@@ -47,7 +48,7 @@
     <div class="bgf5 clearfix">
         <div class="top-user">
             <div class="inner">
-                <a class="logo" href="index.html"><img src="/homes/images/icons/logo.jpg" alt="U袋网" class="cover"></a>
+                <a class="logo" href="/home"><img src="/homes/images/icons/logo.jpg" alt="U袋网" class="cover"></a>
                 <div class="title">个人中心</div>
             </div>
         </div>
@@ -114,7 +115,7 @@
             </li>
             <li class="r-toolbar-item">
 
-                <a href="udai_shopcart.html" class="r-item-hd">
+                <a href="/home/shopcart" class="r-item-hd">
 
                     <i class="iconfont icon-cart" data-badge="10"></i>
                     <div class="r-tip__box"><span class="r-tip-text">购物车</span></div>
