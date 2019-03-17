@@ -106,7 +106,7 @@
 							<div class="item-metatit">数量：</div>
 							<div class="amount-box">
 								<div class="amount-widget">
-									<input class="amount-input" value="1" maxlength="8" title="请输入购买量" type="text">
+									<input class="amount-input shop" value="1" maxlength="8" title="请输入购买量" type="text">
 									<div class="amount-btn">
 										<a class="amount-but add"></a>
 										<a class="amount-but sub"></a>
@@ -115,16 +115,16 @@
 								<!-- 引入阿里矢量库文件 之前的没用 -->
 								<script src="/homes/font_u9bb8x660y/iconfont.js"></script>
 								<style>
-								.icon {
-								  width: 1em;
-								  height: 1em;
-								  vertical-align: -0.15em;
-								  fill: currentColor;
-								  overflow: hidden;
-								}
-								.icon:hover{
-									cursor: pointer;
-								}
+									.icon {
+									  width: 1em;
+									  height: 1em;
+									  vertical-align: -0.15em;
+									  fill: currentColor;
+									  overflow: hidden;
+									}
+									.icon:hover{
+										cursor: pointer;
+									}
 								</style>
 								<div class="item-stock"><span style="margin-left: 10px;">库存 <b id="Stock">{{ $goods->goods_store }}</b> 件</span>
 								<!-- 点赞按钮 勿删-->
@@ -319,13 +319,20 @@
 						<div class="item-action clearfix bgf5">
 							<a href="/home/shopcart/create?id={{ $goods->id }}" rel="nofollow" data-addfastbuy="true" title="点击此按钮，到下一步确认购买信息。" role="button" class="item-action__buy">立即购买</a>
 
-							<a href="javascript:;" rel="nofollow" data-addfastbuy="true" role="button" class="item-action__basket" title="点击此按钮,把商品添加到购物车">
+							<a rel="nofollow" data-addfastbuy="true" role="button" class="item-action__basket cart" title="点击此按钮,把商品添加到购物车">
 								<i class="iconfont icon-shopcart"></i> 加入购物车
 							</a>
 						</div>
 					</div>
 				</div>
 			</div>
+			<script>
+				$('.cart').click(function(){
+					$.get('/home/shopcart/add', {'goods_id':{{$goods->id}}, 'sc_num':($('.shop').val())}, function(result){
+						console.log(result);
+					}, 'json');
+				});
+			</script>
 			<div class="pull-right picked-div">
 				<div class="lace-title">
 					<span class="c6">爆款推荐</span>

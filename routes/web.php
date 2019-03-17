@@ -69,6 +69,8 @@ Route::any('admin/denglu','Admin\LoginController@login');
 Route::post('admin/deng','Admin\LoginController@deng');
 
 // 购物车
+// 添加一条新的路由 用于添加商品进购物车
+Route::get('home/shopcart/add','Home\ShopcartController@add');
 Route::resource('home/shopcart','Home\ShopcartController');
 
 
