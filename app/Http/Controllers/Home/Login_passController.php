@@ -1,85 +1,17 @@
 <?php
 
 namespace App\Http\Controllers\Home;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Hash;
-use DB;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Http\RedirectResponse;
-use App\Model\Home\home_users;
-use App\Model\Home\home_integrals;
 
-class TestController extends Controller
+class Login_passController extends Controller
 {
-    public function test(){
-        //session()->forget('phon_code');
-        //dump(session()->all());
 
+    public function upedit()
+    {
+        $phon = $_GET['phon'];
 
-        $phon = $_POST['phone'];
-        $pass = Hash::make($_POST['password']);
-        $num = 10;
-
-        if($pass == " "){
-            return redirect()->route('test',['p=register','reeor'=>2131]);
-        }
-
-        //如果验证码错误或者不存在,就返回注册页面
-        $phon_code = session()->get('phon_code.1');
-        //dd(session()->all());
-        $sms = $_POST['smscode'];
-        //判断验证是不是正确的;
-        if ($phon_code == $sms){
-                 DB::beginTransaction();
-                $user = 'fcl'.mt_rand(70000000,99999999);
-                $data = new home_users;
-                $data->uname = $user;
-                $data->upass = $pass;
-                $data->uphon = $phon;
-                $data->usex = 2;
-                $date = $data->save();
-                $uid = $data->id;
-                $integral = new home_integrals;
-                $integral->uid = $uid;
-                $integral->integral_num = $num;
-                $inte = $integral->save();
-
-                    //判断两个数据库是否同时存入到了数据库
-                    if ($date && $inte == true) {
-
-                        //成功执行事务
-                        DB::commit();
-                        //添加登录验证session
-                        session(['user_login.'.'1' => $phon]);
-                        //删除验证码session
-                        session()->forget('phon_code');
-
-                        return redirect('home');
-
-
-                    }else{
-                        //失败执行回滚
-                        DB::rollBaCk();
-                        return  back();
-                    }
-
-            return redirect()->route('home');
-        }else{
-
-            return redirect()->route('test',["error"=>123,'p=register']);
-        }
-        //开启事务
-
-    }
-
-
-    public function updata(Request $request){
-
-
-        //接受过来的电话号码
-
-       $phon = $_GET['phon'];
 
         //$phon = '13711380814';
         //echo $phon;
@@ -154,20 +86,5 @@ class TestController extends Controller
         $httpInfo = array_merge( $httpInfo , curl_getinfo( $ch ) );
         curl_close( $ch );
          return $response;
-    }
-
-    public function detetion(){
-
-        // 是否有这个电电话号码
-        $phon = $_GET['tel'];
-        //$phon = 13543853501;
-        $flight = home_users::where('uphon',$phon)->first();
-        //dump($flight['uphon']);
-         if ($flight == true) {
-            echo json_encode('ok');
-        }else{
-            echo json_encode('false');
-            session(['phon_code.'.'1' => 123456]);
-        }
     }
 }

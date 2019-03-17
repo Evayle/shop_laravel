@@ -1,189 +1,103 @@
 @extends('home.layout.homepage')
 @section('homepage')
     <div class="pull-right">
+
+                @if($data== true)
                 <div class="user-content__box clearfix bgf">
                     <div class="title">账户信息-修改支付密码</div>
                     <div class="modify_div">
                         <div class="clearfix">
-                            <a href="udai_modifypay_step1.html" role="button" class="but">修改支付密码</a>
-                            <a href="udai_modifypay_step1.html" role="button" class="but">忘记支付密码</a>
+                            <a href="/home/payupss" role="button" class="but">修改支付密码</a>
+                            <a href="/home/payupss" role="button" class="but">忘记支付密码</a>
+                        </div>
+
+                        <div class="help-block">随时都能更改密码，保障您账户余额支付的安全</div>
+                    </div>
+                </div>
+                @else
+                <!-- 这个,没有 密码的时候提交的 -->
+                <form action="/home/pay" method="post">
+                 {{ csrf_field() }}
+                <div class="user-content__box clearfix bgf">
+                    <div class="title">账户信息-修改支付密码</div>
+                    <div class="modify_div">
+                        <span>您还没有设置支付密码(6-8位的数字)</span>
+                        <br>
+                        <br>
+                        <input type="password" placeholder="请直接输入您的密码" class="form-control phone1" style="width:250px;display:block;" name="upay" id="upay">
+                        <span id="sapn1"></span>
+                        <span id="sapn2" style="color:red"></span>
+
+                        <br>
+                        <input type="password" placeholder="请再次输入您的密码" class="form-control phone" style="width:250px;display:block;" name="upaypass" id="upaypass">
+                        <span style="color: red;" id="sapn"></span>
+                        <span " id="sapn4"></span>
+                        <br>
+                        <div class="user-form-group tags-box">
+                            <button type="submit" class="btn" id="sub">提交</button>
                         </div>
                         <div class="help-block">随时都能更改密码，保障您账户余额支付的安全</div>
                     </div>
                 </div>
+                </form>
+                <script type="text/javascript" >
+                //判断是否是(6-8的数字);
+                $('#upay').blur(function(){
+                    var ze =  /^[0-9]{6,8}$/;
+                    var pass = $('#upay').val();
+                    if(pass.match(ze)){
+                       $('#sapn1').text('密码格式正确');
+                       $('#sapn2').text(' ');
+                       $('#sapn').text(' ');
+                       $('#sapn4').text(' ');
+                    }else{
+                        $('#upay').text('');
+                        $('#sapn2').text('密码格式正确密码格式设置有问题,请重新输入');
+                        $('#sapn1').text(' ');
+                        $('#sapn').text(' ');
+                        $('#sapn4').text(' ');
+                    }
+                });
+                </script>
+                <script  type="text/javascript" >
+                $('#upaypass').blur(function(){
+                    var one = $('#upay').val();
+                    var ones = $('#upaypass').val();
 
+                    if(one == ones){
+                        $('#sapn4').text('两次密码输入正确,请点击提交');
+                        $('#sapn1').text('');
+                        $('#sapn2').text('');
+                        $('#sapn').text('');
+                    }else{
+                        $('#sapn').text('两次密码输入不正确');
+                        $('#sapn1').text('');
+                        $('#sapn2').text('');
+                        $('#sapn4').text('');
+                    }
+                });
+                </script>
+                <script  type="text/javascript">
+                     $('#sub').click(function(){
+                    var one = $('#upay').val();
+                    var ones = $('#upaypass').val();
 
-                <hr>
-                <div class="user-content__box clearfix bgf">
-                    <div class="title">账户信息-修改支付密码</div>
-                    <div class="step-flow-box">
-                        <div class="step-flow__bd">
-                            <div class="step-flow__li step-flow__li_done">
-                              <div class="step-flow__state"><i class="iconfont icon-ok"></i></div>
-                              <p class="step-flow__title-top">验证身份</p>
-                            </div>
-                            <div class="step-flow__line step-flow__line_ing">
-                              <div class="step-flow__process"></div>
-                            </div>
-                            <div class="step-flow__li">
-                              <div class="step-flow__state"><i class="iconfont icon-ok"></i></div>
-                              <p  class="step-flow__title-top">重置支付密码</p>
-                            </div>
-                            <div class="step-flow__line">
-                              <div class="step-flow__process"></div>
-                            </div>
-                            <div class="step-flow__li">
-                              <div class="step-flow__state"><i class="iconfont icon-ok"></i></div>
-                              <p class="step-flow__title-top">完成</p>
-                            </div>
-                        </div>
-                    </div>
-                    <form action="udai_modifypay_step2.html" class="user-setting__form" role="form">
-                        <div class="form-group">
-                            <input class="form-control phone" name="phone" required="" maxlength="11" autocomplete="off" type="text">
-                            <span class="tip-text">手机号</span>
-                            <span class="error_tip"></span>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <input class="form-control" name="sms" type="text">
-                                <span class="tip-text">输入验证码</span>
-                                <span class="input-group-btn">
-                                    <button class="btn btn-pink" id="getsms" type="button">发送验证码</button>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="user-form-group tags-box">
-                            <button type="submit" class="btn ">提交</button>
-                        </div>
-                        <script src="js/login.js"></script>
-                        <script>
-                            $(document).ready(function(){
-                                $('.form-control').on('blur focus',function() {
-                                    $(this).addClass('focus');
-                                    $('.error_tip').empty();
-                                    if ($(this).val() == ''){$(this).removeClass('focus')}
-                                });
-                                $('#getsms').click(function() {
-                                    var phone = $(this).parents('form').find('input.phone');
-                                    var error = $(this).parents('form').find('.error_tip');
-                                    switch(phone.validatemobile()) {
-                                        case 0:
-                                            // 短信验证码的php请求
-                                            error.html('验证码 <strong>已发送</strong>');
-                                            $(this).rewire(60);
-                                        break;
-                                        case 1: error.html('<strong>手机号码为空</strong> 请输入手机号码'); break;
-                                        case 2: error.html('<strong>手机号码错误</strong> 请输入11位数的号码'); break;
-                                        case 3: error.html('<strong>手机号码错误</strong> 请输入正确的号码'); break;
-                                    }
-                                });
-                            });
-                        </script>
-                    </form>
-                </div>
-        <hr>
-
-
-
-
-                <div class="user-content__box clearfix bgf">
-                <div class="title">账户信息-修改支付密码</div>
-                    <div class="step-flow-box">
-                        <div class="step-flow__bd">
-                            <div class="step-flow__li step-flow__li_done">
-                              <div class="step-flow__state"><i class="iconfont icon-ok"></i></div>
-                              <p class="step-flow__title-top">验证身份</p>
-                            </div>
-                            <div class="step-flow__line step-flow__li_done">
-                              <div class="step-flow__process"></div>
-                            </div>
-                            <div class="step-flow__li step-flow__li_done">
-                              <div class="step-flow__state"><i class="iconfont icon-ok"></i></div>
-                              <p  class="step-flow__title-top">重置支付密码</p>
-                            </div>
-                            <div class="step-flow__line step-flow__line_ing">
-                              <div class="step-flow__process"></div>
-                            </div>
-                            <div class="step-flow__li">
-                              <div class="step-flow__state"><i class="iconfont icon-ok"></i></div>
-                              <p class="step-flow__title-top">完成</p>
-                            </div>
-                        </div>
-                    </div>
-                    <form action="udai_modifypay_step3.html" class="user-setting__form" role="form">
-                        <div class="form-group">
-                            <input class="form-control" name="phone" required="" maxlength="11" autocomplete="off" type="password">
-                            <span class="tip-text">新的密码</span>
-                            <span class="see-pwd pwd-toggle" title="显示密码"><i class="glyphicon glyphicon-eye-open"></i></span>
-                            <span class="error_tip"></span>
-                        </div>
-                        <div class="form-group">
-                        <div class="form-group">
-                            <input class="form-control" name="phone" required="" maxlength="11" autocomplete="off" type="password">
-                            <span class="tip-text">再次确认新的密码</span>
-                            <span class="see-pwd pwd-toggle" title="显示密码"><i class="glyphicon glyphicon-eye-open"></i></span>
-                            <span class="error_tip"></span>
-                        </div>
-                        </div>
-                        <div class="user-form-group tags-box">
-                            <button type="submit" class="btn ">提交</button>
-                        </div>
-                        <script src="js/login.js"></script>
-                        <script>
-                            $(document).ready(function(){
-                                $('.form-control').on('blur focus',function() {
-                                    $(this).addClass('focus')
-                                    if ($(this).val() == ''){$(this).removeClass('focus')}
-                                });
-                            });
-                        </script>
-                    </form>
-                </div>
-
-        <hr>
-
-
-                <div class="user-content__box clearfix bgf">
-                    <div class="title">账户信息-修改支付密码</div>
-                    <div class="step-flow-box">
-                        <div class="step-flow__bd">
-                            <div class="step-flow__li step-flow__li_done">
-                              <div class="step-flow__state"><i class="iconfont icon-ok"></i></div>
-                              <p class="step-flow__title-top">验证身份</p>
-                            </div>
-                            <div class="step-flow__line step-flow__li_done">
-                              <div class="step-flow__process"></div>
-                            </div>
-                            <div class="step-flow__li step-flow__li_done">
-                              <div class="step-flow__state"><i class="iconfont icon-ok"></i></div>
-                              <p  class="step-flow__title-top">重置支付密码</p>
-                            </div>
-                            <div class="step-flow__line step-flow__li_done">
-                              <div class="step-flow__process"></div>
-                            </div>
-                            <div class="step-flow__li step-flow__li_done">
-                              <div class="step-flow__state"><i class="iconfont icon-ok"></i></div>
-                              <p class="step-flow__title-top">完成</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modify-success__box text-center">
-                        <div class="icon b-r50"><i class="iconfont icon-checked cf fz24"></i></div>
-                        <div class="text c6">支付密码设置成功！</div>
-                        <a href="item_category.html" class="btn">赶紧去购物，试试新的支付密码吧</a>
-                    </div>
-                </div>
-
-
-        <hr>
-
-
+                    if(one == ones){
+                        alert('提交成功');
+                    }else{
+                        $('#sapn').text('两次密码输入不正确');
+                        alert('请输入正确的密码');
+                        $('#upay').val('');
+                        $('#upaypass').val('');
+                        return false;
+                    }
+                });
+                </script>
+                @endif
             </div>
+
         </section>
     </div>
-
-
 
 
 

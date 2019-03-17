@@ -36,6 +36,7 @@ class CouponController extends Controller
     public function create()
     {
 
+
         $date = tp_goods::all();
         return view('admin.coupon.create',['date'=>$date]);
     }
@@ -48,7 +49,6 @@ class CouponController extends Controller
      */
     public function store(Request $request)
     {
-
         DB::beginTransaction();
         $mun = mt_rand(99999,10000000).time();
         $out = 0;
@@ -62,9 +62,11 @@ class CouponController extends Controller
         $data['coupon_sku'] =$sku;
         $data['coupon_num'] =$mun;
 
+
         $gid = $data['coupon_shop'];
         $data['coupon_end_period'] = $data['coupon_end_period'].'-'.$data['end_period'];
         $data['coupon_start_period'] = $data['coupon_start_period'].'-'.$data['start_period'];
+
         $date = new coupon_shop;
         $date->coupon = $data['coupon'];
         $date->coupon_send_type = $data['coupon_send_type'];
@@ -94,6 +96,7 @@ class CouponController extends Controller
             return back()->with('error','修改失败');
         }
     }
+
     /**
      * Display the specified resource.
      *
@@ -115,6 +118,7 @@ class CouponController extends Controller
     {
         echo "edit";
     }
+
     /**
      * Update the specified resource in storage.
      *
@@ -139,6 +143,7 @@ class CouponController extends Controller
     public function recording(){
         return view('admin.coupon.recording');
     }
+
     public function cou($id)
     {
 
@@ -149,5 +154,4 @@ class CouponController extends Controller
         }
         return back();
     }
-
 }

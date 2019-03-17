@@ -1,81 +1,105 @@
 <?php
 
 namespace App\Http\Controllers\Home;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Hash;
 use DB;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Http\RedirectResponse;
-use App\Model\Home\home_users;
-use App\Model\Home\home_integrals;
 
-class TestController extends Controller
+class PaypwdsController extends Controller
 {
-    public function test(){
-        //session()->forget('phon_code');
-        //dump(session()->all());
+    /**
+     * 用户的密码验证
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //用户支付跳转的页面
+        //确认是不是本用户操作
+        $uphon = session('user_login')[1];
 
+        return view('home.homepage.upass_1',['uphon'=>$uphon]);
+    }
 
-        $phon = $_POST['phone'];
-        $pass = Hash::make($_POST['password']);
-        $num = 10;
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        echo "create";
+    }
 
-        if($pass == " "){
-            return redirect()->route('test',['p=register','reeor'=>2131]);
-        }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $session = session('pass_code')[1];
+        $res = $request->input('sms');
+        if($session == $res){
+         //跳转页面
+         return redirect('/home/payupss/send1');
 
-        //如果验证码错误或者不存在,就返回注册页面
-        $phon_code = session()->get('phon_code.1');
-        //dd(session()->all());
-        $sms = $_POST['smscode'];
-        //判断验证是不是正确的;
-        if ($phon_code == $sms){
-                 DB::beginTransaction();
-                $user = 'fcl'.mt_rand(70000000,99999999);
-                $data = new home_users;
-                $data->uname = $user;
-                $data->upass = $pass;
-                $data->uphon = $phon;
-                $data->usex = 2;
-                $date = $data->save();
-                $uid = $data->id;
-                $integral = new home_integrals;
-                $integral->uid = $uid;
-                $integral->integral_num = $num;
-                $inte = $integral->save();
-
-                    //判断两个数据库是否同时存入到了数据库
-                    if ($date && $inte == true) {
-
-                        //成功执行事务
-                        DB::commit();
-                        //添加登录验证session
-                        session(['user_login.'.'1' => $phon]);
-                        //删除验证码session
-                        session()->forget('phon_code');
-
-                        return redirect('home');
-
-
-                    }else{
-                        //失败执行回滚
-                        DB::rollBaCk();
-                        return  back();
-                    }
-
-            return redirect()->route('home');
         }else{
-
-            return redirect()->route('test',["error"=>123,'p=register']);
+            return back();
         }
-        //开启事务
+
 
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        echo 123;
+    }
 
-    public function updata(Request $request){
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+    echo 123;
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+
+    public function send(Request $request){
 
         //接受过来的电话号码
 
@@ -104,7 +128,7 @@ class TestController extends Controller
         if($error_code == 0){
             //状态为0，说明短信发送成功
             echo "短信发送成功,短信ID：".$result['result']['sid'];
-            session(['phon_code.'.'1' => $phon_code]);
+            session(['pass_code.'.'1' => $phon_code]);
 
         }else{
             //状态非0，说明失败
@@ -155,19 +179,31 @@ class TestController extends Controller
         curl_close( $ch );
          return $response;
     }
+    public function send1()
+    {
 
-    public function detetion(){
-
-        // 是否有这个电电话号码
-        $phon = $_GET['tel'];
-        //$phon = 13543853501;
-        $flight = home_users::where('uphon',$phon)->first();
-        //dump($flight['uphon']);
-         if ($flight == true) {
-            echo json_encode('ok');
-        }else{
-            echo json_encode('false');
-            session(['phon_code.'.'1' => 123456]);
-        }
+        return view('home.homepage.upass_2');
     }
+    public function send2(Request $request)
+    {
+        $uphon = session('user_login')[1];
+        $res['upay'] = Hash::make($request->input('phone'));
+
+
+        $date = DB::table('home_users')->where('uphon',$uphon)->update($res);
+        if($date == true){
+            //删除session
+            session()->forget('pass_code');
+            return redirect('/home/payupss/send3');
+        }else{
+            return back();
+        }
+
+
+    }
+    public function send3(){
+        return view('home.homepage.upass_3');
+    }
+
+
 }

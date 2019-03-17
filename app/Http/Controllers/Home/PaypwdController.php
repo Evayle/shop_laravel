@@ -4,19 +4,24 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use DB;
+use Hash;
 
 class PaypwdController extends Controller
 {
     /**
-     * 修改用户密码
+     * 修改用户支付密码
      *
-     * @return 用邮箱验证
+     * @return 用电话验证
      */
     public function index()
     {
-   
-        return view('home.homepage.upass');
-       
+        //用session获取用的具体信息
+        //判断用户是有没有支付密码
+        $uphon = session("user_login")[1];
+        $data = DB::table('home_users')->where('uphon',$uphon)->pluck('upay')[0];
+        return view('home.homepage.upass',['data'=>$data]);
+
     }
 
     /**
@@ -37,7 +42,19 @@ class PaypwdController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //利用session找到用户的修改方式
+        $uphon = session("user_login")[1];
+
+        //支付密码设置成hash格式
+        $data['upay'] = Hash::make($request->input('upay'));
+        $date = DB::table('home_users')->where('uphon',$uphon)->update($data);
+        if($date == true){
+            return redirect('/home/pay/1');
+        }else{
+
+            return back();
+        }
+
     }
 
     /**
@@ -48,7 +65,7 @@ class PaypwdController extends Controller
      */
     public function show($id)
     {
-        //
+       return view('home.homepage.upass_ok');
     }
 
     /**

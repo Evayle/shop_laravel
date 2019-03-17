@@ -76,6 +76,7 @@
 
                                   <td>
 
+
                                       <a href="/admin/coupon/cou/{{$val->id}}" class="btn btn-primary" >
                                      @if ($val->coupon_out === 1)
                                          发放中

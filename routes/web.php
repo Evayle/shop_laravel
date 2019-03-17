@@ -44,10 +44,10 @@ Route::group(['middleware'=>'login'],function(){
     Route::resource('admin/slide','Admin\SlideController');
     //后台优惠券管理
 
+
     Route::get('admin/coupon/cou/{id}','Admin\CouponController@cou');
     Route::resource('admin/coupon','Admin\CouponController');
     Route::any('admin/coupon_recording','Admin\CouponController@recording');
-
 
     // 后台分类管理(huang)
     Route::get('admin/category/create/{id}','Admin\CategoryController@create');
@@ -136,23 +136,42 @@ Route::get('home/address/upd/{id}','Home\AddresController@add');
 Route::resource('home/address/','Home\AddresController');
 
 //用户优惠券
+//领取得到优惠券
+Route::get('home/coupon/add','Home\CouponController@addcoupon');
 Route::resource('home/coupon','Home\CouponController');
 
+
 //用户paypwd
-//用户修改密码
+//用户修改支付密码
 Route::resource('home/pay','Home\PaypwdController');
+Route::get('home/payupss/send','Home\PaypwdsController@send');
+Route::get('home/payupss/send1','Home\PaypwdsController@send1');
+Route::post('home/payupss/send2','Home\PaypwdsController@send2');
+Route::any('home/payupss/send3','Home\PaypwdsController@send3');
+Route::resource('home/payupss','Home\PaypwdsController');
 
 
 //用户修改登录
 Route::resource('home/login_pass','Home\UpassController');
 
 
+//用户忘记密码
+Route::any('home/login_edit','Home\Login_passController@upedit');
+
+
+Route::resource('home/login_mod','Home\LoginpassController');
+
+
+
+
 //用户订单
 Route::resource('home/orders','Home\UorderController');
 
 
+
 //用户收藏
 Route::resource('home/collection','Home\CollectionController');
+
 
 
 // 这里有改动 这是点赞的路由 勿删
@@ -167,6 +186,5 @@ Route::resource('home/refund','Home\refundController');
 //立即付款
 Route::resource('home/Receipt','Home\ReceiptController');
 
-
-//用户评价
+//用户评论
 Route::resource('home/evaluation','Home\EvaluationController');

@@ -114,6 +114,8 @@ class shopcartController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+
     }
+
 }

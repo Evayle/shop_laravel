@@ -16,7 +16,7 @@
     <script src="/homes/js/global.js" charset="UTF-8"></script>
     <script src="/homes/js/jquery.DJMask.2.1.1.js" charset="UTF-8"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <script src="https://cdn.bootcss.com/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/address/jquery.min.js"></script>
     <title>U袋网</title>
 </head>
 <body>

@@ -26,6 +26,7 @@
                             }else{
                               $("#ss").text('');
                             }
+
                           });
                           </script>
                             <br>
@@ -60,15 +61,16 @@
                             //执行一个laydate实例
                             laydate.render({
 
+
                               elem: '#time' //指定元素
                             });
                             </script>
+
                         <hr>
 
                         <label class="col-sm-2 col-sm-2 control-label"><strong style="color:red">*</strong>优惠券发放类型</label>
                         <label class="checkbox-inline" id="inlineCheckbox1">
                           <input type="radio"  name="coupon_send_type" value="1">商品添加
-
                         </label>
                         <label class="checkbox-inline" id="inlineCheckbox2">
                           <input type="radio"  name="coupon_send_type" value="2"> 分享链接添加
@@ -84,7 +86,6 @@
                               <label class="col-sm-2 col-sm-2 control-label"><strong style="color:red">*</strong>绑定商品</label>
                               <div class="col-sm-10">
                                  <select class="form-control input-sm" name="coupon_shop" id="sel">
-
                                     @foreach($date as $k=>$v)
                                      <option value="{{$v->id}}">{{$v->goods_name}}</option>
                                     @endforeach

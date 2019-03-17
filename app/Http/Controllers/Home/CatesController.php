@@ -4,23 +4,17 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use DB;
-class CouponController extends Controller
+
+class CatesController extends Controller
 {
     /**
-     * 用户优惠券
+     * //商品分类主页
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-
-
-
-
-
-
-        return view('home.homepage.coupon');
+        //
     }
 
     /**
@@ -87,38 +81,5 @@ class CouponController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function addcoupon()
-    {
-
-        //接受过来的商品id;优惠券id;
-        $uid = "5";
-        $con_id = "7";
-        $con_status = "0";
-        $con_num = 1;
-        //判断用户是不是有这个优惠券
-        //如有的话及就+1;
-        $dadd = DB::table('home_coupon')->where('uid',$uid)->where('con_id',$con_id
-            );
-        if ($dadd == true) {
-
-        }
-
-
-
-
-
-
-        $date['uid'] = $uid;
-        $date['con_id'] = $con_id;
-        $date['con_status'] = $con_status;
-        $date['con_num'] = $con_num;
-
-        $data = DB::table('home_coupon')->insert($date);
-        dump($data);
-
-
-
     }
 }

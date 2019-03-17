@@ -49,13 +49,14 @@
                         <div class="modal-content">
                             <div class="modal-header">
 
+
                                 <h4 class="modal-title">优惠券</h4>
+
 
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                             <div class="modal-body">
                             <div>
-
                                 <table class="table table-hover">
                                    <tr>
                                         <th>
@@ -70,7 +71,6 @@
                                         <td>50</td>
                                         <td>1</td>
                                         <td>1</td>
-
                                     </tr>
                                 </table>
 
@@ -110,7 +110,6 @@
                         <td>500</td>
                         <td>
                             <a href="#" class="edit" id="new_add"  data-toggle="modal" data-target="#renyuan">查看更多详情</a>
-
                         </td>
                     </tr>
                 </tbody>
@@ -120,9 +119,5 @@
                   </div>
                 </div><!-- col-lg-12-->
             </div><!-- /row -->
-
-
-
-
 
 @endsection

@@ -175,44 +175,35 @@
                             });
                         });
                     </script>
-                    <div class="tabs_div">
-                        <div class="success-box">
-                            <div class="success-msg">
-                                <i class="success-icon"></i>
-                                <p class="success-text">注册成功</p>
-                            </div>
-                        </div>
-                        <div class="option-box">
-                            <div class="buts-title">
-                                现在您可以
-                            </div>
-                            <div class="buts-box">
-                                <a role="button" href="index.html" class="btn btn-block btn-lg btn-default">继续访问商城</a>
-                                <a role="button" href="udai_welcome.html" class="btn btn-block btn-lg btn-info">登录会员中心</a>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
+
+
+
             <div class="form-box resetpwd">
                 <div class="tabs-nav clearfix">
                     <h2>找回密码<a href="javascript:;" class="pull-right fz16" id="pwdlogin">返回登录</a></h2>
                 </div>
                 <div class="tabs_container">
-                    <form class="tabs_form" action="https://rpg.blue/member.php?mod=logging&action=login" method="post" id="resetpwd_form">
+                    <form class="tabs_form" action="/home/login_mod" method="post" >
+                     {{ csrf_field() }}
                         <div class="form-group">
                             <div class="input-group">
                                 <div class="input-group-addon">
                                     <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
                                 </div>
-                                <input class="form-control phone" name="phone" id="resetpwd_phone" required placeholder="手机号" maxlength="11" autocomplete="off" type="text">
+                                <input type="text" name="uphonsess" class="form-control phone" placeholder="请输入手机号码" id="telphon" maxlength="11">
+
                             </div>
+                            <span id="so" style="color:red"></span>
+                            <span id="soo"></span>
                         </div>
                         <div class="form-group">
                             <div class="input-group">
-                                <input class="form-control" name="sms" id="resetpwd_sms" placeholder="输入验证码" type="text">
+                                <input class="form-control" name="sms" id="sms_pass" placeholder="输入验证码" type="text">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-primary getsms" type="button">发送短信验证码</button>
+                                    <button class="btn btn-primary getsms" type="button" id="ssmm">发送短信验证码</button>
                                 </span>
                             </div>
                         </div>
@@ -221,7 +212,7 @@
                                 <div class="input-group-addon">
                                     <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
                                 </div>
-                                <input class="form-control password" name="password" id="resetpwd_pwd" placeholder="新的密码" autocomplete="off" type="password">
+                                <input class="form-control password" name="password" id="sspwd" placeholder="新的密码" autocomplete="off" type="password">
                                 <div class="input-group-addon pwd-toggle" title="显示密码"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></div>
                             </div>
                         </div>
@@ -229,25 +220,65 @@
                         <div class="form-group">
                             <div class="error_msg" id="resetpwd_error"></div>
                         </div>
-                        <button class="btn btn-large btn-primary btn-lg btn-block submit" id="resetpwd_submit" type="button">重置密码</button>
+                        <button class="btn btn-large btn-primary btn-lg btn-block" id="ppsss" type="submit">重置密码</button>
                     </form>
-                    <div class="tabs_div">
-                        <div class="success-box">
-                            <div class="success-msg">
-                                <i class="success-icon"></i>
-                                <p class="success-text">密码重置成功</p>
-                            </div>
-                        </div>
-                        <div class="option-box">
-                            <div class="buts-title">
-                                现在您可以
-                            </div>
-                            <div class="buts-box">
-                                <a role="button" href="index.html" class="btn btn-block btn-lg btn-default">继续访问商城</a>
-                                <a role="button" href="login.html" class="btn btn-block btn-lg btn-info">返回登陆</a>
-                            </div>
-                        </div>
-                    </div>
+                    <script  type="text/javascript">
+                    $('#telphon').blur(function(){
+                        var phon = $('#telphon').val();
+                        $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        type: 'GET',
+                        url: '/home/login_mod/1',
+                        data: {'phon':phon},
+                        dataType: 'json',
+                        async : 'false',    //同步
+                        success: function(data){
+                            if(data == 1){
+                                $('#soo').text('此用户已注册,可以提交申请');
+                                $('#so').text('');
+                                $("#ssmm").removeAttr("disabled");
+                                $("#ppsss").removeAttr("disabled");
+                                $("#sms_pass").removeAttr("disabled");
+                                $("#sspwd").removeAttr("disabled");
+
+                            }else{
+                                $('#so').text('此用户未注册,不可以提交申请');
+                                $('#soo').text('');
+                                $("#ssmm").attr("disabled","disabled");
+                                $("#ppsss").attr("disabled","disabled");
+                                $("#sms_pass").attr("disabled","disabled");
+                                $("#sspwd").attr("disabled","disabled");
+                            }
+                            },
+                        error:function(data){
+                        console.log(data);
+                        }
+                        });
+                    });
+                    </script>
+                    <script type="text/javascript">
+                    $('#ssmm').click(function(){
+                        var phon = $('#telphon').val();
+                        $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        type: 'GET',
+                        url: '/home/login_edit',
+                        data: {'phon':phon},
+                        dataType: 'json',
+                        async : 'false',    //同步
+                        success: function(data){
+                            console.log(data);
+                            },
+                        error:function(data){
+                        console.log(data);
+                        }
+                        });
+                    });
+                    </script>
                 </div>
             </div>
             <script>
@@ -308,8 +339,6 @@
                     })
                 });
             </script>
-
-
             <script type="text/javascript">
                 $(function () {
             //利用返回来的url地址进行判断

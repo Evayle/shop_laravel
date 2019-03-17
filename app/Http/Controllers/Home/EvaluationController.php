@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
+use App\Model\Admin\user_comment_img;
+use App\Model\Admin\user_comment;
 
 
 class EvaluationController extends Controller
@@ -14,10 +16,20 @@ class EvaluationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
-        return view('home.evaluation.index');
+
+        $date = user_comment::where('gid',5)->get();
+
+        foreach ($date as $key => $value) {
+            $gid = $value->gid;
+            $uphon = $value->uphon;
+            $dadd = user_comment_img::where('gid',$gid)->where('upon',$uphon)->get();
+
+        }
+
+        return view('home.evaluation.index',['data'=>$date,'dadd'=>$dadd]);
     }
 
     /**
@@ -38,13 +50,16 @@ class EvaluationController extends Controller
      */
     public function store(Request $request)
     {
-
+        if(!Session('user_login') == true){
+          return redirect('home/login');
+        }
         DB::beginTransaction();
         $request->all();
         $user_comment['uphon'] = Session('user_login')[1];//用户手机号
         $user_comment['user_like'] =$request->user_like;//用户的评价
         $user_comment['user_comment'] =$request->user_comment;//用户给的评价内容
         $user_comment['gid'] = 5;//商品id
+        $user_comment['time'] = date('Y-m-d H:i:s',time());//评论的时间爱
         $date = DB::table('user_comment')->insert($user_comment);
 
         //检测文件是否有上传
@@ -64,6 +79,7 @@ class EvaluationController extends Controller
                     $res1 = substr($res, 6);
                     $user_img['good_img'] = 'storage'.$res1;
                     $user_img['gid'] = $user_comment['gid'];
+                    $user_img['uphon'] = Session('user_login')[1];
                     $data = DB::table('user_comment_img')->insert($user_img);
                   }else{
                     DB::rollBack();//执行回滚,另一个对对应的表删除
@@ -73,38 +89,9 @@ class EvaluationController extends Controller
                       DB::commit();
                       return 1;
                   }
-
-
-
             }
 
         }
-
-
-        // 检查是否有文件上传-
-        // if ($request->hasFile('good_img')) {
-        //     $file = $request->file('good_img');// 创建文件上传对象
-        //     // 执行文件上传
-        //     foreach ($file as $key => $value) {
-        //         $res = $value->store('public/home/comment');
-        //         $ext = $file->extension();
-        //         dump($ext);exit;
-        //         $res1 = substr($res, 6);
-        //         $data['pics_url'] = 'storage'.$res1;
-
-        //         DB::table('tp_goods_pics')->insert($data);
-        //     };
-
-        //     // 将'public'替换成'storage'
-        //     $res1 = substr($res, 6);
-        //     $data['goods_plot'] = 'storage'.$res1;
-        // }else{
-        //     echo 132;
-        // }
-
-
-
-
 
     }
 

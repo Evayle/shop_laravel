@@ -17,7 +17,7 @@
 							<a href="javascript:;" class="default">默认地址</a>
 							<a href="udai_address_edit.html" class="edit">修改</a>
 						</div>
-						
+
 					</div>
 					<div class="add_addr"><a href="/home/address">添加新地址</a></div>
 					<div class="shop-title">确认订单</div>
@@ -53,7 +53,7 @@
 									<td>￥{{$v->goods_price}}</td>
 								</tr>
 							@endforeach
-								
+
 							</tbody>
 						</table>
 					</div>

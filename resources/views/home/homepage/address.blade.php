@@ -66,7 +66,7 @@
                                     // 将得到的地址名写入到option中
                                     var info = $('<option value="'+result[i].id+'">'+result[i].name+'</option>');
                                     // 将得到的option标签放到select中
-                                    $('.province').append(info);
+                                    $('select').append(info);
                                 }
                                 // 禁止请选择被选中
                                 $('.ss').attr('disabled',true);
@@ -99,9 +99,9 @@
                                 // console.log($('select'));
                                 arr =[];
                                 $('select').each(function(){
-                                    
+
                                     opdata=$(this).find('option:selected').html();
-                                    
+
                                 //  console.log(opdata);
                                     //将我们得到的每个值放置到数组中
                                     arr.push(opdata);
@@ -115,7 +115,7 @@
                                         $('.sps').text('请选择完整地址').css('color','red');
                                         return false;
                                     }
-                                    
+
                                 }
                                 //将 得到的数组直接赋值给隐藏域的value即可
                                 $('input[name=address]').val(arr);
