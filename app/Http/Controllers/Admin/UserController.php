@@ -28,7 +28,6 @@ class UserController extends Controller
         $tp_data = tp_admin_users::where('admin_name','like','%'.$uname.'%')
         ->orderBy('id','desc')
         ->paginate($count);
-
         return view('admin.users.index',['data'=>$tp_data,'i'=>$i,'request'=>$request->all() or " "]);
             }
 

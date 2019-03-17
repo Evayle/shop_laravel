@@ -8,7 +8,6 @@ use DB;
 use App\Model\Admin\user_comment_img;
 use App\Model\Admin\user_comment;
 
-
 class EvaluationController extends Controller
 {
     /**
@@ -16,6 +15,7 @@ class EvaluationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index(Request $request)
     {
 
@@ -28,7 +28,6 @@ class EvaluationController extends Controller
             $dadd = user_comment_img::where('gid',$gid)->where('upon',$uphon)->get();
 
         }
-
         return view('home.evaluation.index',['data'=>$date,'dadd'=>$dadd]);
     }
 
@@ -50,6 +49,7 @@ class EvaluationController extends Controller
      */
     public function store(Request $request)
     {
+
         if(!Session('user_login') == true){
           return redirect('home/login');
         }
@@ -60,6 +60,7 @@ class EvaluationController extends Controller
         $user_comment['user_comment'] =$request->user_comment;//用户给的评价内容
         $user_comment['gid'] = 5;//商品id
         $user_comment['time'] = date('Y-m-d H:i:s',time());//评论的时间爱
+
         $date = DB::table('user_comment')->insert($user_comment);
 
         //检测文件是否有上传
@@ -79,6 +80,7 @@ class EvaluationController extends Controller
                     $res1 = substr($res, 6);
                     $user_img['good_img'] = 'storage'.$res1;
                     $user_img['gid'] = $user_comment['gid'];
+
                     $user_img['uphon'] = Session('user_login')[1];
                     $data = DB::table('user_comment_img')->insert($user_img);
                   }else{
@@ -92,6 +94,7 @@ class EvaluationController extends Controller
             }
 
         }
+
 
     }
 

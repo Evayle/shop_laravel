@@ -14,12 +14,6 @@ class CouponController extends Controller
      */
     public function index()
     {
-
-
-
-
-
-
         return view('home.homepage.coupon');
     }
 
@@ -88,7 +82,6 @@ class CouponController extends Controller
     {
         //
     }
-
     public function addcoupon()
     {
 
@@ -105,11 +98,6 @@ class CouponController extends Controller
 
         }
 
-
-
-
-
-
         $date['uid'] = $uid;
         $date['con_id'] = $con_id;
         $date['con_status'] = $con_status;
@@ -121,4 +109,5 @@ class CouponController extends Controller
 
 
     }
+
 }

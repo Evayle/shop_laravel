@@ -16,10 +16,9 @@ class TestController extends Controller
         //session()->forget('phon_code');
         //dump(session()->all());
 
-
-        $phon = $_POST['phone'];
-        $pass = Hash::make($_POST['password']);
-        $num = 10;
+        if(empty($_POST)){
+            return redirect()->route('test');
+        }
 
         if($pass == " "){
             return redirect()->route('test',['p=register','reeor'=>2131]);

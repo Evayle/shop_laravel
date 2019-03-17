@@ -176,10 +176,9 @@
                         });
                     </script>
 
+
                 </div>
             </div>
-
-
 
             <div class="form-box resetpwd">
                 <div class="tabs-nav clearfix">
@@ -193,6 +192,7 @@
                                 <div class="input-group-addon">
                                     <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
                                 </div>
+
                                 <input type="text" name="uphonsess" class="form-control phone" placeholder="请输入手机号码" id="telphon" maxlength="11">
 
                             </div>
@@ -212,6 +212,7 @@
                                 <div class="input-group-addon">
                                     <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
                                 </div>
+
                                 <input class="form-control password" name="password" id="sspwd" placeholder="新的密码" autocomplete="off" type="password">
                                 <div class="input-group-addon pwd-toggle" title="显示密码"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></div>
                             </div>
@@ -220,6 +221,7 @@
                         <div class="form-group">
                             <div class="error_msg" id="resetpwd_error"></div>
                         </div>
+
                         <button class="btn btn-large btn-primary btn-lg btn-block" id="ppsss" type="submit">重置密码</button>
                     </form>
                     <script  type="text/javascript">

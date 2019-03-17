@@ -4,12 +4,15 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
 use DB;
 use Hash;
+
 
 class PaypwdController extends Controller
 {
     /**
+
      * 修改用户支付密码
      *
      * @return 用电话验证
@@ -42,6 +45,7 @@ class PaypwdController extends Controller
      */
     public function store(Request $request)
     {
+
         //利用session找到用户的修改方式
         $uphon = session("user_login")[1];
 
@@ -65,6 +69,7 @@ class PaypwdController extends Controller
      */
     public function show($id)
     {
+
        return view('home.homepage.upass_ok');
     }
 

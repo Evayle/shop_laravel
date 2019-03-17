@@ -110,7 +110,7 @@ Route::any('123',function(){
 
 // 徐俊伟的代码
 // 前台用户收藏的路由
-Route::get('home/collect','Home\CollectController@index');
+Route::get('home/collect/{id}','Home\CollectController@index');
 Route::get('home/collect/create','Home\CollectController@create');
 Route::get('home/collect/new_data','Home\CollectController@new_data');
 Route::get('home/collect/destroy','Home\CollectController@destroy');
@@ -136,6 +136,7 @@ Route::get('home/address/upd/{id}','Home\AddresController@add');
 Route::resource('home/address/','Home\AddresController');
 
 //用户优惠券
+
 //领取得到优惠券
 Route::get('home/coupon/add','Home\CouponController@addcoupon');
 Route::resource('home/coupon','Home\CouponController');
@@ -150,18 +151,13 @@ Route::post('home/payupss/send2','Home\PaypwdsController@send2');
 Route::any('home/payupss/send3','Home\PaypwdsController@send3');
 Route::resource('home/payupss','Home\PaypwdsController');
 
-
 //用户修改登录
 Route::resource('home/login_pass','Home\UpassController');
 
 
 //用户忘记密码
 Route::any('home/login_edit','Home\Login_passController@upedit');
-
-
 Route::resource('home/login_mod','Home\LoginpassController');
-
-
 
 
 //用户订单
@@ -188,3 +184,16 @@ Route::resource('home/Receipt','Home\ReceiptController');
 
 //用户评论
 Route::resource('home/evaluation','Home\EvaluationController');
+
+
+
+
+
+
+
+
+
+
+// 前台分类详情列表
+Route::get('home/cates/{id}','Home\CatesController@index');
+Route::resource('home/cates','Home\CatesController');

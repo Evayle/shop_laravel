@@ -12,9 +12,16 @@ class CatesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function index(Request $request, $id = 0)
     {
-        //
+        // 判断是否有该三级分类
+        // if () {
+
+        // }
+
+        //加载分类详情视图
+        return view('home.cates.index');
     }
 
     /**

@@ -59,7 +59,9 @@ class LoginController extends Controller
         if (!Hash::check($date['password'],$data->upass)) {
 
             //直接跳转到登录页面
+
             return redirect()->route('payupss',['404'=>4]);
+
         }
 
         //将前台判断session的值,添加到session

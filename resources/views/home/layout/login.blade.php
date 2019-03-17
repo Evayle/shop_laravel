@@ -72,13 +72,11 @@ $("#send").click(function(){
 });
 </script>
 <script>
-
     var b =window.location.search;
 
     if(b == '?error=404'){
         alert('密码已重置,请登录');
     }
- ;
-
 </script>
+
 

@@ -1,7 +1,6 @@
 @extends('home.layout.index')
 @section('index')
 	<!-- 内页导航栏 -->
-	<!-- 这是商品详情页 -->
 	<div class="top-nav bg3">
 		<div class="nav-box inner">
 			<div class="all-cat">
@@ -18,38 +17,40 @@
 			</ul>
 		</div>
 	</div>
+
+
+
+	<!-- 这是商品详情页 -->
+
 	<div class="content inner">
 		<section class="item-show__div item-show__head clearfix">
 			<div class="pull-left">
-				<ol class="breadcrumb">	
+				<ol class="breadcrumb">
 					<li><a href="/home">首页</a></li>
-					<li><a href="item_sale_page.html">爆款推荐</a></li>
-					<li class="active">原创设计日常汉服女款绣花长褙子吊带改良宋裤春夏</li>
+					<li class="active">{{ $goods->goods_name }}</li>
 				</ol>
 				<div class="item-pic__box" id="magnifier">
 					<div class="small-box">
-						<img class="cover" src="/homes/images/temp/S-001-1_s.jpg" alt="重回汉唐 旧忆 原创设计日常汉服女款绣花长褙子吊带改良宋裤春夏">
+						<img class="cover" src="/{{ $pic[0]->pics_url }}" alt="重回汉唐 旧忆 原创设计日常汉服女款绣花长褙子吊带改良宋裤春夏">
+
 						<span class="hover"></span>
 					</div>
 					<div class="thumbnail-box">
 						<a href="javascript:;" class="btn btn-default btn-prev"></a>
 						<div class="thumb-list">
 							<ul class="wrapper clearfix">
-								<li class="item active" data-src="/homes/images/temp/S-001-1_b.jpg"><img class="cover" src="/homes/images/temp/S-001-1_s.jpg" alt="商品预览图"></li>
-								<li class="item" data-src="/homes/images/temp/S-001-2_b.jpg"><img class="cover" src="/homes/images/temp/S-001-2_s.jpg" alt="商品预览图"></li>
-								<li class="item" data-src="/homes/images/temp/S-001-3_b.jpg"><img class="cover" src="/homes/images/temp/S-001-3_s.jpg" alt="商品预览图"></li>
-								<li class="item" data-src="/homes/images/temp/S-001-4_b.jpg"><img class="cover" src="/homes/images/temp/S-001-4_s.jpg" alt="商品预览图"></li>
-								<li class="item" data-src="/homes/images/temp/S-001-5_b.jpg"><img class="cover" src="/homes/images/temp/S-001-5_s.jpg" alt="商品预览图"></li>
-								<li class="item" data-src="/homes/images/temp/S-001-6_b.jpg"><img class="cover" src="/homes/images/temp/S-001-6_s.jpg" alt="商品预览图"></li>
-								<li class="item" data-src="/homes/images/temp/S-001-7_b.jpg"><img class="cover" src="/homes/images/temp/S-001-7_s.jpg" alt="商品预览图"></li>
-								<li class="item" data-src="/homes/images/temp/S-001-8_b.jpg"><img class="cover" src="/homes/images/temp/S-001-8_s.jpg" alt="商品预览图"></li>
-								<li class="item" data-src="/homes/images/temp/S-001-9_b.jpg"><img class="cover" src="/homes/images/temp/S-001-9_s.jpg" alt="商品预览图"></li>
-								<li class="item" data-src="/homes/images/temp/S-001-10_b.jpg"><img class="cover" src="/homes/images/temp/S-001-10_s.jpg" alt="商品预览图"></li>
+					<!-- 缩略图遍历开始 -->
+								@foreach ($pic as $v)
+								<li class="item active" data-src="/{{ $v->pics_url }}"><img class="cover" src="/{{ $v->pics_url }}" alt="商品预览图"></li>
+								@endforeach
+								<!-- 缩略图遍历结束 -->
+
 							</ul>
 						</div>
 						<a href="javascript:;" class="btn btn-default btn-next"></a>
 					</div>
-					<div class="big-box"><img src="/homes/images/temp/S-001-1_b.jpg" alt="重回汉唐 旧忆 原创设计日常汉服女款绣花长褙子吊带改良宋裤春夏"></div>
+
+					<div class="big-box"><img src="/{{ $pic[0]->pics_url }}" alt="重回汉唐 旧忆 原创设计日常汉服女款绣花长褙子吊带改良宋裤春夏"></div>
 				</div>
 				<script src="/homes/js/jquery.magnifier.js"></script>
 				<script>
@@ -59,23 +60,17 @@
 				</script>
 				<div class="item-info__box">
 					<div class="item-title">
-						<div class="name ep2">原创设计日常汉服女款绣花长褙子吊带改良宋裤春夏</div>
-						<div class="sale cr">优惠活动：该商品享受8折优惠</div>
+						<div class="name ep2">{{ $goods->goods_name }}</div>
+						<div class="sale cr">@if ($goods->goods_fsp == 0 ) 该商品可包邮 @endif</div>
+						<div class="sale cr">@if ($goods->goods_preferential == 0 ) 优惠活动：该商品参与满减 @endif</div>
+						<div class="sale cr">@if ($goods->goods_hot == 0 ) 优惠活动：该商品可积分兑换 @endif</div>
+						<div class="sale cr">@if ($goods->goods_discount == 0 ) 优惠活动：该商品享受8折优惠 @endif</div>
 					</div>
 					<div class="item-price bgf5">
 						<div class="price-box clearfix">
 							<div class="price-panel pull-left">
-								售价：<span class="price">￥19.20 <s class="fz16 c9">￥24.00</s></span>
-							</div>
-							<div class="vip-price-panel pull-right">
-								会员等级价格 <i class="iconfont icon-down"></i>
-								<ul class="all-price__box">
-									<!-- 登陆后可见 -->
-									<li><span class="text-justify">普通：</span>40.00元</li>
-									<li><span class="text-justify">银牌：</span>38.00元</li>
-									<li><span class="text-justify">超级：</span>28.00元</li>
-									<li><span class="text-justify">V I P：</span>19.20元</li>
-								</ul>
+
+								售价：<span class="price">￥{{ $goods->goods_price * 0.8 }} <s class="fz16 c9">￥{{ $goods->goods_price }}</s></span>
 							</div>
 							<script>
 								// 会员价格折叠展开
@@ -93,58 +88,23 @@
 								});
 							</script>
 						</div>
-						<div class="c6">普通会员限购 2 件，想要<u class="cr"><a href="">购买更多</a></u>？</div>
 					</div>
 					<ul class="item-ind-panel clearfix">
 						<li class="item-ind-item">
 							<span class="ind-label c9">累计销量</span>
-							<span class="ind-count cr">1688</span>
+							<span class="ind-count cr">{{ $goods->goods_sales }}</span>
 						</li>
 						<li class="item-ind-item">
-							<a href=""><span class="ind-label c9">累计评论</span>
-							<span class="ind-count cr">1314</span></a>
+							<span class="ind-label c9">累计评论</span>
+							<span class="ind-count cr">{{ $count }}</span>
 						</li>
 						<li class="item-ind-item">
-							<a href=""><span class="ind-label c9">赠送积分</span>
-							<span class="ind-count cg">666</span></a>
+							<span class="ind-label c9">赠送积分</span>
+							<span class="ind-count cg">{{ floor($goods->goods_price * 0.02) }}</span>
 						</li>
 					</ul>
 					<div class="item-key">
 						<div class="item-sku">
-							<!-- <dl class="item-prop clearfix">
-								<dt class="item-metatit">颜色：</dt>
-								<dd><ul data-property="颜色" class="clearfix">
-									<li><a class="on" href="javascript:;" role="button" data-value="白色" aria-disabled="true">
-										<span>白色</span>
-									</a></li>
-									<li><a href="javascript:;" role="button" data-value="黑色" aria-disabled="true">
-										<span>黑色</span>
-									</a></li>
-									<li><a href="javascript:;" role="button" data-value="粉红色" aria-disabled="true">
-										<span>粉红色</span>
-									</a></li>
-									<li><a href="javascript:;" role="button" data-value="黄色" aria-disabled="true">
-										<span>黄色</span>
-									</a></li>
-								</ul></dd>
-							</dl> -->
-							<!-- <dl class="item-prop clearfix">
-								<dt class="item-metatit">尺码：</dt>
-								<dd><ul data-property="尺码" class="clearfix">
-									<li><a href="javascript:;" role="button" data-value="S" aria-disabled="true">
-										<span>S</span>
-									</a></li>
-									<li><a href="javascript:;" role="button" data-value="M" aria-disabled="true">
-										<span>M</span>
-									</a></li>
-									<li><a href="javascript:;" role="button" data-value="L" aria-disabled="true">
-										<span>L</span>
-									</a></li>
-									<li><a href="javascript:;" role="button" data-value="XL" aria-disabled="true">
-										<span>XL</span>
-									</a></li>
-								</ul></dd>
-							</dl> -->
 						</div>
 						<div class="item-amount clearfix bgf5">
 							<div class="item-metatit">数量：</div>
@@ -170,13 +130,13 @@
 									cursor: pointer;
 								}
 								</style>
-								<div class="item-stock"><span style="margin-left: 10px;">库存 <b id="Stock">1000</b> 件</span>
+								<div class="item-stock"><span style="margin-left: 10px;">库存 <b id="Stock">{{ $goods->goods_store }}</b> 件</span>
 								<!-- 点赞按钮 勿删-->
 								<a class="zan" style="float: right; margin-right: 70px; font-size: 30px; color:#ccc;" title="点赞此商品">
 									<svg class="icon" aria-hidden="true">
 									  <use xlink:href="#icon-unie60b"></use>
 									</svg>
-									<span class="sp" style="font-size: 16px;text-decoration: none;cursor: pointer;">1223</span>
+									<span class="sp" style="font-size: 16px;text-decoration: none;cursor: pointer;">{{ $laud }}</span>
 								</a>
 								<script>
 									// 这是点赞之后刷新要显示的已点赞效果 勿删
@@ -188,7 +148,7 @@
 										});
 										$.ajax({
 							                url:"/home/laud/create", //处理页面的路径
-							                data:{'goods_id':13}, //要提交的数据是一个JSON
+							                data:{'goods_id': {{$goods->id}} }, //要提交的数据是一个JSON
 							                type:"GET", //提交方式
 							                dataType:"json", //返回数据的类型
 							                //TEXT字符串 JSON返回JSON XML返回XML
@@ -211,7 +171,7 @@
 										// ajax传值
 										$.ajax({
 								                url:"/home/laud", //处理页面的路径
-								                data:{'goods_id':13}, //要提交的数据是一个JSON
+								                data:{'goods_id': {{$goods->id}} }, //要提交的数据是一个JSON
 								                type:"POST", //提交方式
 								                dataType:"json", //返回数据的类型
 								                //TEXT字符串 JSON返回JSON XML返回XML
@@ -221,7 +181,7 @@
 							                        }
 								                	if (data == 1) {
 								                		alert('点赞成功!谢谢您的赞!');
-								                		$('.sp').text('1224');
+								                		$('.sp').text({{ $laud }});
 								                	}
 							                        if (data == 2)  //trim()方法会去掉页面中的冗余空格
 							                        {
@@ -229,7 +189,7 @@
 							                        }
 							                 		if (data == 3) {
 							                 			alert('点赞成功!这是该商品的第一个赞哦!');
-							                 			$('.sp').text('1224'); 	
+							                 			$('.sp').text({{ $laud }});
 							                 		}
 							                    }
 											});
@@ -254,7 +214,7 @@
 										});
 										$.ajax({
 							                url:"/home/collect/new_data", //处理页面的路径
-							                data:{'goods_id':9}, //要提交的数据是一个JSON
+							                data:{'goods_id': {{$goods->id}} }, //要提交的数据是一个JSON
 							                type:"GET", //提交方式
 							                dataType:"json", //返回数据的类型
 							                //TEXT字符串 JSON返回JSON XML返回XML
@@ -285,7 +245,7 @@
 											});
 											$.ajax({
 								                url:"/home/collect/create", //处理页面的路径
-								                data:{'goods_id':9}, //要提交的数据是一个JSON
+								                data:{'goods_id': {{$goods->id}} }, //要提交的数据是一个JSON
 								                type:"GET", //提交方式
 								                dataType:"json", //返回数据的类型
 								                //TEXT字符串 JSON返回JSON XML返回XML
@@ -309,7 +269,7 @@
 											});
 											$.ajax({
 								                url:"/home/collect/destroy", //处理页面的路径
-								                data:{'goods_id':9}, //要提交的数据是一个JSON
+								                data:{'goods_id': {{$goods->id}} }, //要提交的数据是一个JSON
 								                type:"GET", //提交方式
 								                dataType:"json", //返回数据的类型
 								                //TEXT字符串 JSON返回JSON XML返回XML
@@ -361,8 +321,7 @@
 							</div>
 						</div>
 						<div class="item-action clearfix bgf5">
-							<a href="/home/shopcart/create?id=18" rel="nofollow" data-addfastbuy="true" title="点击此按钮，到下一步确认购买信息。" role="button" class="item-action__buy">立即购买</a>
-
+							<a href="/home/shopcart/create?id={{ $goods->id }}" rel="nofollow" data-addfastbuy="true" title="点击此按钮，到下一步确认购买信息。" role="button" class="item-action__buy">立即购买</a>
 							<a href="javascript:;" rel="nofollow" data-addfastbuy="true" role="button" class="item-action__basket" title="点击此按钮,把商品添加到购物车">
 								<i class="iconfont icon-shopcart"></i> 加入购物车
 							</a>
@@ -377,79 +336,16 @@
 				<div class="swiper-container picked-swiper">
 					<div class="swiper-wrapper">
 						<div class="swiper-slide">
-							<a class="picked-item" href="">
-								<img src="/homes/images/temp/S-001-1_s.jpg" alt="" class="cover">
-								<div class="look_price">¥134.99</div>
+
+						@foreach ($hot as $v)
+							<a class="picked-item" href="/home/collect/{{ $v->id }}">
+								<img src="/{{ $v->goods_plot }}" alt="" class="cover">
+								<div class="look_price">¥{{ $v->goods_price }}</div>
 							</a>
-							<a class="picked-item" href="">
-								<img src="/homes/images/temp/S-001-2_s.jpg" alt="" class="cover">
-								<div class="look_price">¥134.99</div>
-							</a>
-							<a class="picked-item" href="">
-								<img src="/homes/images/temp/S-001-3_s.jpg" alt="" class="cover">
-								<div class="look_price">¥134.99</div>
-							</a>
-						</div>
-						<div class="swiper-slide">
-							<a class="picked-item" href="">
-								<img src="/homes/images/temp/S-001-4_s.jpg" alt="" class="cover">
-								<div class="look_price">¥134.99</div>
-							</a>
-							<a class="picked-item" href="">
-								<img src="/homes/images/temp/S-001-5_s.jpg" alt="" class="cover">
-								<div class="look_price">¥134.99</div>
-							</a>
-							<a class="picked-item" href="">
-								<img src="/homes/images/temp/S-001-6_s.jpg" alt="" class="cover">
-								<div class="look_price">¥134.99</div>
-							</a>
-						</div>
-						<div class="swiper-slide">
-							<a class="picked-item" href="">
-								<img src="/homes/images/temp/S-001-7_s.jpg" alt="" class="cover">
-								<div class="look_price">¥134.99</div>
-							</a>
-							<a class="picked-item" href="">
-								<img src="/homes/images/temp/S-001-8_s.jpg" alt="" class="cover">
-								<div class="look_price">¥134.99</div>
-							</a>
-							<a class="picked-item" href="">
-								<img src="/homes/images/temp/S-001-9_s.jpg" alt="" class="cover">
-								<div class="look_price">¥134.99</div>
-							</a>
-						</div>
-						<div class="swiper-slide">
-							<a class="picked-item" href="">
-								<img src="/homes/images/temp/S-001-10_s.jpg" alt="" class="cover">
-								<div class="look_price">¥134.99</div>
-							</a>
-							<a class="picked-item" href="">
-								<img src="/homes/images/temp/S-001-1_s.jpg" alt="" class="cover">
-								<div class="look_price">¥134.99</div>
-							</a>
-							<a class="picked-item" href="">
-								<img src="/homes/images/temp/S-001-2_s.jpg" alt="" class="cover">
-								<div class="look_price">¥134.99</div>
-							</a>
-						</div>
-						<div class="swiper-slide">
-							<a class="picked-item" href="">
-								<img src="/homes/images/temp/S-001-3_s.jpg" alt="" class="cover">
-								<div class="look_price">¥134.99</div>
-							</a>
-							<a class="picked-item" href="">
-								<img src="/homes/images/temp/S-001-4_s.jpg" alt="" class="cover">
-								<div class="look_price">¥134.99</div>
-							</a>
-							<a class="picked-item" href="">
-								<img src="/homes/images/temp/S-001-5_s.jpg" alt="" class="cover">
-								<div class="look_price">¥134.99</div>
-							</a>
+						@endforeach
 						</div>
 					</div>
 				</div>
-				<div class="picked-button-prev"></div>
-				<div class="picked-button-next"></div>
 				<script>
 					$(document).ready(function(){
 						// 顶部banner轮播
@@ -467,7 +363,7 @@
 			<div class="item-nav-tabs">
 				<ul class="nav-tabs nav-pills clearfix" role="tablist" id="item-tabs">
 					<li role="presentation" class="active"><a href="#detail" role="tab" data-toggle="tab" aria-controls="detail" aria-expanded="true">商品详情</a></li>
-					<li role="presentation"><a href="#evaluate" role="tab" data-toggle="tab" aria-controls="evaluate">累计评价 <span class="badge">1314</span></a></li>
+					<li role="presentation"><a href="#evaluate" role="tab" data-toggle="tab" aria-controls="evaluate">累计评价 <span class="badge">{{ $count }}</span></a></li>
 					<li role="presentation"><a href="#service" role="tab" data-toggle="tab" aria-controls="service">售后服务</a></li>
 				</ul>
 			</div>
@@ -475,24 +371,14 @@
 				<div class="tab-content">
 					<div role="tabpanel" class="tab-pane fade in active" id="detail" aria-labelledby="detail-tab">
 						<div class="item-detail__info clearfix">
-							<div class="record">商品编号：D-8812</div>
-							<div class="record">上架时间：2017-06-24</div>
-							<div class="record">商品毛重：200克</div>
-							<div class="record">商品库存：1000件</div>
+							<div class="record">上架时间：{{ $goods->updated_at }}</div>
+							<div class="record">商品库存：{{ $goods->goods_store }}</div>
 						</div>
 						<div class="rich-text">
 							<p style="text-align: center;">
-								<i id="desc-module-1" style="font-size: 0"></i>
-
-								<img src="/homes/images/temp/S-001_1.jpg" alt=""><br><img src="/homes/images/temp/S-001_2.jpg" alt=""><br>
-
-								<i id="desc-module-2" style="font-size: 0"></i><img src="/homes/images/temp/S-001_3.jpg" alt=""><br><img src="/homes/images/temp/S-001_4.jpg" alt=""><br><img src="/homes/images/temp/S-001_5.jpg" alt=""><br><img src="/homes/images/temp/S-001_6.jpg" alt=""><br><img src="/homes/images/temp/S-001_7.jpg" alt=""><br><img src="/homes/images/temp/S-001_8.jpg" alt=""><br>
-
-								<i id="desc-module-3" style="font-size: 0"></i><img src="/homes/images/temp/S-001_9.jpg" alt=""><br><img src="/homes/images/temp/S-001_10.jpg" alt=""><br><img src="/homes/images/temp/S-001_11.jpg" alt=""><br><img src="/homes/images/temp/S-001_12.jpg" alt=""><br>
-
-								<i id="desc-module-4" style="font-size: 0"></i><img src="/homes/images/temp/S-001_13.jpg" alt=""><br><img src="/homes/images/temp/S-001_14.jpg" alt=""><br><img src="/homes/images/temp/S-001_15.jpg" alt=""><br><img src="/homes/images/temp/S-001_16.jpg" alt=""><br><img src="/homes/images/temp/S-001_17.jpg" alt=""><br><img src="/homes/images/temp/S-001_18.jpg" alt=""><br><img src="/homes/images/temp/S-001_19.jpg" alt=""><br><img src="/homes/images/temp/S-001_20.jpg" alt=""><br><img src="/homes/images/temp/S-001_21.jpg" alt=""><br><img src="/homes/images/temp/S-001_22.jpg" alt=""><br><img src="/homes/images/temp/S-001_23.jpg" alt=""><br><img src="/homes/images/temp/S-001_24.jpg" alt=""><br><img src="/homes/images/temp/S-001_25.jpg" alt=""><br><img src="/homes/images/temp/S-001_26.jpg" alt=""><br><img src="/homes/images/temp/S-001_27.jpg" alt=""><br><img src="/homes/images/temp/S-001_28.jpg" alt=""><br><img src="/homes/images/temp/S-001_29.jpg" alt=""><br><img src="/homes/images/temp/S-001_30.jpg" alt=""><br><img src="/homes/images/temp/S-001_31.jpg" alt=""><br><img src="/homes/images/temp/S-001_32.jpg" alt=""><br><img src="/homes/images/temp/S-001_33.jpg" alt=""><br><img src="/homes/images/temp/S-001_34.jpg" alt=""><br><img src="/homes/images/temp/S-001_35.jpg" alt=""><br><img src="/homes/images/temp/S-001_36.jpg" alt=""><br>
-
-								<i id="desc-module-5" style="font-size: 0"></i><img src="/homes/images/temp/S-001_37.jpg" alt=""><br><img src="/homes/images/temp/S-001_38.jpg" alt=""><br><img src="/homes/images/temp/S-001_39.jpg" alt=""><br><img src="/homes/images/temp/S-001_40.jpg" alt=""><br><img src="/homes/images/temp/S-001_41.png" width="790" alt="">
+								@foreach ($img as $v)
+								<img src="/{{ $v->imgs_url }}" alt="" width="790">
+								@endforeach
 							</p>
 						</div>
 					</div>
@@ -619,110 +505,12 @@
 					<div class="swiper-container recommends-swiper">
 						<div class="swiper-wrapper">
 							<div class="swiper-slide">
-								<a class="picked-item" href="">
-									<img src="/homes/images/temp/S-001-1_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
+								@foreach ($hot as $v)
+								<a class="picked-item" href="/home/collect/{{ $v->id }}">
+									<img src="/{{ $v->goods_plot }}" alt="" class="cover">
+									<div class="look_price">¥{{ $v->goods_price }}</div>
 								</a>
-								<a class="picked-item" href="">
-									<img src="/homes/images/temp/S-001-2_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/homes/images/temp/S-001-3_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/homes/images/temp/S-001-4_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/homes/images/temp/S-001-5_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a class="picked-item" href="">
-									<img src="/homes/images/temp/S-001-1_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/homes/images/temp/S-001-2_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/homes/images/temp/S-001-3_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/homes/images/temp/S-001-4_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/homes/images/temp/S-001-5_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a class="picked-item" href="">
-									<img src="/homes/images/temp/S-001-1_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/homes/images/temp/S-001-2_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/homes/images/temp/S-001-3_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/homes/images/temp/S-001-4_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/homes/images/temp/S-001-5_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a class="picked-item" href="">
-									<img src="/homes/images/temp/S-001-1_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/homes/images/temp/S-001-2_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/homes/images/temp/S-001-3_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/homes/images/temp/S-001-4_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/homes/images/temp/S-001-5_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a class="picked-item" href="">
-									<img src="/homes/images/temp/S-001-3_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/homes/images/temp/S-001-4_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/homes/images/temp/S-001-5_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/homes/images/temp/S-001-5_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
+								@endforeach
 							</div>
 						</div>
 					</div>
@@ -739,80 +527,14 @@
 			<div class="pull-right">
 				<div class="tab-content" id="descCate">
 					<div role="tabpanel" class="tab-pane fade in active" id="detail-tab" aria-labelledby="detail-tab">
-						<div class="descCate-content bgf5">
-							<dd class="dc-idsItem selected">
-								<a href="#desc-module-1"><i class="iconfont icon-dot"></i> 产品图</a>
-							</dd>
-							<dd class="dc-idsItem">
-								<a href="#desc-module-2"><i class="iconfont icon-selected"></i> 细节图</a>
-							</dd>
-							<dd class="dc-idsItem">
-								<a href="#desc-module-3"><i class="iconfont"></i> 尺寸及试穿</a>
-							</dd>
-							<dd class="dc-idsItem">
-								<a href="#desc-module-4"><i class="iconfont"></i> 模特效果图</a>
-							</dd>
-							<dd class="dc-idsItem">
-								<a href="#desc-module-5"><i class="iconfont"></i> 常见问题</a>
-							</dd>
-						</div>
+						<div class="descCate-content bgf5"></div>
 					</div>
 					<div role="tabpanel" class="tab-pane fade" id="evaluate-tab" aria-labelledby="evaluate-tab">
 						<div class="descCate-content posr bgf5">
-							<div class="lace-title">
-								<span class="c6">相关推荐</span>
-							</div>
-							<div class="picked-box">
-								<a class="picked-item" href="">
-									<img src="/homes/images/temp/S-001-1_s.jpg" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/homes/images/temp/S-001-2_s.jpg" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/homes/images/temp/S-001-3_s.jpg" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/homes/images/temp/S-001-4_s.jpg" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/homes/images/temp/S-001-5_s.jpg" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-							</div>
 						</div>
 					</div>
 					<div role="tabpanel" class="tab-pane fade" id="service-tab" aria-labelledby="service-tab">
 						<div class="descCate-content posr bgf5">
-							<div class="lace-title">
-								<span class="c6">最近浏览</span>
-							</div>
-							<div class="picked-box">
-								<a class="picked-item" href="">
-									<img src="/homes/images/temp/S-001-1_s.jpg" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/homes/images/temp/S-001-2_s.jpg" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/homes/images/temp/S-001-3_s.jpg" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/homes/images/temp/S-001-4_s.jpg" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="/homes/images/temp/S-001-5_s.jpg" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-							</div>
 						</div>
 					</div>
 				</div>

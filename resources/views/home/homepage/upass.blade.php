@@ -2,11 +2,14 @@
 @section('homepage')
     <div class="pull-right">
 
+
                 @if($data== true)
+
                 <div class="user-content__box clearfix bgf">
                     <div class="title">账户信息-修改支付密码</div>
                     <div class="modify_div">
                         <div class="clearfix">
+
                             <a href="/home/payupss" role="button" class="but">修改支付密码</a>
                             <a href="/home/payupss" role="button" class="but">忘记支付密码</a>
                         </div>
@@ -95,10 +98,6 @@
                 </script>
                 @endif
             </div>
-
         </section>
     </div>
-
-
-
 @endsection

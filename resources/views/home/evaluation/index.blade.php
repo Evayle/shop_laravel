@@ -21,7 +21,6 @@
     <title>U袋网</title>
 </head>
 <body>
-
     <!-- 顶部tab -->
     <div class="tab-header">
         <div class="inner">
@@ -171,7 +170,9 @@
 <br>
 <br>
 <br>
+
     <!-- 这里是评价开始的地方 -->
+
         <section class="item-show__div item-show__body posr clearfix">
             <div class="item-nav-tabs">
                 <ul class="nav-tabs nav-pills clearfix" role="tablist" id="item-tabs">
@@ -218,7 +219,10 @@
 
                         </div>
                     </div>
+
                     <!-- 这里是评价结束的地方 -->
+
+
                         <div class="evaluate-tabs bgf5">
                             <ul class="nav-tabs nav-pills clearfix" role="tablist">
                                 <li role="presentation" class="active"><a href="#all" role="tab" data-toggle="tab" aria-controls="all" aria-expanded="true">全部评价 <span class="badge">1314</span></a></li>
@@ -258,7 +262,7 @@
                                         </div>
                                     </div>
                                     @endforeach
-                                    <!-- 分页 -->
+                                 <!-- 分页 -->
                                     <div class="page text-center clearfix">
                                         <a class="disabled">上一页</a>
                                         <a class="select">1</a>
@@ -302,8 +306,6 @@
                                     </div>
 
 
-
-
                                     <!-- 分页 -->
                                     <div class="page text-center clearfix">
                                         <a class="disabled">上一页</a>
@@ -320,13 +322,16 @@
                                     </div>
                                 </div>
 
+
                                 <!-- 这个是中评 -->
+
                                 <div role="tabpanel" class="tab-pane fade" id="normal" aria-labelledby="normal-tab">
                                     <div class="eval-box">
                                         <div class="eval-author">
                                             <div class="port">
                                                 <img src="/homes/images/icons/default_avt.png" alt="欢迎来到U袋网" class="cover b-r50">
                                             </div>
+
                                             <div class="name">这个是中评</div>
                                         </div>
                                         <div class="eval-content">
@@ -366,6 +371,7 @@
                                             <div class="port">
                                                 <img src="/homes/images/icons/default_avt.png" alt="欢迎来到U袋网" class="cover b-r50">
                                             </div>
+
                                             <div class="name">这个是差评</div>
                                         </div>
                                         <div class="eval-content">
@@ -384,7 +390,6 @@
                                             </div>
                                         </div>
                                     </div>
-
 
                                     <!-- 分页 -->
                                     <div class="page text-center clearfix">

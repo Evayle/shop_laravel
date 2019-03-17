@@ -238,8 +238,10 @@ class GoodsController extends Controller
                 // 删除旧图片
                 Storage::delete("public/$path");
             }
+
             // 同时删除旧数据
             tp_goods_imgs::where('goods_id', $id)->delete();
+
             // 同时添加缩略图进数据
             $data = $request->only(['imgs_url']);
             $data['goods_id'] = $id;
@@ -257,7 +259,9 @@ class GoodsController extends Controller
         } else {
             return back()->with('error', '修改失败');
         }
+
     }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -266,6 +270,7 @@ class GoodsController extends Controller
      */
     public function destroy($id)
     {
+
         // 执行删除操作
         DB::beginTransaction();
         $goods = tp_goods::find($id);
@@ -288,6 +293,7 @@ class GoodsController extends Controller
                 Storage::delete("public/$path");
             }
         }
+
         // 删除缩略套图及数据
         $goodspic = tp_goods_pics::where('goods_id', $id)->get();
         $res3 = tp_goods_pics::where('goods_id', $id)->delete();
