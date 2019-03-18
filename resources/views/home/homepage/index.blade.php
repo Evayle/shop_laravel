@@ -4,12 +4,13 @@
                 <div class="user-center__info bgf">
                     <div class="pull-left clearfix">
                         <div class="port b-r50 pull-left">
-                            <img src="images/icons/default_avt.png" alt="用户名" class="cover b-r50">
-                            <a href="udai_setting.html" class="edit"><i class="iconfont icon-edit"></i></a>
+
+                            <img src="/{{$data->uavatr}}" onerror='this.src="/homes/images/avate/1.png"'alt="用户名" class="cover b-r50">
+                            <a href="/home/presonal" class="edit"><i class="iconfont icon-edit"></i></a>
                         </div>
-                        <p class="name text-nowrap">您好，18759808122！</p>
+                        <p class="name text-nowrap">您好，{{$data->uname}}}</p>
                         <p class="money text-nowrap">余额：¥88.0</p>
-                        <p class="level text-nowrap">身份：普通会员 <a href="agent_level.html">提升</a></p>
+
                     </div>
                     <div class="pull-right user-nav">
                         <a href="udai_order.html" class="user-nav__but">

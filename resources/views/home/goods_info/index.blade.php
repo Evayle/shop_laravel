@@ -1,5 +1,5 @@
-@extends('home.layout.index')
-@section('index')
+@extends('home.layout.shopping')
+@section('shopping')
 	<!-- 内页导航栏 -->
 	<div class="top-nav bg3">
 		<div class="nav-box inner">
@@ -8,12 +8,12 @@
 			</div>
 			<ul class="nva-list">
 				<a href="/home"><li>首页</li></a>
-				<a href="temp_article/udai_article10.html"><li>企业简介</li></a>
-				<a href="temp_article/udai_article5.html"><li>新手上路</li></a>
-				<a href="class_room.html"><li>U袋学堂</li></a>
-				<a href="enterprise_id.html"><li>企业账号</li></a>
-				<a href="udai_contract.html"><li>诚信合约</li></a>
-				<a href="item_remove.html"><li>实时下架</li></a>
+				<a href="#"><li>企业简介</li></a>
+				<a href="#"><li>新手上路</li></a>
+				<a href="#"><li>U袋学堂</li></a>
+				<a href="#"><li>企业账号</li></a>
+				<a href="#"><li>诚信合约</li></a>
+				<a href="#"><li>实时下架</li></a>
 			</ul>
 		</div>
 	</div>
@@ -39,7 +39,9 @@
 						<a href="javascript:;" class="btn btn-default btn-prev"></a>
 						<div class="thumb-list">
 							<ul class="wrapper clearfix">
+
 					<!-- 缩略图遍历开始 -->
+
 								@foreach ($pic as $v)
 								<li class="item active" data-src="/{{ $v->pics_url }}"><img class="cover" src="/{{ $v->pics_url }}" alt="商品预览图"></li>
 								@endforeach
@@ -49,7 +51,6 @@
 						</div>
 						<a href="javascript:;" class="btn btn-default btn-next"></a>
 					</div>
-
 					<div class="big-box"><img src="/{{ $pic[0]->pics_url }}" alt="重回汉唐 旧忆 原创设计日常汉服女款绣花长褙子吊带改良宋裤春夏"></div>
 				</div>
 				<script src="/homes/js/jquery.magnifier.js"></script>
@@ -69,6 +70,7 @@
 					<div class="item-price bgf5">
 						<div class="price-box clearfix">
 							<div class="price-panel pull-left">
+
 
 								售价：<span class="price">￥{{ $goods->goods_price * 0.8 }} <s class="fz16 c9">￥{{ $goods->goods_price }}</s></span>
 							</div>
@@ -105,12 +107,14 @@
 					</ul>
 					<div class="item-key">
 						<div class="item-sku">
+
+
 						</div>
 						<div class="item-amount clearfix bgf5">
 							<div class="item-metatit">数量：</div>
 							<div class="amount-box">
 								<div class="amount-widget">
-									<input class="amount-input" value="1" maxlength="8" title="请输入购买量" type="text">
+									<input class="amount-input shop" value="1" maxlength="8" title="请输入购买量" type="text">
 									<div class="amount-btn">
 										<a class="amount-but add"></a>
 										<a class="amount-but sub"></a>
@@ -119,6 +123,7 @@
 								<!-- 引入阿里矢量库文件 之前的没用 -->
 								<script src="/homes/font_u9bb8x660y/iconfont.js"></script>
 								<style>
+
 								.icon {
 								  width: 1em;
 								  height: 1em;
@@ -322,6 +327,7 @@
 						</div>
 						<div class="item-action clearfix bgf5">
 							<a href="/home/shopcart/create?id={{ $goods->id }}" rel="nofollow" data-addfastbuy="true" title="点击此按钮，到下一步确认购买信息。" role="button" class="item-action__buy">立即购买</a>
+
 							<a href="javascript:;" rel="nofollow" data-addfastbuy="true" role="button" class="item-action__basket" title="点击此按钮,把商品添加到购物车">
 								<i class="iconfont icon-shopcart"></i> 加入购物车
 							</a>
@@ -329,6 +335,14 @@
 					</div>
 				</div>
 			</div>
+
+			<script>
+				$('.cart').click(function(){
+					$.get('/home/shopcart/add', {'goods_id':{{$goods->id}}, 'sc_num':($('.shop').val())}, function(result){
+						console.log(result);
+					}, 'json');
+				});
+			</script>
 			<div class="pull-right picked-div">
 				<div class="lace-title">
 					<span class="c6">爆款推荐</span>
@@ -336,7 +350,6 @@
 				<div class="swiper-container picked-swiper">
 					<div class="swiper-wrapper">
 						<div class="swiper-slide">
-
 						@foreach ($hot as $v)
 							<a class="picked-item" href="/home/collect/{{ $v->id }}">
 								<img src="/{{ $v->goods_plot }}" alt="" class="cover">
@@ -531,6 +544,7 @@
 					</div>
 					<div role="tabpanel" class="tab-pane fade" id="evaluate-tab" aria-labelledby="evaluate-tab">
 						<div class="descCate-content posr bgf5">
+
 						</div>
 					</div>
 					<div role="tabpanel" class="tab-pane fade" id="service-tab" aria-labelledby="service-tab">

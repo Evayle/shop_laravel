@@ -34,25 +34,25 @@
 								</tr>
 							</thead>
 							<tbody>
-							@foreach($goods as $v)
 								<tr>
-									<th scope="row"><a href="item_show.html"><div class="img"><img src="/homes/images/temp/M-003.jpg" alt="" class="cover"></div></a></th>
+									<th scope="row"><a href="item_show.html"><div class="img"><img src="/{{$goods->goods_plot}}" alt="" class="cover"></div></a></th>
 									<td>
-										<div class="name ep3">{{$v->goods_name}} </div>
+										<div class="name ep3">{{$goods->goods_name}} </div>
 										<!-- <div class="type c9">颜色分类：深棕色  尺码：均码</div> -->
 									</td>
-									<td>￥{{$v->goods_price}}</td>
+									<td>￥{{$goods->goods_price}}</td>
 									<td>1</td>
 									<td>
-										@if($v->goods_fsp == 0)
+										@if($goods->goods_fsp == 0)
+
 										<span>包邮</span>
 										@else
 										<span>￥10.0</span>
 										@endif
 									</td>
-									<td>￥{{$v->goods_price}}</td>
+
+									<td>￥{{$goods->goods_price}}</td>
 								</tr>
-							@endforeach
 
 							</tbody>
 						</table>

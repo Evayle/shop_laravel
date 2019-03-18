@@ -6,7 +6,6 @@
                     <div class="modify_div">
                         <div class="clearfix">
                             <a href="udai_modifypay_step1.html" role="button" class="but">修改支付密码</a>
-
                             <a href="udai_modifypay_step1.html" role="button" class="but">忘记支付密码</a>
                         </div>
                         <div class="help-block">随时都能更改密码，保障您账户余额支付的安全</div>
@@ -138,7 +137,6 @@
                         </script>
                     </form>
                 </div>
-
                 <div class="user-content__box clearfix bgf">
                     <div class="title">账户信息-修改支付密码</div>
                     <div class="step-flow-box">
@@ -169,13 +167,8 @@
                         <a href="item_category.html" class="btn">赶紧去购物，试试新的支付密码吧</a>
                     </div>
                 </div>
-
             </div>
         </section>
     </div>
-
-
-
-
 
 @endsection

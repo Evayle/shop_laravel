@@ -39,6 +39,7 @@ class LaudController extends Controller
         $res = $request->only('goods_id');
         $res['home_users_id'] = $uid[0];
         // return $res;
+
         $infos = DB::table('tp_lauds_infos')->where($res)->limit(5)->get();
         if (!empty($infos[0])) {
             return 4;

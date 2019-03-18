@@ -223,6 +223,7 @@
                     <!-- 这里是评价结束的地方 -->
 
 
+
                         <div class="evaluate-tabs bgf5">
                             <ul class="nav-tabs nav-pills clearfix" role="tablist">
                                 <li role="presentation" class="active"><a href="#all" role="tab" data-toggle="tab" aria-controls="all" aria-expanded="true">全部评价 <span class="badge">1314</span></a></li>
@@ -234,7 +235,8 @@
                         <div class="evaluate-content">
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane fade in active" id="all" aria-labelledby="all-tab">
-                                    @foreach($data as $k=>$v);
+
+                                    @foreach($list as $k=>$v);
                                     <div class="eval-box">
                                         <div class="eval-author">
                                             <div class="port">
@@ -248,11 +250,12 @@
                                                 {{$v->gid}}
                                             </div>
                                             <div class="eval-imgs">
-                                             @foreach($dadd as $key=>$val)
+                                                @foreach($v->pic as $key=>$val)
                                                 <div class="img-temp">
                                                 <img src="/{{$val->good_img}}"  class="cover">
                                                 </div>
-                                             @endforeach
+                                                @endforeach
+
                                                 {{$v->user_comment}}
                                             </div>
                                             <div class="eval-time">
@@ -263,6 +266,7 @@
                                     </div>
                                     @endforeach
                                  <!-- 分页 -->
+
                                     <div class="page text-center clearfix">
                                         <a class="disabled">上一页</a>
                                         <a class="select">1</a>
@@ -305,7 +309,6 @@
                                         </div>
                                     </div>
 
-
                                     <!-- 分页 -->
                                     <div class="page text-center clearfix">
                                         <a class="disabled">上一页</a>
@@ -323,6 +326,7 @@
                                 </div>
 
 
+
                                 <!-- 这个是中评 -->
 
                                 <div role="tabpanel" class="tab-pane fade" id="normal" aria-labelledby="normal-tab">
@@ -331,7 +335,6 @@
                                             <div class="port">
                                                 <img src="/homes/images/icons/default_avt.png" alt="欢迎来到U袋网" class="cover b-r50">
                                             </div>
-
                                             <div class="name">这个是中评</div>
                                         </div>
                                         <div class="eval-content">
@@ -371,7 +374,6 @@
                                             <div class="port">
                                                 <img src="/homes/images/icons/default_avt.png" alt="欢迎来到U袋网" class="cover b-r50">
                                             </div>
-
                                             <div class="name">这个是差评</div>
                                         </div>
                                         <div class="eval-content">

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Home\tp_address;
 use DB;
+use App\Model\Home\home_users;
+use App\Model\Home\home_integrals;
 
 /**
  * 这是购物车的控制器
@@ -20,11 +22,28 @@ class shopcartController extends Controller
      */
     public function index()
     {
-        //
-        return view('home.shopcart.index');
+
+        //判断用户的信息
+         //利用session查询用户的登录账号
+        $user = session()->get('user_login.1');
+        $flight = home_users::where('uphon',$user)->first();
+
+        return view('home.shopcart.index',['data'=>$flight]);
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * 这是添加商品进购物车方法 勿删
+     */
+    public function add(Request $request)
+    {
+        $data = $request->all();
+        return $data;
+    }
+
+    /**
+>>>>>>> origin/xujw233
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -52,9 +71,11 @@ class shopcartController extends Controller
           $ads['status'] = $v->status;
         }
         // dump($ads);
-        $goods = DB::table('tp_goods')->where('id' , '=',$_GET['id'])->get();
 
-        dump($goods);
+        $goods = DB::table('tp_goods')->where('id', $_GET['id'])->first();
+
+        // dd($goods);
+
         return view('home.shopcart.pay',['ads'=>$ads, 'goods'=>$goods]);
     }
 

@@ -9,6 +9,8 @@ use App\Model\Home\tp_laud;
 use App\Model\Admin\tp_goods;
 use App\Model\Admin\tp_goods_pics;
 use App\Model\Admin\tp_goods_imgs;
+use App\Model\Home\home_users;
+use App\Model\Home\home_integrals;
 use DB;
 /**
  * 这是前台用户收藏的控制器
@@ -38,10 +40,47 @@ class CollectController extends Controller
         // 评论总数
         $count = DB::table('user_comment')->where('gid', $id)->count();
 
+
         // 爆款推荐信息
         $hot = DB::table('tp_goods')->where('goods_status', 1)->orderBy('goods_sales', 'desc')->limit(5)->get();
 
-        return view('home.goods_info.index', ['goods'=>$goods, 'pic' => $pic, 'img' => $img, 'laud' => $laud, 'count' => $count, 'hot' => $hot]);
+        //判断用户的信息
+        //利用session查询用户的登录账号
+        $user = session()->get('user_login.1');
+        $flight = home_users::where('uphon',$user)->first();
+
+
+        //利用商品的ID.来获取本商品所有的评价
+        $res['gid'] = $id;
+        $list = DB::table('user_comment')->where($res)->get();
+        foreach ($list as $key => $value) {
+            $uphon =  $value->uphon;
+            $list[$key]->pic = DB::table('user_comment_img')->where(['gid'=>$id,'uphon'=>$uphon])->get();
+        }
+        //搜索商品各种评论有多少条
+        $cont_all = DB::table('user_comment')->where(['gid'=>$id])->count();//评价总数
+
+        $cont_like = DB::table('user_comment')->where(['gid'=>$id])->where(['user_like'=>1])->count();//这个是好评
+
+        $cont_average = DB::table('user_comment')->where(['gid'=>$id])->where(['user_like'=>2])->count();//这个是中评
+
+        $cont_bad = DB::table('user_comment')->where(['gid'=>$id])->where(['user_like'=>3])->count();//这个是差评
+
+        return view('home.goods_info.index',
+        [
+            'goods'=>$goods,
+            'pic' => $pic,
+            'img' => $img,
+            'laud' => $laud,
+            'count' => $count,
+            'hot' => $hot ,
+            'data'=>$flight,
+            'list'=>$list,
+            'con_all'=>$cont_all,
+            'cont_like'=>$cont_like,
+            'cont_ave'=>$cont_average,
+            'cont_bad'=>$cont_bad
+        ]);
 
     }
 

@@ -71,6 +71,7 @@ $("#send").click(function(){
  }
 });
 </script>
+
 <script>
     var b =window.location.search;
 

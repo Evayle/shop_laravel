@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Hash;
 use DB;
+use App\Model\Home\home_users;
 
 class PaypwdsController extends Controller
 {
@@ -19,8 +20,10 @@ class PaypwdsController extends Controller
         //用户支付跳转的页面
         //确认是不是本用户操作
         $uphon = session('user_login')[1];
+         $user = session()->get('user_login.1');
+        $flight = home_users::where('uphon',$user)->first();
 
-        return view('home.homepage.upass_1',['uphon'=>$uphon]);
+        return view('home.homepage.upass_1',['uphon'=>$uphon,'data'=>$flight]);
     }
 
     /**

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\Home\home_users;
+use Hash;
 
 class UpassController extends Controller
 {
@@ -13,8 +15,9 @@ class UpassController extends Controller
      */
     public function index()
     {
-       
-        return view('home.homepage.upwd');
+         $user = session()->get('user_login.1');
+        $flight = home_users::where('uphon',$user)->first();
+        return view('home.homepage.upwd',['data'=>$flight]);
     }
 
     /**
@@ -24,7 +27,16 @@ class UpassController extends Controller
      */
     public function create()
     {
-        //
+        //ajax验证密码
+        $date = $_GET['upass'];
+         $user = session()->get('user_login.1');
+        $flight = home_users::where('uphon',$user)->first();
+        $upss = $flight->upass;
+     if (Hash::check($date,$upss)) {
+            echo 1;
+        }else{
+            echo 2;
+        }
     }
 
     /**
@@ -35,7 +47,8 @@ class UpassController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $res = $request->all();
+        dump($res);
     }
 
     /**
@@ -46,7 +59,7 @@ class UpassController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**

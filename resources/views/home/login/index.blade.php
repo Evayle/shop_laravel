@@ -185,13 +185,16 @@
                     <h2>找回密码<a href="javascript:;" class="pull-right fz16" id="pwdlogin">返回登录</a></h2>
                 </div>
                 <div class="tabs_container">
+
                     <form class="tabs_form" action="/home/login_mod" method="post" >
                      {{ csrf_field() }}
+
                         <div class="form-group">
                             <div class="input-group">
                                 <div class="input-group-addon">
                                     <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
                                 </div>
+
 
                                 <input type="text" name="uphonsess" class="form-control phone" placeholder="请输入手机号码" id="telphon" maxlength="11">
 
@@ -213,15 +216,11 @@
                                     <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
                                 </div>
 
-                                <input class="form-control password" name="password" id="sspwd" placeholder="新的密码" autocomplete="off" type="password">
-                                <div class="input-group-addon pwd-toggle" title="显示密码"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></div>
-                            </div>
-                        </div>
-                        <!-- 错误信息 -->
-                        <div class="form-group">
-                            <div class="error_msg" id="resetpwd_error"></div>
-                        </div>
 
+                                <input class="form-control password" name="password" id="sspwd" placeholder="新的密码" autocomplete="off" type="password">
+
+                                </div>
+                                </div>
                         <button class="btn btn-large btn-primary btn-lg btn-block" id="ppsss" type="submit">重置密码</button>
                     </form>
                     <script  type="text/javascript">
@@ -361,9 +360,6 @@
          </script>
         </div>
     </div>
-
-    <
-
 
 @endsection
 

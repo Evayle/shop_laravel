@@ -228,7 +228,7 @@
           _this = this;
 
       $.ajax(url, {
-        headers: {'X-XSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}, 
+        headers: {'X-XSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         type: 'post',
         data: data,
         dataType: 'json',

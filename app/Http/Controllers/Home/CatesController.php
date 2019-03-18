@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\Home\home_users;
 
 class CatesController extends Controller
 {
@@ -21,7 +22,10 @@ class CatesController extends Controller
         // }
 
         //加载分类详情视图
-        return view('home.cates.index');
+
+        $user = session()->get('user_login.1');
+        $flight = home_users::where('uphon',$user)->first();
+        return view('home.cates.index',['data'=>$flight]);
     }
 
     /**

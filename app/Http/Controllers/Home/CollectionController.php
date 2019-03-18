@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\Home\home_users;
 
 class CollectionController extends Controller
 {
@@ -13,7 +14,10 @@ class CollectionController extends Controller
      */
     public function index()
     {
-        return view('home.homepage.collection');
+
+        $user = session()->get('user_login.1');
+        $flight = home_users::where('uphon',$user)->first();
+        return view('home.homepage.collection',['data'=>$flight]);
     }
 
     /**

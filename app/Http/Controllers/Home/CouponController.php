@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
+use App\Model\Home\home_users;
 class CouponController extends Controller
 {
     /**
@@ -14,7 +15,11 @@ class CouponController extends Controller
      */
     public function index()
     {
-        return view('home.homepage.coupon');
+
+
+        $user = session()->get('user_login.1');
+        $flight = home_users::where('uphon',$user)->first();
+        return view('home.homepage.coupon',['data'=>$flight]);
     }
 
     /**
@@ -82,6 +87,7 @@ class CouponController extends Controller
     {
         //
     }
+
     public function addcoupon()
     {
 
@@ -97,7 +103,6 @@ class CouponController extends Controller
         if ($dadd == true) {
 
         }
-
         $date['uid'] = $uid;
         $date['con_id'] = $con_id;
         $date['con_status'] = $con_status;
@@ -105,9 +110,5 @@ class CouponController extends Controller
 
         $data = DB::table('home_coupon')->insert($date);
         dump($data);
-
-
-
     }
-
 }

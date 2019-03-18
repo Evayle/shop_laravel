@@ -235,6 +235,7 @@ class GoodsController extends Controller
             foreach ($goodsimg as $value) {
                 // 将 '/storage/xxxx.jpg' 更换成 'xxxx.jpg'
                 $path = substr($value->imgs_url, 8);
+
                 // 删除旧图片
                 Storage::delete("public/$path");
             }
@@ -306,6 +307,7 @@ class GoodsController extends Controller
                 Storage::delete("public/$path");
             }
         }
+
         if($res1 && $res2 && $res3){
             DB::commit();
             return redirect($_SERVER['HTTP_REFERER'])->with('success','删除成功');

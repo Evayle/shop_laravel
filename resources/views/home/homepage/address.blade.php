@@ -11,6 +11,7 @@
                             <div class="col-sm-6">
                                 <input class="form-control" id="name" placeholder="请输入姓名" type="text" name="name">
                             </div>
+                            <span class="name_s"></span>
                         </div>
                         <div class="form-group">
                             <label for="details" class="col-sm-2 control-label">收货地址：</label>
@@ -30,12 +31,16 @@
                             <div class="col-sm-6">
                                 <input class="form-control" id="code" placeholder="请输入邮政编码" type="text" name="code">
                             </div>
+
+                            <span class="code_s"></span>
                         </div>
                         <div class="form-group">
                             <label for="mobile" class="col-sm-2 control-label">手机号码：</label>
                             <div class="col-sm-6">
-                                <input class="form-control" id="mobile" placeholder="请输入手机号码" type="text" name="phone">
+                            <!-- <input type="text" id="mobile" class="form-control" style="width: 80%"> -->
+                                <input class="form-control" id="mobile" placeholder="请输入手机号码" type="text" name="phone" style="display: block;">
                             </div>
+                            <span class="mobile_s"></span>
                         </div>
 <!--                         <div class="form-group">
     <label for="phone" class="col-sm-2 control-label">电话号码：</label>
@@ -52,75 +57,13 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-6">
-                                <button type="submit" class="but" >保存</button>
+                                <button type="submit" class="but" id="submit">保存</button>
                             </div>
                         </div>
                         <script src="/homes/js/jquery.citys.js"></script>
+                        <!-- 表单验证js文件+get请求获取地址表内容 -->
+                        <script src="/homes/js/yanzheng.js"></script>
 
-                        <!-- 这是get传输的请求地址 用以获取地址表数据-->
-                        <script>
-                            $.get('/home/address/address',{'upid':0},function(result){
-                                // console.log(result);
-                                // 得到数据的数组遍历选择得到其中一个对象
-                                for (var i = 0; i < result.length; i++) {
-                                    // 将得到的地址名写入到option中
-                                    var info = $('<option value="'+result[i].id+'">'+result[i].name+'</option>');
-                                    // 将得到的option标签放到select中
-                                    $('select').append(info);
-                                }
-                                // 禁止请选择被选中
-                                $('.ss').attr('disabled',true);
-                            },'json');
-                            // live  事件 委派    它可以帮助我们将动态生成的内容 只要选择 器相同就可以有相应的事件
-                            $('select').live('change',function(){
-                                // 将当前的对象储存起来
-                                obj = $(this);
-                                // 通过id查找下一个地址
-                                id = $(this).val();
-                                // 清除其他select标签
-                                obj.nextAll('select').remove();
-                                $.getJSON('/home/address/address',{'upid':id},function(result){
-                                    if (result != '') {
-                                        var select = $('<select></select>');
-                                        var op = $('<option class="city">--请选择--</option>');
-                                        select.append(op);
-                                        for (var i = 0; i < result.length; i++) {
-                                            var info = $('<option value="'+result[i].id+'">'+result[i].name+'</option>');
-                                            select.append(info);
-                                        }
-                                        // 将select标签添加到当前标签后
-                                        obj.after(select);
-                                    }
-                                    $('.city').attr('disabled','true');
-                                });
-                            });
-                            // 获取选中的数据提交到操作页面
-                            $(':submit').click(function(){
-                                // console.log($('select'));
-                                arr =[];
-                                $('select').each(function(){
-
-                                    opdata=$(this).find('option:selected').html();
-
-                                //  console.log(opdata);
-                                    //将我们得到的每个值放置到数组中
-                                    arr.push(opdata);
-                                })
-                                // console.log(arr);
-                                /*if (arr == '--请选择--') {
-                                    console.log(00000);
-                                }*/
-                                for (var i = 0; i < arr.length; i++) {
-                                    if (arr[i] == '--请选择--'){
-                                        $('.sps').text('请选择完整地址').css('color','red');
-                                        return false;
-                                    }
-
-                                }
-                                //将 得到的数组直接赋值给隐藏域的value即可
-                                $('input[name=address]').val(arr);
-                            })
-                        </script>
                     </form>
                     <p class="fz18 cr">已保存的有效地址</p>
 
@@ -146,7 +89,7 @@
                                 <form action="/home/address/{{ $v->id }}" style="display: inline-block;" method="post">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
-                                    <input type="submit" value="删除" class="btn btn-danger">
+                                    <input type="submit" value="删除" class="btn btn-danger" >
                                 </form>
                             </div>
                             <div class="tdf1">
@@ -163,8 +106,6 @@
             </div>
         </section>
     </div>
-
-
 @endsection
 
 

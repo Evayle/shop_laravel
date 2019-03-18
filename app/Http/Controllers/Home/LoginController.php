@@ -16,9 +16,6 @@ class LoginController extends Controller
         return view('home.login.index');
     }
 
-
-
-
     public function updata(){
 
 
@@ -60,7 +57,7 @@ class LoginController extends Controller
 
             //直接跳转到登录页面
 
-            return redirect()->route('payupss',['404'=>4]);
+            return redirect()->route('test',['404'=>4]);
 
         }
 

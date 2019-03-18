@@ -30,6 +30,7 @@
 						</div>
 					</div>
 					@endforeach
+
 				</div>
 			</div>
 			<ul class="nva-list">
@@ -125,6 +126,7 @@
 				<div class="floor-title">
 					<i class="iconfont icon-tuijian fz16"></i> 爆款推荐
 
+
 					<a href="javascript:;" class="more"><i class="iconfont icon-more"></i></a>
 				</div>
 				<div class="con-box">
@@ -151,7 +153,6 @@
 			<div class="pull-right">
 				<div class="floor-title">
 					<i class="iconfont icon-horn fz16"></i> 平台公告
-
 					<a href="javascript:;" class="more"><i class="iconfont icon-more"></i></a>
 
 				</div>
@@ -159,6 +160,7 @@
 					<div class="notice-box bgf5">
 						<div class="swiper-container">
 							<div class="swiper-wrapper">
+
 								<a class="swiper-slide ep" href="javascript:;">【公告】U袋网平台已上线，您还在等什么呢？是吧~</a>
 								<a class="swiper-slide ep" href="javascript:;">【资讯】P站服务器爆炸啦。国内86%地区IP被限制~</a>
 								<a class="swiper-slide ep" href="javascript:;">【公告】六趣公司9月底将彻底关闭66RPG论坛~</a>
@@ -174,7 +176,6 @@
 								<a class="swiper-slide ep" href="javascript:;">【新闻】游客们注意了！国庆你要避开十大坑</a>
 								<a class="swiper-slide ep" href="javascript:;">【新闻】他卖了1.5万双假货，现在面临10年牢狱！</a>
 								<a class="swiper-slide ep" href="javascript:;">【新闻】10月1日起国家再次提高部分优抚对象抚恤补助标准 烈属抚恤每年23130元</a>
-
 							</div>
 						</div>
 					</div>
@@ -210,6 +211,7 @@
 		<section class="scroll-floor floor-2">
 			<div class="floor-title">
 				<i class="iconfont icon-skirt fz16"></i> 女装
+
 			</div>
 			<div class="con-box">
 				<a class="left-img hot-img" href="javascript:;">
@@ -234,6 +236,7 @@
 		<section class="scroll-floor floor-3">
 			<div class="floor-title">
 				<i class="iconfont icon-fushi fz16"></i> 男装
+
 			</div>
 			<div class="con-box">
 				<a class="left-img hot-img" href="javascript:;">
@@ -253,7 +256,6 @@
 						<div class="name ep" title="{{ $v->goods_name }}">{{ $v->goods_name }}</div>
 					</a>
 					@endforeach
-
 				</div>
 			</div>
 		</section>
@@ -279,14 +281,13 @@
 						<div class="name ep" title="{{ $v->goods_name }}">{{ $v->goods_name }}</div>
 					</a>
 					@endforeach
-
-
 				</div>
 			</div>
 		</section>
 		<section class="scroll-floor floor-5">
 			<div class="floor-title">
 				<i class="iconfont icon-bao fz16"></i> 时尚包包
+
 			</div>
 			<div class="con-box">
 				<a class="left-img hot-img" href="javascript:;">
@@ -331,7 +332,6 @@
 						<div class="name ep" title="{{ $v->goods_name }}">{{ $v->goods_name }}</div>
 					</a>
 					@endforeach
-
 				</div>
 			</div>
 		</section>

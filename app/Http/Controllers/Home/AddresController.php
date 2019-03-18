@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Model\Home\district;
 use App\Model\Home\tp_address;
 use DB;
-
+use App\Http\Requests\AsStoreBlogPost;
 class AddresController extends Controller
 {
     /**
@@ -51,7 +51,8 @@ class AddresController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+
+    public function store(AsStoreBlogPost $request)
     {
         //
         $tp_address = new tp_address;
@@ -162,9 +163,12 @@ class AddresController extends Controller
     public function destroy($id)
     {
         //
-        $bool = DB::table('tp_address')->delete($id);
+
+        $bool = DB::table('tp_address')->where('id', '=', $id)->delete();
         // dump($bool);
         return back();
+        // dump($bool);
+
     }
     public function add($id)
     {

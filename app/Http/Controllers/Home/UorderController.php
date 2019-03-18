@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\Home\home_users;
 
 class UorderController extends Controller
 {
@@ -13,7 +14,11 @@ class UorderController extends Controller
      */
     public function index()
     {
-        return view('home.homepage.orders');
+
+
+        $user = session()->get('user_login.1');
+        $flight = home_users::where('uphon',$user)->first();
+        return view('home.homepage.orders',['data'=>$flight]);
     }
 
     /**

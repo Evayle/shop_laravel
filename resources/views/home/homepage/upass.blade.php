@@ -1,15 +1,11 @@
 @extends('home.layout.homepage')
 @section('homepage')
     <div class="pull-right">
-
-
-                @if($data== true)
-
+                @if($date== true)
                 <div class="user-content__box clearfix bgf">
                     <div class="title">账户信息-修改支付密码</div>
                     <div class="modify_div">
                         <div class="clearfix">
-
                             <a href="/home/payupss" role="button" class="but">修改支付密码</a>
                             <a href="/home/payupss" role="button" class="but">忘记支付密码</a>
                         </div>

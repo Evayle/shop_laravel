@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Model\Home\home_users;
 use App\Model\Home\home_integrals;
 
+
 use App\Model\Admin\tp_goods_categorys;
 use DB;
 class IndexController extends Controller
@@ -80,16 +81,15 @@ class IndexController extends Controller
     public function index()
     {
 
+
         // 爆款数据
         $hot = DB::table('tp_goods')->orderBy('goods_sales', 'desc')->limit(6)->get();
 
         // 女装数据
 
-
         //利用session查询用户的登录账号
         $user = session()->get('user_login.1');
         $flight = home_users::where('uphon',$user)->first();
-
 
         //查询用户详情表的数据
         $uid  = $flight['id'];
@@ -97,6 +97,7 @@ class IndexController extends Controller
 
         //把查询的用户信息,传递到首页界面
         return view('home.index.index',['data'=>$flight, 'date'=>$home_integrals, 'common_cates_data' => self::getPidCates(), 'hot' => $hot, 'nv' => self::getCates('女装'), 'nan' => self::getCates('男装'), 'bao' => self::getCates('包包'), 'tong' => self::getCates('童装'), 'xie' => self::getCates('鞋靴')]);
+
     }
 
     /**

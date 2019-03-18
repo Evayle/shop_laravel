@@ -4,10 +4,9 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
 use DB;
 use Hash;
-
+use App\Model\Home\home_users;
 
 class PaypwdController extends Controller
 {
@@ -23,7 +22,11 @@ class PaypwdController extends Controller
         //判断用户是有没有支付密码
         $uphon = session("user_login")[1];
         $data = DB::table('home_users')->where('uphon',$uphon)->pluck('upay')[0];
-        return view('home.homepage.upass',['data'=>$data]);
+
+        $user = session()->get('user_login.1');
+        $flight = home_users::where('uphon',$user)->first();
+
+        return view('home.homepage.upass',['date'=>$data,'data'=>$flight]);
 
     }
 
@@ -46,6 +49,7 @@ class PaypwdController extends Controller
     public function store(Request $request)
     {
 
+
         //利用session找到用户的修改方式
         $uphon = session("user_login")[1];
 
@@ -59,6 +63,7 @@ class PaypwdController extends Controller
             return back();
         }
 
+
     }
 
     /**
@@ -70,7 +75,9 @@ class PaypwdController extends Controller
     public function show($id)
     {
 
+
        return view('home.homepage.upass_ok');
+
     }
 
     /**

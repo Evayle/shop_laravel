@@ -39,12 +39,9 @@
                 <a href="/home/login?p=register">注册</a>
                 @endif
 
-
-
-
-                <a href="udai_welcome.html">我的U袋</a>
-                <a href="udai_order.html">我的订单</a>
-                <a href="udai_integral.html">积分平台</a>
+                <a href="/home/page">个人中心</a>
+                <a href="/home/orders">我的订单</a>
+                <a href="/home/inteqral">积分平台</a>
             </div>
         </div>
     </div>
@@ -54,7 +51,7 @@
             <div class="inner">
 
                 <a class="logo" href="/home"><img src="/homes/images/icons/logo.jpg" alt="富潮里" class="cover"></a>
-                <div class="title">跳转的页面标题</div>
+                <div class="title"></div>
             </div>
         </div>
     </div>

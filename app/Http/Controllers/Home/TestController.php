@@ -20,7 +20,9 @@ class TestController extends Controller
             return redirect()->route('test');
         }
 
+
         if($pass == " "){
+
             return redirect()->route('test',['p=register','reeor'=>2131]);
         }
 
@@ -85,6 +87,7 @@ class TestController extends Controller
         //每次发送的随机数
         $phon_code = mt_rand(10000,999999);
         //echo $phon_code;
+
 
         $sendUrl = 'http://v.juhe.cn/sms/send'; //短信接口的URL
 
