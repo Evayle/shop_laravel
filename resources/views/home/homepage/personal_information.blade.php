@@ -5,6 +5,7 @@
                 <div class="user-content__box clearfix bgf">
                     <div class="title">账户信息-个人资料</div>
 
+
                     <form action="/home/presonal" class="user-setting__form" role="form" method="post" id="form_1" enctype="multipart/form-data">
                      {{ csrf_field() }}
                     <div class="" id="crop-avatar">
@@ -161,16 +162,7 @@
                 });
             }
           </script>
-
-
-
-
-
-                </div>
-            </div>
-        </section>
     </div>
-
 
     <!-- 右侧菜单 -->
 @endsection

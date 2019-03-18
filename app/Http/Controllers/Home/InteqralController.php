@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Home\home_users;
 
+
 class InteqralController extends Controller
 {
     /**
@@ -16,6 +17,7 @@ class InteqralController extends Controller
     public function index()
     {
         //用户积分
+
         $user = session()->get('user_login.1');
         $flight = home_users::where('uphon',$user)->first();
         return view('home.homepage.integral',['data'=>$flight]);

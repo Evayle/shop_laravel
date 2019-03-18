@@ -56,8 +56,8 @@ class LoginController extends Controller
         if (!Hash::check($date['password'],$data->upass)) {
 
             //直接跳转到登录页面
-
             return redirect()->route('test',['404'=>4]);
+
 
         }
 

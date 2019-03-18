@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
 use App\Model\Home\home_users;
 use DB;
 
@@ -17,9 +18,11 @@ class PresonalController extends Controller
     public function index()
     {
         //个人资料首页
+
         $user = session()->get('user_login.1');
         $flight = home_users::where('uphon',$user)->first();
         return view('home.homepage.personal_information',['data'=>$flight]);
+
     }
 
     /**
@@ -29,7 +32,10 @@ class PresonalController extends Controller
      */
     public function create()
     {
+
         echo "create";
+
+
     }
 
     /**
@@ -40,6 +46,7 @@ class PresonalController extends Controller
      */
     public function store(Request $request)
     {
+
         $uphon = session('user_login')[1];
         $re = $request->except(['_token','file']);
        $date = DB::table('home_users')->where(['uphon'=>$uphon])->update($re);
@@ -71,6 +78,7 @@ class PresonalController extends Controller
      */
     public function show($id)
     {
+
         $unme['uname']=$_GET['tel'];
         $date = DB::table('home_users')->where($unme)->first();
         if ($date) {
@@ -80,6 +88,7 @@ class PresonalController extends Controller
         }else{
             echo 1;
         }
+
     }
 
     /**
@@ -90,7 +99,8 @@ class PresonalController extends Controller
      */
     public function edit($id)
     {
-        echo 22;
+
+        //
     }
 
     /**
@@ -104,6 +114,7 @@ class PresonalController extends Controller
     {
         //
     }
+
     /**
      * Remove the specified resource from storage.
      *

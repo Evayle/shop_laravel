@@ -37,7 +37,6 @@
                 <a href="/home/login"><span class="cr">登录</span></a>
                 <a href="/home/login?p=register">注册</a>
                 @endif
-
                 <a href="/home/page">个人中心</a>
                 <a href="/home/orders">我的订单</a>
                 <a href="/home/inteqral">积分平台</a>
@@ -142,8 +141,7 @@
             <li class="r-toolbar-item to-top">
                 <i class="iconfont icon-top"></i>
                 <div class="r-tip__box"><span class="r-tip-text">返回顶部</span></div>
-            </li>
-
+            </li
         </ul>
     </div>
 

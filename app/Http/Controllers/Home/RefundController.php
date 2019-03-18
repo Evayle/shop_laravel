@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
 use App\Model\Home\home_users;
 
 class RefundController extends Controller
@@ -14,9 +15,11 @@ class RefundController extends Controller
      */
     public function index()
     {
+
         $user = session()->get('user_login.1');
         $flight = home_users::where('uphon',$user)->first();
         return view('home.homepage.refund',['data'=>$flight]);
+
     }
 
     /**

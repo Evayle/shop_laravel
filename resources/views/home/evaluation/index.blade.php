@@ -236,7 +236,9 @@
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane fade in active" id="all" aria-labelledby="all-tab">
 
+
                                     @foreach($list as $k=>$v);
+
                                     <div class="eval-box">
                                         <div class="eval-author">
                                             <div class="port">
@@ -250,12 +252,12 @@
                                                 {{$v->gid}}
                                             </div>
                                             <div class="eval-imgs">
+
                                                 @foreach($v->pic as $key=>$val)
                                                 <div class="img-temp">
                                                 <img src="/{{$val->good_img}}"  class="cover">
                                                 </div>
                                                 @endforeach
-
                                                 {{$v->user_comment}}
                                             </div>
                                             <div class="eval-time">

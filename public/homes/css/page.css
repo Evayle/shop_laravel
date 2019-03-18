@@ -1,0 +1,23 @@
+#page_page li{
+    float: left;
+}
+
+#page_page .active span{
+	color: red;
+    padding: 10px 15px;
+    margin: 5px;
+    line-height: 1em;
+    border: 1px solid red;
+    display: inline-block;
+    text-decoration: none;
+}
+
+#page_page .disabled span{
+	color: #666;
+    padding: 10px 15px;
+    margin: 5px;
+    line-height: 1em;
+    border: 1px solid #999;
+    display: inline-block;
+    text-decoration: none;
+}

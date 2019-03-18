@@ -6,7 +6,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
 use Hash;
+
 use App\Model\Home\home_users;
+
+
+
 
 class PaypwdController extends Controller
 {
@@ -27,6 +31,7 @@ class PaypwdController extends Controller
         $flight = home_users::where('uphon',$user)->first();
 
         return view('home.homepage.upass',['date'=>$data,'data'=>$flight]);
+
 
     }
 

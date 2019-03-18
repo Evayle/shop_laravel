@@ -50,6 +50,7 @@ class CollectController extends Controller
         $flight = home_users::where('uphon',$user)->first();
 
 
+
         //利用商品的ID.来获取本商品所有的评价
         $res['gid'] = $id;
         $list = DB::table('user_comment')->where($res)->get();
@@ -81,6 +82,7 @@ class CollectController extends Controller
             'cont_ave'=>$cont_average,
             'cont_bad'=>$cont_bad
         ]);
+
 
     }
 

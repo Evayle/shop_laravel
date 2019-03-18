@@ -76,7 +76,6 @@ Route::get('home','Home\IndexController@index')->name('home');
 
 
 
-
 //前台 登录页面
 Route::any('home/login','Home\LoginController@login')->name('test');
 
@@ -96,10 +95,10 @@ Route::post('home/enpty','Home\LoginController@entry');
 Route::group(['middleware'=>'test'],function(){
 
 
-
 //前台注册验证页面
 Route::any('home/test','Home\TestController@test');
 Route::get('home/datection','Home\TestController@detetion');
+
 
 
 
@@ -111,6 +110,7 @@ Route::get('home/payupss/send1','Home\PaypwdsController@send1');
 Route::post('home/payupss/send2','Home\PaypwdsController@send2');
 Route::any('home/payupss/send3','Home\PaypwdsController@send3');
 Route::resource('home/payupss','Home\PaypwdsController');
+
 
 
 // 购物车
@@ -147,8 +147,10 @@ Route::get('home/page','Home\HomepageController@index');
 
 //个人资料
 Route::resource('home/presonal','Home\PresonalController');
+
 //头像无刷新上传
 Route::any('home/avater','Home\AvatrerComtroller@index');
+
 
 //个人积分
 Route::resource('home/inteqral','Home\InteqralController');
@@ -164,8 +166,6 @@ Route::resource('home/address','Home\AddresController');
 //领取得到优惠券
 Route::get('home/coupon/add','Home\CouponController@addcoupon');
 Route::resource('home/coupon','Home\CouponController');
-
-
 
 
 
@@ -194,7 +194,10 @@ Route::resource('home/evaluation','Home\EvaluationController');
 
 
 // 前台分类详情列表
+
 Route::get('home/cates/{id}','Home\CatesController@index');
+
+
 Route::resource('home/cates','Home\CatesController');
 
 
@@ -204,7 +207,10 @@ Route::any('admin/denglu','Admin\LoginController@login');
 //ajax验证后台登录路由(测试)
 Route::post('admin/deng','Admin\LoginController@deng');
 
+
 });
+
+
 //测试查看session的代码
 Route::any('123',function(){
     dump(session()->all());

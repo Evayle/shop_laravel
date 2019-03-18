@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="/homes/css/bootstrap-theme.min.css">
 	<link rel="stylesheet" href="/homes/css/swiper.min.css">
 	<link rel="stylesheet" href="/homes/css/styles.css">
+	<link rel="stylesheet" href="/homes/css/page.css">
 	<script src="/homes/js/jquery.1.12.4.min.js" charset="UTF-8"></script>
 	<script src="/homes/js/bootstrap.min.js" charset="UTF-8"></script>
 	<script src="/homes/js/swiper.min.js" charset="UTF-8"></script>
@@ -44,10 +45,10 @@
 				<a href="/home/login"><span class="cr">登录</span></a>
 				<a href="/home/login?p=register">注册</a>
 				@endif
-
 				<a href="/home/page">个人中心</a>
 				<a href="/home/orders">我的订单</a>
 				<a href="/home/inteqral">积分平台</a>
+
 			</div>
 		</div>
 	</div>
@@ -62,20 +63,21 @@
 
 					<span class="input-group-btn">
 						<button type="button">
+
+			<!-- 搜索开始 -->
+			<div class="search-box">
+				<form class="input-group" action="/home/cates">
+					<input placeholder="Ta们都在搜富潮里" type="text" name="search" value="{{ $request['search'] or '' }}">
+
+					<span class="input-group-btn">
+						<button type="submit">
+
 							<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 						</button>
 					</span>
 				</form>
-				<p class="help-block text-nowrap">
-					<a href="">连衣裙</a>
-					<a href="">裤</a>
-					<a href="">衬衫</a>
-					<a href="">T恤</a>
-					<a href="">女包</a>
-					<a href="">家居服</a>
-					<a href="">2017新款</a>
-				</p>
 			</div>
+			<!-- 搜索结束 -->
 			<div class="cart-box">
 				<!-- 此处有改动 shopping不要了 改成shopcart -->
 				<a href="/home/shopcart" class="cart-but">

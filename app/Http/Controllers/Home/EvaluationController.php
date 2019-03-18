@@ -17,6 +17,7 @@ class EvaluationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index(Request $request)
         {
         $res['gid'] = 21;
@@ -27,7 +28,6 @@ class EvaluationController extends Controller
             $list[$key]->pic = DB::table('user_comment_img')->where(['gid'=>5,'uphon'=>$uphon])->get();
         }
          return view('home.evaluation.index',['list'=>$list]);
-
 
     }
 
@@ -59,6 +59,7 @@ class EvaluationController extends Controller
         $user_comment['uphon'] = Session('user_login')[1];//用户手机号
         $user_comment['user_like'] =$request->user_like;//用户的评价
         $user_comment['user_comment'] =$request->user_comment;//用户给的评价内容
+
         $user_comment['gid'] = 21;//商品id
 
         $user_comment['time'] = date('Y-m-d H:i:s',time());//评论的时间爱
@@ -91,6 +92,7 @@ class EvaluationController extends Controller
                       DB::commit();
                       //成功以后返回到详情页
                       return redirect('home/collect');
+
                   }
             }
 

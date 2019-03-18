@@ -39,9 +39,11 @@
                 <a href="/home/login?p=register">注册</a>
                 @endif
 
+
                 <a href="/home/page">个人中心</a>
                 <a href="/home/orders">我的订单</a>
                 <a href="/home/inteqral">积分平台</a>
+
             </div>
         </div>
     </div>

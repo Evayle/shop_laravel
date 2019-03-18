@@ -21,7 +21,7 @@
 									<span class="title">{{ $cats = $vv->categorys_name }}：</span>
 									@foreach($vv['sub'] as $kkk => $vvv)
 									<div class="genre-list">
-										<a href="/home/cates/{{ $vvv->id }}">{{ $vvv->categorys_name }}</a>
+										<a href="/home/cates?id={{ $vvv->id }}">{{ $vvv->categorys_name }}</a>
 									</div>
 									@endforeach
 								</div>

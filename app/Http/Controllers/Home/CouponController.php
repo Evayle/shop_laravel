@@ -17,9 +17,11 @@ class CouponController extends Controller
     {
 
 
+
         $user = session()->get('user_login.1');
         $flight = home_users::where('uphon',$user)->first();
         return view('home.homepage.coupon',['data'=>$flight]);
+
     }
 
     /**
