@@ -25,7 +25,6 @@
                         <th><i class="fa fa-bullhorn"></i> 分类名称</th>
                         <th><i class="fa fa-bullhorn"></i> 父级ID</th>
                         <th class="hidden-phone"><i class="fa fa-question-circle"></i>分类路径</th>
-                        <th><i class="fa fa-bookmark"></i>是否推荐为热门显示</th>
                         <th><i class=" fa fa-edit"></i>是否显示</th>
                         <th>操作</th>
                     </tr>
@@ -36,7 +35,6 @@
                         <td><a href="basic_table.html#">{{ $v->categorys_name }}</a></td>
                         <td class="hidden-phone">{{ $v->categorys_pid }}</td>
                         <td>{{ $v->categorys_path }} </td>
-                        <td><span class="label label-info label-mini"><a href="/admin/category/{{ $v->id }}">{{ $v->categorys_hot == 0 ? '非热门' : '热门' }}</a></span></td>
                         <td><span class="label label-info label-mini"><a href="/admin/category/{{ $v->id }}/edit">{{ $v->categorys_display == 0 ? '显示' : '隐藏' }}</a></span></td>
                         <td>
                             <a href="/admin/category/create/{{ $v->id }}"><button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button></a>

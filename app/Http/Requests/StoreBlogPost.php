@@ -31,7 +31,7 @@ class StoreBlogPost extends FormRequest
         'admin_email' => 'required',
         'admin_phon' => 'required',
         'admin_itn' => 'required',
-        'admin_permission' => 'required',
+
         ];
     }
 
@@ -47,7 +47,6 @@ class StoreBlogPost extends FormRequest
             'admin_email.required' => '邮箱必填',
             'admin_phon.required' => '电话必填',
             'admin_itn.required' => '个人介绍必填',
-            'admin_permission.required' => '个人权限必填',
         ];
     }
 }

@@ -79,27 +79,8 @@
                                   <textarea name="admin_itn" class="self">{{ old('admin_introduction') }}</textarea>
                               </div>
                           </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label"><span class="user_add">权限管理</span></label>
-                              <div class="col-sm-10">
-                                  <select class="form-control input-sm" name="admin_permission">
-
-                                     <option value="0">--请选择--</option>
-                                     <option value="1">超级管理员</option>
-                                     <option value="2">管理员</option>
-                                     <option value="3">员  工</option>
-                                     <option value="4">财务人员</option>
-                                  </select>
 
 
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label"><span class="user_add">上传头像</span></label>
-                              <div class="col-sm-10">
-                                <input type="file" id="file" name="admin_avatar">
-                              </div>
-                          </div>
                           <div class="form-group">
                             <input type="submit"  class=" center-block btn btn-success" value="提  交">
                           </div>

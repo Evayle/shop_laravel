@@ -57,12 +57,7 @@
 		<div class="inner">
 		<a class="logo" href="/home"><img src="/homes/images/icons/logo.jpg" alt="U袋网" class="cover"></a>
 
-			<div class="search-box">
-				<form class="input-group">
-					<input placeholder="Ta们都在搜富潮里" type="text" id="in">
 
-					<span class="input-group-btn">
-						<button type="button">
 
 			<!-- 搜索开始 -->
 			<div class="search-box">

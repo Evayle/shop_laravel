@@ -294,6 +294,18 @@
                           <li><a  href="/admin/coupon/">回收站</a></li>
                       </ul>
                   </li>
+                   <li class="sub-menu">
+                      <a href="#" >
+                          <i class="glyphicon glyphicon-lock"></i>
+                          <span>后台权限管理</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="/admin/rbace">权限列表</a></li>
+                          <li><a  href="/admin/rbace/create">添加角色</a></li>
+                          <li><a  href="/admin/rbace/nodeadd">添加节点</a></li>
+
+                      </ul>
+                  </li>
 
 
               </ul>

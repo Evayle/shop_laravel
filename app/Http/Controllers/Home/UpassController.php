@@ -54,8 +54,9 @@ class UpassController extends Controller
     public function store(Request $request)
     {
 
-        $res = $request->all();
-        dump($res);
+        $user = session()->get('user_login.1');
+        $flight = home_users::where('uphon',$user)->first();
+        return view('home.homepage.upwd_2',['data'=>$flight]);
 
     }
 
@@ -90,7 +91,12 @@ class UpassController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = session()->get('user_login.1');
+        $flight = home_users::where('uphon',$user)->first();
+        return view('home.homepage.upwd_3',['data'=>$flight]);
+
+
+
     }
 
     /**
@@ -101,6 +107,6 @@ class UpassController extends Controller
      */
     public function destroy($id)
     {
-        //
+        echo 2222;
     }
 }

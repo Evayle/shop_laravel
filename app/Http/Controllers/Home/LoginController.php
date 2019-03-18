@@ -12,7 +12,7 @@ class LoginController extends Controller
 {
 
     public function login(){
-
+        session()->forget('user_login');
         return view('home.login.index');
     }
 

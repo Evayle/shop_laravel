@@ -18,6 +18,53 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function role($id)
+    {
+        //获取用户
+         $datt = tp_admin_users::find($id);
+
+         //获取当前用户的角色
+         $user_role_data = DB::table('rbac_users_roles')->select('rid')->where('uid',$id)->get();
+         $user_role_data_rids = [];
+        foreach ($user_role_data as $value) {
+            $rid = $value->rid;
+            $user_role_data_rids[] = $rid;
+         }
+
+
+        //获取权类别
+        $date = DB::table('rbac_rolse')->get();
+
+        return view('admin.users.role',['user_1'=>$datt,'rose'=>$date,'rid'=>$user_role_data_rids]);
+    }
+
+
+    public function updaterole(Request $request,$uid )
+    {
+        //获取所有的角色id
+        $rids =  $request->input('rids');
+
+        //为了防止冗余,先删除数据,添加
+          $data = DB::table('rbac_users_roles')->where('uid',$uid)->delete();
+
+        foreach ($rids as $rid) {
+            $temp = [
+            'uid'=>$uid,
+            'rid'=>$rid,
+              ];
+            $data = DB::table('rbac_users_roles')->insert($temp);
+
+        }
+         if($data){
+               return back()->with('success',"修改成功");
+            }
+
+
+
+
+
+    }
+
     public function index(Request $request)
     {
 
@@ -71,13 +118,11 @@ class UserController extends Controller
                 $res = 'user_avatar.jpg';//如果用户没有头像，就直接用系统的统一头像；
                     $data['admin_avatar'] = $res;
             }
-
             $users = new tp_admin_users;
             $users->admin_name = $data['admin_name']; // 用户名
             $users->admin_password = Hash::make($data['admin_password']); // 密码
             $users->admin_email = $data['admin_email']; // 邮箱
             $users->admin_phon = $data['admin_phon']; // 电话号码
-            $users->admin_level = $data['admin_permission']; // 权限
             $data_user = $users->save(); // 写入
             $id = $users->id;
 

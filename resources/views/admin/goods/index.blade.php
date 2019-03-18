@@ -33,14 +33,10 @@
                         <th class="hidden-phone"><i class="fa fa-question-circle"></i>分类名称</th>
                         <th class="hidden-phone"><i class="fa fa-question-circle"></i>描述</th>
                         <th class="hidden-phone"><i class="fa fa-question-circle"></i>是否包邮</th>
-                        <th class="hidden-phone"><i class="fa fa-question-circle"></i>是否会员打折</th>
-                        <th class="hidden-phone"><i class="fa fa-question-circle"></i>是否推荐</th>
                         <th class="hidden-phone"><i class="fa fa-question-circle"></i>是否打折</th>
                         <th class="hidden-phone"><i class="fa fa-question-circle"></i>是否参与优惠</th>
                         <th class="hidden-phone"><i class="fa fa-question-circle"></i>是否可积分兑换</th>
-                        <th class="hidden-phone"><i class="fa fa-question-circle"></i>点击数</th>
                         <th class="hidden-phone"><i class="fa fa-question-circle"></i>销量</th>
-                        <th class="hidden-phone"><i class="fa fa-question-circle"></i>评论数</th>
                         <th><i class="fa fa-bookmark"></i>库存</th>
                         <th><i class="fa fa-bookmark"></i>价格</th>
                         <th><i class=" fa fa-edit"></i>上下架</th>
@@ -67,14 +63,10 @@
                             </abbr>
                         </td>
                         <td><span class="label label-info label-mini">{{ $v->goods_fsp == 0 ? '包邮' : '不包邮' }}</span></td>
-                        <td><span class="label label-info label-mini">{{ $v->goods_vip == 0 ? '打折' : '不打折' }}</span></td>
-                        <td><span class="label label-info label-mini">{{ $v->goods_recommend == 0 ? '推荐' : '不推荐' }}</span></td>
                         <td><span class="label label-info label-mini">{{ $v->goods_discount == 0 ? '打折' : '不打折' }}</span></td>
                         <td><span class="label label-info label-mini">{{ $v->goods_preferential == 0 ? '优惠' : '不优惠' }}</span></td>
                         <td><span class="label label-info label-mini">{{ $v->goods_hot == 0 ? '兑换' : '不兑换' }}</span></td>
-                        <td>{{ $v->goods_click }} </td>
                         <td>{{ $v->goods_sales }} </td>
-                        <td>{{ $v->goods_comments }} </td>
                         <td>{{ $v->goods_store }} </td>
                         <td>{{ $v->goods_price }} </td>
                         <td><span class="label label-info label-mini"><a href="/admin/goods/{{ $v->id }}">{{ $v->goods_status == 0 ? '未上架' : '上架' }}</a></span></td>

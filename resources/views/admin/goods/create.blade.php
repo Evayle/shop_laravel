@@ -62,16 +62,6 @@
             </div>
 
             <div class="form-group">
-                <label class="col-sm-2 col-sm-2 control-label"><span class="user_add">是否会员折扣</span></label>
-                <div class="col-sm-10">
-                    <select class="form-control input-sm" name="goods_vip">
-                       <option value="0">是</option>
-                       <option value="1">否</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group">
                 <label class="col-sm-2 col-sm-2 control-label"><span class="user_add">是否打折</span></label>
                 <div class="col-sm-10">
                     <select class="form-control input-sm" name="goods_discount">
@@ -101,15 +91,6 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label class="col-sm-2 col-sm-2 control-label"><span class="user_add">是否推荐</span></label>
-                <div class="col-sm-10">
-                    <select class="form-control input-sm" name="goods_recommend">
-                       <option value="0">是</option>
-                       <option value="1">否</option>
-                    </select>
-                </div>
-            </div>
 
             <div class="form-group">
                 <label class="col-sm-2 col-sm-2 control-label"><span class="user_add">是否可积分兑换</span></label>

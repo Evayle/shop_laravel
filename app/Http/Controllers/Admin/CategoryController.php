@@ -104,13 +104,6 @@ class CategoryController extends Controller
     }
 
     /**
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> origin/xujw
-=======
->>>>>>> origin/huang1
      * Display the specified resource.
      *
      * @param  int  $id
@@ -118,21 +111,6 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-
-        // 修改热门分类
-        $goods = tp_goods_categorys::find($id);
-        $bool = $goods->categorys_hot;
-
-        // 判断值后更改内容
-        if ($bool) {
-            $goods->categorys_hot = 0;
-            $goods->save();
-            return back()->with('success', '修改热门分类成功');
-        } else {
-            $goods->categorys_hot = 1;
-            $goods->save();
-            return back()->with('success', '修改热门分类成功');
-        }
 
     }
 
