@@ -1,6 +1,13 @@
 @extends('admin.layout.index')
 @section('content')
           <section class="wrapper">
+
+          <section class="wrapper">
+          @if (session('success'))
+            <div class="alert alert-success">
+              {{ session('success') }}
+            </div>
+          @endif
             <div class="row mt">
             <div class="col-lg-12">
                       <div class="content-panel">
@@ -29,7 +36,6 @@
                                   <th>序号</th>
                                   <th>名称</th>
                                   <th class="numeric">网址</th>
-                                  <th class="numeric">logo</th>
                                   <th class="numeric">公司</th>
                                   <th class="numeric">是否显示</th>
                                   <th class="numeric">添加时间</th>
@@ -43,12 +49,11 @@
                                     <td class="col-md-1">{{ $i++ }}</td>
                                     <td class="col-md-1">{{ $v->fs_name }}</td>
                                     <td class="col-md-2">{{ $v->fs_link }}</td>
-                                    <td class="col-md-1"><img src="/storage/admin/link/{{  $v->fs_logo }}" alt=""height="26px"></td>
                                     <td class="col-md-2">{{ $v->fs_note }}</td>
                                     @if( $v->fs_status == 'true' )
-                                      <td class="col-md-1"><a href=""><img src="/bg/img/对.jpg" alt="" width="26"></a></td>
+                                      <td class="col-md-1"><a href="/admin/friendship/{{ $v->id }}"><img src="/bg/img/对.jpg" alt="" width="26"></a></td>
                                     @else()
-                                      <td class="col-md-1"><a href=""><img src="/bg/img/错.jpg" alt="" width="26"></a></td>
+                                      <td class="col-md-1"><a href="/admin/friendship/{{ $v->id }}"><img src="/bg/img/错.jpg" alt="" width="26"></a></td>
                                     @endif
                                     <td class="col-md-1">{{ $v->created_at }}</td>
                                     <td class="col-md-1">{{ $v->updated_at }}</td>

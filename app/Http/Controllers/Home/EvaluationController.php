@@ -19,7 +19,7 @@ class EvaluationController extends Controller
      */
 
     public function index(Request $request)
-        {
+    {
         $res['gid'] = 21;
         $res['uphon'] = session('user_login')[1];//用户电话
         $list = DB::table('user_comment')->where(['gid'=>5])->get();

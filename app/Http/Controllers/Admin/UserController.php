@@ -18,6 +18,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+
     public function role($id)
     {
         //获取用户
@@ -123,6 +124,7 @@ class UserController extends Controller
             $users->admin_password = Hash::make($data['admin_password']); // 密码
             $users->admin_email = $data['admin_email']; // 邮箱
             $users->admin_phon = $data['admin_phon']; // 电话号码
+
             $data_user = $users->save(); // 写入
             $id = $users->id;
 

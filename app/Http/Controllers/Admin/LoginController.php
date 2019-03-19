@@ -20,16 +20,25 @@ class LoginController extends Controller
 
     //登录验证
     public function login(){
+        // //防止浏览器直接输入路由,用这个方法验证
+        // if(empty($_POST)){
+        //     return redirect()->route('login');
+        // }
 
         //接收所有的传值
         //dump($_POST);
         $data = $_POST['uname'];
         $upass = $_POST['password'];
 
+        // session()->push('name', $data);
+        // session()->push('pass', $upass);
+        //dump(session()->all());
+
             $flight= tp_admin_users::where('admin_name',$data)->first();
 
         //查询验证用户名是否存在,不存在就返回登录页面
         if ($flight == false){
+
             //验证手机号输入
            $flight= tp_admin_users::where('admin_phon',$data)->first();
             //dump($phon);
@@ -47,6 +56,7 @@ class LoginController extends Controller
                 //echo "密码验证成功";
             }else{
                 return redirect('/admin/login');
+
             }
         // session()->flush();//删除素有的session
         //session()->forget('admin_loginhai'); //删除某个值键
@@ -56,6 +66,7 @@ class LoginController extends Controller
 
         //判读session是否写入成功
         if(session()->exists('admin_login')){
+
             $data = session('admin_login')[2];
             $date = DB::table('tp_admin_users')->where('admin_name',$data)->select('id')->first();
             $id = $date->id;
@@ -81,6 +92,7 @@ class LoginController extends Controller
 
            //将获取到的权限压入session
            session(['admin_node_type'=>$arr]);
+
             return redirect('admin');
         }
 
@@ -88,6 +100,7 @@ class LoginController extends Controller
 
     public function session(){
         //session()->flush();
+
         // session()->forget('admin_login');
         // return redirect()->route('login');
 

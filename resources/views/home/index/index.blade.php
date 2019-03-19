@@ -102,11 +102,12 @@
 	<!-- 顶部轮播 -->
     <div class="swiper-container banner-box">
         <div class="swiper-wrapper">
-            <div class="swiper-slide"><a href="item_show.html"><img src="/homes/images/temp/banner_1.jpg" class="cover"></a></div>
-            <div class="swiper-slide"><a href="item_show.html"><img src="/homes/images/temp/banner_2.jpg" class="cover"></a></div>
-            <div class="swiper-slide"><a href="item_category.html"><img src="/homes/images/temp/banner_3.jpg" class="cover"></a></div>
-            <div class="swiper-slide"><a href="item_show.html"><img src="/homes/images/temp/banner_4.jpg" class="cover"></a></div>
-            <div class="swiper-slide"><a href="item_sale_page.html"><img src="/homes/images/temp/banner_5.jpg" class="cover"></a></div>
+
+        @foreach ($slides as $v)
+            <div class="swiper-slide"><a href="/home/collect/{{ $v->goods_id }}"><img src="/{{ $v->slide_pic }}" class="cover"></a></div>
+
+        @endforeach
+
         </div>
         <div class="swiper-pagination"></div>
     </div>
@@ -218,6 +219,9 @@
 					<img src="/homes/images/floor_2.jpg" alt="" class="cover">
 				</a>
 				<div class="right-box">
+
+					@if ($nv != false)
+
 					@foreach ($nv as $v)
 					<a href="/home/collect/{{ $v->id }}" class="floor-item">
 						<div class="item-img hot-img">
@@ -230,6 +234,19 @@
 						<div class="name ep" title="{{ $v->goods_name }}">{{ $v->goods_name }}</div>
 					</a>
 					@endforeach
+					@else
+					<a href="javascript:;" class="floor-item">
+						<div class="item-img hot-img">
+							<img src="" alt="" class="cover">
+						</div>
+						<div class="price clearfix">
+							<span class="pull-left cr fz16">暂无商品哦!</span>
+							<span class="pull-right c6"></span>
+						</div>
+						<div class="name ep" title=""></div>
+					</a>
+					@endif
+
 				</div>
 			</div>
 		</section>
@@ -244,6 +261,9 @@
 				</a>
 				<div class="right-box">
 
+
+					@if ($nan != false)
+
 					@foreach ($nan as $v)
 					<a href="/home/collect/{{ $v->id }}" class="floor-item">
 						<div class="item-img hot-img">
@@ -256,6 +276,20 @@
 						<div class="name ep" title="{{ $v->goods_name }}">{{ $v->goods_name }}</div>
 					</a>
 					@endforeach
+
+
+					@else
+					<a href="javascript:;" class="floor-item">
+						<div class="item-img hot-img">
+							<img src="" alt="" class="cover">
+						</div>
+						<div class="price clearfix">
+							<span class="pull-left cr fz16">暂无商品哦!</span>
+							<span class="pull-right c6"></span>
+						</div>
+						<div class="name ep" title=""></div>
+					</a>
+					@endif
 				</div>
 			</div>
 		</section>
@@ -269,6 +303,8 @@
 				</a>
 				<div class="right-box">
 
+					@if ($tong != false)
+
 					@foreach ($tong as $v)
 					<a href="/home/collect/{{ $v->id }}" class="floor-item">
 						<div class="item-img hot-img">
@@ -281,6 +317,19 @@
 						<div class="name ep" title="{{ $v->goods_name }}">{{ $v->goods_name }}</div>
 					</a>
 					@endforeach
+
+					@else
+					<a href="javascript:;" class="floor-item">
+						<div class="item-img hot-img">
+							<img src="" alt="" class="cover">
+						</div>
+						<div class="price clearfix">
+							<span class="pull-left cr fz16">暂无商品哦!</span>
+							<span class="pull-right c6"></span>
+						</div>
+						<div class="name ep" title=""></div>
+					</a>
+					@endif
 				</div>
 			</div>
 		</section>
@@ -295,6 +344,8 @@
 				</a>
 				<div class="right-box">
 
+					@if ($bao != false)
+
 					@foreach ($bao as $v)
 					<a href="/home/collect/{{ $v->id }}" class="floor-item">
 						<div class="item-img hot-img">
@@ -307,6 +358,19 @@
 						<div class="name ep" title="{{ $v->goods_name }}">{{ $v->goods_name }}</div>
 					</a>
 					@endforeach
+
+					@else
+					<a href="javascript:;" class="floor-item">
+						<div class="item-img hot-img">
+							<img src="" alt="" class="cover">
+						</div>
+						<div class="price clearfix">
+							<span class="pull-left cr fz16">暂无商品哦!</span>
+							<span class="pull-right c6"></span>
+						</div>
+						<div class="name ep" title=""></div>
+					</a>
+					@endif
 				</div>
 			</div>
 		</section>
@@ -319,6 +383,7 @@
 					<img src="/homes/images/floor_6.jpg" alt="" class="cover">
 				</a>
 				<div class="right-box">
+					@if ($xie != false)
 
 					@foreach ($xie as $v)
 					<a href="/home/collect/{{ $v->id }}" class="floor-item">
@@ -332,6 +397,20 @@
 						<div class="name ep" title="{{ $v->goods_name }}">{{ $v->goods_name }}</div>
 					</a>
 					@endforeach
+
+
+					@else
+					<a href="javascript:;" class="floor-item">
+						<div class="item-img hot-img">
+							<img src="" alt="" class="cover">
+						</div>
+						<div class="price clearfix">
+							<span class="pull-left cr fz16">暂无商品哦!</span>
+							<span class="pull-right c6"></span>
+						</div>
+						<div class="name ep" title=""></div>
+					</a>
+					@endif
 				</div>
 			</div>
 		</section>

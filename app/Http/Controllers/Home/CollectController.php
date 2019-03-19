@@ -22,7 +22,8 @@ class CollectController extends Controller
     public function index($id = 0)
     {
         // 判断是否有这个商品
-        if (!$goods = tp_goods::find($id)) {// 商品信息
+
+        if (!$goods = tp_goods::where('goods_status', 1)->find($id)) {// 商品信息
             return back();
         }
 
@@ -67,6 +68,16 @@ class CollectController extends Controller
 
         $cont_bad = DB::table('user_comment')->where(['gid'=>$id])->where(['user_like'=>3])->count();//这个是差评
 
+        //商品评价
+        $res['gid'] = $id;
+        $res['uphon'] = session('user_login')[1];//用户电话
+        $list = DB::table('user_comment')->where(['gid'=>$id])->get();
+        foreach ($list as $key => $value) {
+            $uphon =  $value->uphon;
+            $list[$key]->pic = DB::table('user_comment_img')->where(['gid'=>$id,'uphon'=>$uphon])->get();
+        }
+
+
         return view('home.goods_info.index',
         [
             'goods'=>$goods,
@@ -80,7 +91,8 @@ class CollectController extends Controller
             'con_all'=>$cont_all,
             'cont_like'=>$cont_like,
             'cont_ave'=>$cont_average,
-            'cont_bad'=>$cont_bad
+            'cont_bad'=>$cont_bad,
+            'list'=>$list
         ]);
 
 

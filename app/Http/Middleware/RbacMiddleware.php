@@ -37,12 +37,12 @@ class RbacMiddleware
         $aname = strtolower($cname_aname['method']);
        // dump($cname);
         //查看权限
-        if(!in_array($cname,$keys)){
-            dd('没有权限');
-        }
-        if(!in_array($aname,$admin_node[$cname])){
-            dd('没有的权限啊');
-        }
+        // if(!in_array($cname,$keys)){
+        //     dd('没有权限');
+        // }
+        // if(!in_array($aname,$admin_node[$cname])){
+        //     dd('没有的权限啊');
+        // }
 
         return $next($request);
     }

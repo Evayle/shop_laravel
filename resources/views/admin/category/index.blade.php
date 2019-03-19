@@ -35,7 +35,11 @@
                         <td><a href="basic_table.html#">{{ $v->categorys_name }}</a></td>
                         <td class="hidden-phone">{{ $v->categorys_pid }}</td>
                         <td>{{ $v->categorys_path }} </td>
-                        <td><span class="label label-info label-mini"><a href="/admin/category/{{ $v->id }}/edit">{{ $v->categorys_display == 0 ? '显示' : '隐藏' }}</a></span></td>
+                        @if (!($v->categorys_pid == 0))
+                            <td><span class="label label-info label-mini"><a href="/admin/category/{{ $v->id }}/edit">{{ $v->categorys_display == 0 ? '显示' : '隐藏' }}</a></span></td>
+                        @else
+                            <td><span class="label label-info label-mini"></span></td>
+                        @endif
                         <td>
                             <a href="/admin/category/create/{{ $v->id }}"><button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button></a>
                         </td>

@@ -10,7 +10,7 @@
                     <div class="integral-box clearfix bgf5">
                         <div class="integral-total">
                             <div class="fz16">可用的积分</div>
-                            <b class="num">888</b>
+                            <b class="num">{{$tate->integral_num}}</b>
                         </div>
                         <div class="integral-desc">
                             <b class="cr fz16">积分使用规则：</b><br>

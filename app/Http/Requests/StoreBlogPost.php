@@ -31,7 +31,6 @@ class StoreBlogPost extends FormRequest
         'admin_email' => 'required',
         'admin_phon' => 'required',
         'admin_itn' => 'required',
-
         ];
     }
 

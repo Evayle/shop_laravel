@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Home\home_users;
-
+use DB;
 
 class InteqralController extends Controller
 {
@@ -20,7 +20,11 @@ class InteqralController extends Controller
 
         $user = session()->get('user_login.1');
         $flight = home_users::where('uphon',$user)->first();
-        return view('home.homepage.integral',['data'=>$flight]);
+        $tate = DB::table('home_integrals')->where(['uid'=>$flight->id])->first();
+
+
+
+        return view('home.homepage.integral',['data'=>$flight,'tate'=>$tate]);
     }
 
     /**

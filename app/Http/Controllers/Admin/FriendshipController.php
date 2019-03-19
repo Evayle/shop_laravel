@@ -10,6 +10,7 @@ use App\Model\Admin\tp_friendship;
 use DB;
 use Illuminate\Support\Facades\Storage;
 
+
 /**
  * 这是友情链接的控制器
  */
@@ -65,34 +66,13 @@ class friendshipController extends Controller
      */
     public function store(FsStoreBlogPost $request)
     {
-        //
+
         $data = $request->except('_token');
-
-        //获取文件对象
-        $file = $request->file('fs_logo');
-
-        if ($file == true) {
-            // 获取文件后缀
-            $ext = $file->extension();
-            // 拼接文件名
-            $logo_name = time().rand(100,999).'.'.$ext;
-            // 执行文件上传
-            $res = $file->storeAs('public/admin/link',$logo_name);
-            if ($res == false) {
-                return back()->with('图片添加失败');
-            }
-        }else{
-            // 未选择则默认logo图片
-            $logo_name = time().rand(100,999).'.jpg';
-        }
-
-
         // 执行写入数据库
         $tp_fs = new tp_friendship;
         $tp_fs->fs_name = $data['fs_name'];// 链接名称
         $tp_fs->fs_link = $data['fs_link'];// 链接网址
         $tp_fs->fs_note = $data['fs_note'];// 公司名字
-        $tp_fs->fs_logo = $logo_name;// logo名字
         $tp_fs->fs_status = 0;// 是否启用 默认0启用
         $bool = $tp_fs->save();// 写入
         if ($bool == true) {
@@ -110,8 +90,21 @@ class friendshipController extends Controller
      */
     public function show($id)
     {
-        //
-        echo "show";
+
+         // 修改状态
+        $fri = tp_friendship::find($id);
+        $bool = $fri->fs_status;
+
+        // 判断值后更改内容
+        if ($bool) {
+            $fri->fs_status = 0;
+            $fri->save();
+            return back()->with('success', '修改状态成功');
+        } else {
+            $fri->fs_status = 1;
+            $fri->save();
+            return back()->with('success', '修改状态成功');
+        }
     }
 
     /**
@@ -146,24 +139,7 @@ class friendshipController extends Controller
         $this->validate($request, ['fs_logo'=>'required'], ['fs_logo.required'=>'请选择图片']);*/
         $data = new tp_friendship;
         $upd = $data->find($id);
-        $old_pic = $upd->fs_logo;
-        $file = $request->file('fs_logo');
-        if ($file == true) {
-            // 获取文件后缀
-            $ext = $file->extension();
-            // 拼接文件名
-            $logo_name = time().rand(100,999).'.'.$ext;
-            // 执行文件上传
-            $res = $file->storeAs('public/admin/link',$logo_name);
-            if ($res == false) {
-                return back()->with('error','图片添加失败');
-            }else{
-                if (file_exists('../storage/app/public/'.$old_pic)) {
-                    unlink('../storage/app/public/'.$old_pic);
-                }
-            }
-            $upd->fs_logo = $logo_name;
-        }
+
         $upd->fs_name = $request->input('fs_name','');
         $upd->fs_link = $request->input('fs_link','');
         $upd->fs_note = $request->input('fs_note','');
@@ -171,7 +147,7 @@ class friendshipController extends Controller
         if ($bool == true) {
             return redirect('admin/friendship')->with('success','修改成功');
         }else{
-            return redirect('admin/friendship')->with('error','修改失败');
+            return back()->with('error','修改失败');
         }
 
     }
@@ -185,17 +161,8 @@ class friendshipController extends Controller
      */
     public function destroy($id)
     {
-        //
-        // dd($id);
-        $tp_fs = new tp_friendship;
-        $old_data = $tp_fs->find($id);
-        // 获取要删除的文件名
-        $old_pic = $old_data->fs_logo;
-        $res = $tp_fs::destroy($id);
-        // dd($res);
+        $res = DB::table('tp_friendships')->delete($id);
         if ($res) {
-            unlink('../storage/app/public/'.$old_pic);
-
             return redirect($_SERVER['HTTP_REFERER'])->with('success','删除成功');
         }else{
             return redirect($_SERVER['HTTP_REFERER'])->with('error','删除失败');

@@ -2,13 +2,11 @@
 @section('content')
           <section class="wrapper">
           	<h3 class=" text-center"><i class=" "></i> 分 类 添 加</h3>
-
           	<!-- BASIC FORM ELELEMNTS -->
           	<center>
           	<div class="row mt text-center" style="width:1200px;">
           		<div class="col-lg-12">
                   <div class="form-panel">
-
             <!-- 提示错误信息 -->
             @if (count($errors) > 0)
             <div class="alert alert-danger alert-dismissible" role="alert">

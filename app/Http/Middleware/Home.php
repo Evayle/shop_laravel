@@ -19,9 +19,6 @@ class Home
          // 登录首先要检测session是否存在
         if (session()->exists('user_login')) {
 
-
-
-
             return $next($request);
         }else{
             //跳转登陆页面

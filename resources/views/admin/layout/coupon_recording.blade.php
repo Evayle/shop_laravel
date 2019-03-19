@@ -30,13 +30,6 @@
     <script src="/table/js/bootbox.min.js"></script>
 
 
-
-
-
-
-
-
-
   </head>
 
   <body>
@@ -239,7 +232,6 @@
                       <ul class="sub">
                           <li><a  href="/admin/category">分类列表</a></li>
 
-
                           <li><a  href="/admin/category/create">分类添加</a></li>
                       </ul>
                   </li>
@@ -303,10 +295,8 @@
                           <li><a  href="/admin/rbace">权限列表</a></li>
                           <li><a  href="/admin/rbace/create">添加角色</a></li>
                           <li><a  href="/admin/rbace/nodeadd">添加节点</a></li>
-
                       </ul>
                   </li>
-
 
               </ul>
               <!-- sidebar menu end-->
@@ -314,7 +304,7 @@
       </aside>
       <!--sidebar end-->
       <!-- 内容的开始 -->
-<section id="main-content">
+        <section id="main-content">
       @section('content_coupon')
 
       @show

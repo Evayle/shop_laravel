@@ -32,8 +32,7 @@ class shopcartController extends Controller
     }
 
     /**
-<<<<<<< HEAD
-=======
+
      * 这是添加商品进购物车方法 勿删
      */
     public function add(Request $request)
@@ -43,7 +42,6 @@ class shopcartController extends Controller
     }
 
     /**
->>>>>>> origin/xujw233
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

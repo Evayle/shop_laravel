@@ -68,9 +68,7 @@
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label"><span class="user_add">手机号</span></label>
                               <div class="col-sm-10">
-
                                   <input type="text"  class="form-control" placeholder="请输入正确的手机格式" name="admin_phon" value="{{ old('admin_phon') }}" >
-
                               </div>
                           </div>
                           <div class="form-group">
@@ -79,8 +77,6 @@
                                   <textarea name="admin_itn" class="self">{{ old('admin_introduction') }}</textarea>
                               </div>
                           </div>
-
-
                           <div class="form-group">
                             <input type="submit"  class=" center-block btn btn-success" value="提  交">
                           </div>

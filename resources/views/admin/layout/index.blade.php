@@ -263,6 +263,18 @@
                           <li><a  href="/admin/friendship/create">添加链接</a></li>
                       </ul>
                   </li>
+                  <li class="sub-menu">
+                      <a href="#" >
+                          <i class="glyphicon glyphicon-lock"></i>
+                          <span>后台权限管理</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="/admin/rbace">权限列表</a></li>
+                          <li><a  href="/admin/rbace/create">添加角色</a></li>
+                          <li><a  href="/admin/rbace/nodeadd">添加节点</a></li>
+
+                      </ul>
+                  </li>
                   <!-- 友情链接结束 -->
                   <!-- 前台轮播图 -->
                   <li class="sub-menu">
@@ -273,7 +285,6 @@
                       <ul class="sub">
                           <li><a  href="/admin/slide">图片列表</a></li>
                           <li><a  href="/admin/slide/create">添加图片</a></li>
-                          <li><a  href="/admin/slide/delete">回收站</a></li>
                       </ul>
                   </li>
                   <!-- 轮播图结束 -->
@@ -289,18 +300,7 @@
                           <li><a  href="/admin/coupon/">回收站</a></li>
                       </ul>
                   </li>
-                  <li class="sub-menu">
-                      <a href="#" >
-                          <i class="glyphicon glyphicon-lock"></i>
-                          <span>后台权限管理</span>
-                      </a>
-                      <ul class="sub">
-                          <li><a  href="/admin/rbace">权限列表</a></li>
-                          <li><a  href="/admin/rbace/create">添加角色</a></li>
-                          <li><a  href="/admin/rbace/nodeadd">添加节点</a></li>
 
-                      </ul>
-                  </li>
 
 
               </ul>

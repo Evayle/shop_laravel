@@ -399,39 +399,46 @@
 					<div role="tabpanel" class="tab-pane fade" id="evaluate" aria-labelledby="evaluate-tab">
 						<div class="evaluate-tabs bgf5">
 							<ul class="nav-tabs nav-pills clearfix" role="tablist">
-								<li role="presentation" class="active"><a href="#all" role="tab" data-toggle="tab" aria-controls="all" aria-expanded="true">全部评价 <span class="badge">1314</span></a></li>
-								<li role="presentation"><a href="#good" role="tab" data-toggle="tab" aria-controls="good">好评 <span class="badge">1000</span></a></li>
-								<li role="presentation"><a href="#normal" role="tab" data-toggle="tab" aria-controls="normal">中评 <span class="badge">314</span></a></li>
-								<li role="presentation"><a href="#bad" role="tab" data-toggle="tab" aria-controls="bad">差评 <span class="badge">0</span></a></li>
+								<li role="presentation" class="active"><a href="#all" role="tab" data-toggle="tab" aria-controls="all" aria-expanded="true">全部评价 <span class="badge">{{$cont_all or 0}}</span></a></li>
+								<li role="presentation"><a href="#good" role="tab" data-toggle="tab" aria-controls="good">好评 <span class="badge">{{ $cont_like or 0}}</span></a></li>
+								<li role="presentation"><a href="#normal" role="tab" data-toggle="tab" aria-controls="normal">中评 <span class="badge">{{$cont_average or 0}}</span></a></li>
+								<li role="presentation"><a href="#bad" role="tab" data-toggle="tab" aria-controls="bad">差评 <span class="badge">{{$cont_bad or 0}}</span></a></li>
 							</ul>
 						</div>
 						<div class="evaluate-content">
 							<div class="tab-content">
 								<div role="tabpanel" class="tab-pane fade in active" id="all" aria-labelledby="all-tab">
 
-									<div class="eval-box">
-										<div class="eval-author">
-											<div class="port">
-												<img src="/homes/images/icons/default_avt.png" alt="欢迎来到U袋网" class="cover b-r50">
-											</div>
-											<div class="name">高***恒</div>
-										</div>
-										<div class="eval-content">
-											<div class="eval-text">
-												真是特别美_回头穿了晒图
-											</div>
-											<div class="eval-imgs">
-												<div class="img-temp"><img src="/homes/images/temp/S-001-1_s.jpg" data-src="/homes/images/temp/S-001-1_b.jpg" data-action="zoom" class="cover"></div>
-												<div class="img-temp"><img src="/homes/images/temp/S-001-2_s.jpg" data-src="/homes/images/temp/S-001-2_b.jpg" data-action="zoom" class="cover"></div>
-												<div class="img-temp"><img src="/homes/images/temp/S-001-3_s.jpg" data-src="/homes/images/temp/S-001-3_b.jpg" data-action="zoom" class="cover"></div>
-												<div class="img-temp"><img src="/homes/images/temp/S-001-4_s.jpg" data-src="/homes/images/temp/S-001-4_b.jpg" data-action="zoom" class="cover"></div>
-												<div class="img-temp"><img src="/homes/images/temp/S-001-5_s.jpg" data-src="/homes/images/temp/S-001-5_b.jpg" data-action="zoom" class="cover"></div>
-											</div>
-											<div class="eval-time">
-												2017年08月11日 20:31 颜色分类：深棕色 尺码：均码
-											</div>
-										</div>
-									</div>
+									 @foreach($list as $k=>$v);
+
+                                    <div class="eval-box">
+                                        <div class="eval-author">
+                                            <div class="port">
+                                            <!-- 用户头像 -->
+                                                <img src="/homes/images/icons/default_avt.png" alt="欢迎来到U袋网" class="cover b-r50">
+                                            </div>
+                                            <div class="name">{{$v->uphon}}</div>
+                                        </div>
+                                        <div class="eval-content">
+                                            <div class="eval-text">
+                                                {{$v->gid}}
+                                            </div>
+                                            <div class="eval-imgs">
+
+                                                @foreach($v->pic as $key=>$val)
+                                                <div class="img-temp">
+                                                <img src="/{{$val->good_img}}"  class="cover">
+                                                </div>
+                                                @endforeach
+                                                {{$v->user_comment}}
+                                            </div>
+                                            <div class="eval-time">
+                                            {{$v->time}}
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
 
 
 
@@ -450,53 +457,7 @@
 								</div>
 								<div role="tabpanel" class="tab-pane fade" id="bad" aria-labelledby="bad-tab">
 
-									<div class="eval-box">
-										<div class="eval-author">
-											<div class="port">
-												<img src="/homes/images/icons/default_avt.png" alt="欢迎来到U袋网" class="cover b-r50">
-											</div>
-											<div class="name">高***恒</div>
-										</div>
-										<div class="eval-content">
-											<div class="eval-text">
-												真是特别美_回头穿了晒图
-											</div>
-											<div class="eval-imgs">
-												<div class="img-temp"><img src="/homes/images/temp/S-001-1_s.jpg" data-src="/homes/images/temp/S-001-1_b.jpg" data-action="zoom" class="cover"></div>
-												<div class="img-temp"><img src="/homes/images/temp/S-001-2_s.jpg" data-src="/homes/images/temp/S-001-2_b.jpg" data-action="zoom" class="cover"></div>
-												<div class="img-temp"><img src="/homes/images/temp/S-001-3_s.jpg" data-src="/homes/images/temp/S-001-3_b.jpg" data-action="zoom" class="cover"></div>
-												<div class="img-temp"><img src="/homes/images/temp/S-001-4_s.jpg" data-src="/homes/images/temp/S-001-4_b.jpg" data-action="zoom" class="cover"></div>
-												<div class="img-temp"><img src="/homes/images/temp/S-001-5_s.jpg" data-src="/homes/images/temp/S-001-5_b.jpg" data-action="zoom" class="cover"></div>
-											</div>
-											<div class="eval-time">
-												2017年08月11日 20:31 颜色分类：深棕色 尺码：均码
-											</div>
-										</div>
-									</div>
 
-									<div class="eval-box">
-										<div class="eval-author">
-											<div class="port">
-												<img src="/homes/images/icons/default_avt.png" alt="欢迎来到U袋网" class="cover b-r50">
-											</div>
-											<div class="name">高***恒</div>
-										</div>
-										<div class="eval-content">
-											<div class="eval-text">
-												真是特别美_回头穿了晒图
-											</div>
-											<div class="eval-imgs">
-												<div class="img-temp"><img src="/homes/images/temp/S-001-1_s.jpg" data-src="/homes/images/temp/S-001-1_b.jpg" data-action="zoom" class="cover"></div>
-												<div class="img-temp"><img src="/homes/images/temp/S-001-2_s.jpg" data-src="/homes/images/temp/S-001-2_b.jpg" data-action="zoom" class="cover"></div>
-												<div class="img-temp"><img src="/homes/images/temp/S-001-3_s.jpg" data-src="/homes/images/temp/S-001-3_b.jpg" data-action="zoom" class="cover"></div>
-												<div class="img-temp"><img src="/homes/images/temp/S-001-4_s.jpg" data-src="/homes/images/temp/S-001-4_b.jpg" data-action="zoom" class="cover"></div>
-												<div class="img-temp"><img src="/homes/images/temp/S-001-5_s.jpg" data-src="/homes/images/temp/S-001-5_b.jpg" data-action="zoom" class="cover"></div>
-											</div>
-											<div class="eval-time">
-												2017年08月11日 20:31 颜色分类：深棕色 尺码：均码
-											</div>
-										</div>
-									</div>
 									<!-- 分页 -->
 									<div class="page text-center clearfix">
 									</div>

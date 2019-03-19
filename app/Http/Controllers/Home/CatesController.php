@@ -18,7 +18,8 @@ class CatesController extends Controller
      */
     public function getPidCates($pid = 0)
     {
-        $cates_data = tp_goods_categorys::where('categorys_pid', $pid)->get();
+
+        $cates_data = tp_goods_categorys::where('categorys_pid', $pid)->where('categorys_display', 0)->get();
         $array = [];
         foreach ($cates_data as $key => $value) {
             $value['sub'] = self::getPidCates($value->id);
@@ -36,6 +37,9 @@ class CatesController extends Controller
 
     public function index(Request $request)
     {
+        // 友情链接数据
+        $fs = DB::table('tp_friendships')->where('fs_status', 0)->limit(5)->get();
+
         // 接收值
         $id = $request->input('id');
         $search = $request->input('search');
@@ -85,22 +89,10 @@ class CatesController extends Controller
             $cats = DB::table('tp_goods')->where('goods_status', 1)->orderBy($ord, $er)->paginate(20);
         } else if(($id == true) && ($search == false)) {
             // 判断是否有该三级分类
-            /*//获取全部顶级分类
-            $data0=DB::select('select * from tp_goods_categorys where categorys_pid =0');
-            //获取全部的子分类数据
-            //$data1=DB::select('select * from tp_goods_categorys where categorys_pid ='.$id);
-            //获取同级分类数据
-            //根据ID查找当前分类的父id
-            $info=DB::select('select * from tp_goods_categorys where id ='.$id);
-            $pid =$info[0]->categorys_pid;
-            $info1=DB::select('select * from tp_goods_categorys where id ='.$pid);
-            $pid1 =$info1[0]->categorys_pid;
-            $data3=DB::select('select * from tp_goods_categorys where categorys_pid ='.$pid1);
-            //$data2=DB::select('select * from tp_goods_categorys where categorys_pid ='.$pid);
-            dump($data0);
-            dump($data3);
-            //dump($data2);*/
+
             $bool = DB::table('tp_goods')->where('goods_status', 1)->where('goods_categorys_id', $id)->first();
+
+            // 如果不是三级分类, 返回上一级
             if (empty($bool)) {
                 return back();
             }
@@ -110,15 +102,16 @@ class CatesController extends Controller
             // 字符串查询
             $cats = DB::table('tp_goods')->where('goods_status', 1)->where('goods_name', 'like', '%'.$search.'%')->orderBy($ord, $er)->paginate(20);
         } else {
-            // 其他情况全查即可
-            $cats = DB::table('tp_goods')->where('goods_status', 1)->orderBy($ord, $er)->paginate(20);
+
+            // 其他情况返回即可
+            return back();
         }
 
         // 爆款推荐信息
         $hot = DB::table('tp_goods')->where('goods_status', 1)->orderBy('goods_sales', 'desc')->limit(10)->get();
 
         //加载分类详情视图
-        return view('home.cates.index', ['cats' => $cats, 'hot' => $hot, 'i' => $i, 'j' => $j, 'request' => $rest, 'common_cates_data' => self::getPidCates()]);
+        return view('home.cates.index', ['cats' => $cats, 'hot' => $hot, 'i' => $i, 'j' => $j, 'request' => $rest, 'common_cates_data' => self::getPidCates(), 'fs' => $fs]);
     }
 
     /**

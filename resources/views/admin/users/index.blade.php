@@ -39,7 +39,8 @@
                                   <th><i class="fa fa-bookmark"></i>&nbsp;所属部门</th>
                                   <th><i class="glyphicon glyphicon-envelope"></i>&nbsp;邮箱</th>
                                   <th><i class=" fa fa-edit"></i>&nbsp;创建时间</th>
-                                  <th> &nbsp;&nbsp;修改 删除 角色管理</th>
+
+                                  <th> &nbsp;&nbsp;修改 删除</th>
                               </tr>
                               </thead>
                               <tbody>
@@ -70,7 +71,6 @@
                                         {{ method_field('DELETE')}}
                                         <input type="submit"  value="删除"  class="btn btn-danger">
                                       </form>
-                                      <a href="/admin/user/role/{{$value->id}}" class="btn btn-info" role="button"><i class="fa fa-pencil">角色管理</i></a>
 
                                   </td>
                               </tr>

@@ -20,7 +20,8 @@ class IndexController extends Controller
      */
     public function getPidCates($pid = 0)
     {
-        $cates_data = tp_goods_categorys::where('categorys_pid', $pid)->get();
+
+        $cates_data = tp_goods_categorys::where('categorys_pid', $pid)->where('categorys_display', 0)->get();
         $array = [];
         foreach ($cates_data as $key => $value) {
             $value['sub'] = self::getPidCates($value->id);
@@ -38,13 +39,20 @@ class IndexController extends Controller
     public function getCates($data)
     {
         // 获取顶级分类的id
-        $cid = DB::table('tp_goods_categorys')->where('categorys_name', $data)->first()->id;
+
+        $cid = DB::table('tp_goods_categorys')->where('categorys_display', 0)->where('categorys_name', $data)->first()->id;
+
         // 根据顶级分类的id获取二级分类的id
-        $pid = DB::table('tp_goods_categorys')->where('categorys_pid', $cid)->get();
+        $pid = DB::table('tp_goods_categorys')->where('categorys_display', 0)->where('categorys_pid', $cid)->get();
 
         // 根据带有二级分类id的三级分类的path路径为条件, 找出三级分类的id
         foreach ($pid as $k => $v) {
-            $cateid[] = DB::table('tp_goods_categorys')->where('categorys_path', 'like', '%'.$v->id)->get();
+            $cateid[] = DB::table('tp_goods_categorys')->where('categorys_display', 0)->where('categorys_path', 'like', '%'.$v->id)->get();
+        }
+
+        // 数据不存在返回false
+        if (empty($cateid)) {
+            return false;
         }
 
         // 将获取的三级分类的id转化成一维数组
@@ -54,9 +62,15 @@ class IndexController extends Controller
             }
         }
 
+
+        // 数据不存在返回false
+        if (empty($arr)) {
+            return false;
+        }
+
         // 根据众多三级分类找出该顶级分类下所有商品数据
         foreach ($arr as $k => $v) {
-            $data1[] = DB::table('tp_goods')->where('goods_categorys_id', $v)->orderBy('goods_sales', 'desc')->get();
+            $data1[] = DB::table('tp_goods')->where('goods_status', 1)->where('goods_categorys_id', $v)->orderBy('goods_sales', 'desc')->get();
         }
 
         // 将获取的所有商品数据转化为二维数组, 便于遍历
@@ -81,9 +95,14 @@ class IndexController extends Controller
     public function index()
     {
 
+        // 轮播图数据
+        $slides = DB::table('tp_slides')->where('slide_status', 0)->limit(4)->get();
+
+        // 友情链接数据
+        $fs = DB::table('tp_friendships')->where('fs_status', 0)->limit(5)->get();
 
         // 爆款数据
-        $hot = DB::table('tp_goods')->orderBy('goods_sales', 'desc')->limit(6)->get();
+        $hot = DB::table('tp_goods')->where('goods_status', 1)->orderBy('goods_sales', 'desc')->limit(6)->get();
 
         // 女装数据
 
@@ -96,8 +115,8 @@ class IndexController extends Controller
         $home_integrals = home_integrals::where('uid',$uid)->first();
 
         //把查询的用户信息,传递到首页界面
-        return view('home.index.index',['data'=>$flight, 'date'=>$home_integrals, 'common_cates_data' => self::getPidCates(), 'hot' => $hot, 'nv' => self::getCates('女装'), 'nan' => self::getCates('男装'), 'bao' => self::getCates('包包'), 'tong' => self::getCates('童装'), 'xie' => self::getCates('鞋靴')]);
 
+        return view('home.index.index',['data'=>$flight, 'date'=>$home_integrals, 'common_cates_data' => self::getPidCates(), 'hot' => $hot, 'nv' => self::getCates('女装'), 'nan' => self::getCates('男装'), 'bao' => self::getCates('包包'), 'tong' => self::getCates('童装'), 'xie' => self::getCates('鞋靴'), 'slides' => $slides, 'fs' => $fs]);
     }
 
     /**

@@ -28,29 +28,19 @@
             </ol>
             <div class="filter-box">
                 <div class="all-filter">
-                    <div class="filter-value">
-                        <div class="filter-title">选择商品分类 <i class="iconfont icon-down"></i></div>
-                        <!-- 全部大分类 -->
-                        <ul class="catelist-card">
-                            <a href=""><li class="active">全部分类</li></a>
-                            <!-- 一级分类遍历开始 -->
-                            @foreach($common_cates_data as $k => $v)
-                                <a href="/home/cates?id={{ $v->id }}"><li>{{ $v->categorys_name }}</li></a>
-                            @endforeach
-                            <!-- 一级分类遍历结束 -->
-                        </ul>
-
-                    </div>
                 </div>
                 <div class="filter-prop-item">
-                    <span class="filter-prop-title">分类：</span>
+                    <span class="filter-prop-title"><b>分类：</b></span>
                     <ul class="clearfix">
-                        <a href=""><li class="active">全部</li></a>
+                        <a href="/home/cates"><li class="active">全部</li></a>
 
                         <!-- 二级分类遍历开始 -->
                         @foreach($common_cates_data as $k => $v)
                             @foreach($v['sub'] as $kk => $vv)
-                                <a href=""><li>{{ $vv->categorys_name }}</li></a>
+
+                                @foreach($vv['sub'] as $kkk => $vvv)
+                                    <a href="/home/cates?id={{ $vvv->id }}"><li>{{ $vvv->categorys_name }}</li></a>
+                                @endforeach
                             @endforeach
                         @endforeach
                         <!-- 二级分类遍历开始 -->

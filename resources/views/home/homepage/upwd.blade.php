@@ -93,16 +93,9 @@
 
                             alert('密码错误');
                             $('#upass').val('');
-
                         }
                     }
                 });
         });
     </script>
-
-
-
-
-
-
 @endsection
